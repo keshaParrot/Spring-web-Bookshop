@@ -17,6 +17,7 @@ public class User {
     private String LastName;
     private String Email;
     private String password;
+    private String userStatus; //admin or user
 
     //Set<Book> books = new HashSet<>();
 
