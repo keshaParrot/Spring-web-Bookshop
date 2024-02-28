@@ -17,7 +17,8 @@ public class Book {
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
-    //private Set<User> users = new HashSet<>();
+    @ManyToMany(mappedBy = "books")
+    private Set<User> users = new HashSet<>();
     @ManyToOne
     private Publisher publisher;
 

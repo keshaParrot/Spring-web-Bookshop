@@ -6,6 +6,7 @@ import com.DenysiukProg.spring6webapp.domain.Publisher;
 import com.DenysiukProg.spring6webapp.repositories.AuthorRepository;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
 import com.DenysiukProg.spring6webapp.repositories.PublisherRepository;
+import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ public class BootstrapData implements CommandLineRunner {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
     private final PublisherRepository publisherRepository;
+    //private final UserRepository
 
     public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
