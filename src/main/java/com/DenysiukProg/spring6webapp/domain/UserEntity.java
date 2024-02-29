@@ -15,7 +15,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +26,8 @@ public class User {
     @Getter(AccessLevel.NONE)
     private String password;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_books",
+    @JoinTable(
+            name = "user_books",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> books = new ArrayList<>();

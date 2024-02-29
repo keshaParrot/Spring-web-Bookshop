@@ -19,16 +19,16 @@ public class Book {
     private long id;
     private String title;
     private String isbn;
+    private String photoURL;
+    private String description;
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
     @ManyToMany(mappedBy = "books")
-    private Set<User> users = new HashSet<>();
+    private Set<UserEntity> userEntities = new HashSet<>();
     @ManyToOne
     private Publisher publisher;
-
-
 
     @Override
     public boolean equals(Object o) {

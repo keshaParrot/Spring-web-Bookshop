@@ -13,7 +13,7 @@ public class AuthorController {
         this.authorService = authorService;
     }
     @RequestMapping("/authors")
-    public String getBooks(Model model){
+    public String getAuthors(Model model){
         model.addAttribute("authors", authorService.findAll());
         return "authors";
     }

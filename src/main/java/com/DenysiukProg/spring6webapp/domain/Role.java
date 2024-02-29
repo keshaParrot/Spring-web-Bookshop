@@ -16,7 +16,7 @@ public class Role {
     private Long Id;
     private String name;
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+    private Set<UserEntity> userEntities = new HashSet<>();
 
 
 }

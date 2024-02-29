@@ -1,0 +1,88 @@
+Body{
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+header{
+    color: white;
+    background-color: #242729; 
+    padding: 15px 20px;
+}
+.AdminInfoSection{
+
+}
+table{
+    width: 1000px;
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+canvas{
+    background-color: #242729;
+    border-radius: 10px;
+}
+.userBooks{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.navBar{
+    padding: 15px 20px;
+    background-color: #242729;
+    display: flex;
+    border-radius: 10px;
+}
+#adminPanel{
+    width: 900px;
+    height: 800px; 
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    display: none;
+
+    position: absolute;
+    top: calc(50% + 20px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+.closePanelButton{
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    margin-top: 15px;
+    margin-right: 20px;
+}
+.shoppingCartButton{
+    margin-top: 15px;
+    margin-right: 20px; 
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    z-index: 1;
+}
+.openAdminPanelButton{
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+.blur-filter > *:not(#adminPanel) {
+    filter: blur(2px);
+}
+
+
+
+
+
+
+
+
+

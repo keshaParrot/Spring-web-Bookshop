@@ -1,18 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Personal Account</title>
 </head>
-<body>
-    <section id="addBook">
+<body class="blur-filter" onload="start()">
+<header style="position: relative;">
+    <a href="../static/home.html"><button>home</button></a>
+    <a href=""><button class="shoppingCartButton">shopping cart</button></a>
+</header>
+<div th:if="${param.success}" class="alert alert-success">
+    You are registered successfully!
+</div>
+<section class="AdminInfoSection">
+    <h1 style="padding-left: 20px;">Shop Statistics</h1>
+    <table>
+        <tr>
+            <td>
+                <canvas width="650" height="400">
 
-    </section>
-    <section id="addAuthor">
+                </canvas>
+            </td>
+            <td>
+                <h3>Admin Menu</h3>
+                <button class="openAdminPanelButton" onClick="showCloseAdminPanel()">Open the admin panel</button>
+                <h3>я єбу, типу циферки</h3>
+                <label id="avaibleBook">avaible book : 651</label><br>
+                <label id="usersOnService">registered users : 20</label><br>
+                <label id="publisherOnService">number of publishers : 23</label>
 
-    </section>
-    <section id="addPublisher">
+            </td>
+        </tr>
+    </table>
+</section>
+<h2 style="padding-left: 20px;">Purchase history</h2>
+<section class="userBooks">
 
-    </section>
+
+</section>
+<div id="adminPanel">
+    <div class="navBar" style="position: relative;">
+        <button style="margin-right: 5px;" onclick="showSection(0)">manageBook</button>
+        <button style="margin-right: 5px;" onclick="showSection(1)">addBook</button>
+        <button style="margin-right: 5px;" onclick="showSection(2)">manageAuthor</button>
+        <button style="margin-right: 5px;" onclick="showSection(3)">addAuthor</button>
+        <button style="margin-right: 5px;" onclick="showSection(4)">managePublisher</button>
+        <button style="margin-right: 5px;" onclick="showSection(5)">addPublisher</button>
+        <button style="margin-right: 5px;" onclick="showSection(6)">manageUser</button>
+        <button onclick="showCloseAdminPanel()" class="closePanelButton">X</button>
+    </div>
+    <div style="text-align: center;">
+        <section id="manageBookAdminSection">
+            manageBook
+        </section>
+        <section id="addBookAdminSection">
+
+        </section>
+        <section id="manageAuthorAdminSection">
+
+        </section>
+        <section id="addAuthorAdminSection">
+
+        </section>
+        <section id="managePublisherAdminSection">
+
+        </section>
+        <section id="addPublisherAdminSection">
+
+        </section>
+        <section id="manageUserAdminSection">
+
+        </section>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{Script/AdminPanel.js}"></script>
 </body>
 </html>

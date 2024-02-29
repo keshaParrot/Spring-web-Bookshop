@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link th:href="@{css/Auth.css}" rel="stylesheet" type="text/css">
+    <title>Login</title>
 </head>
-<body>
+<body class="blur-filter" onload="main()">
+    <div id="container">
+        <h2>Sign in to your account</h2>
+		<form action="" method="post" enctype="">
+			<input name="username" type="text" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='username'" >
+			
+            <input name="haslo" type="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" >
+			
+			<button  th:href="@{/register}" id="registerButton">register</button>
+            <div class="center" style="padding-top: 5px;">
+                <a href="register.html"><button>Want to create an account?</button></a>
+                <a onclick="showCloseresetPasswordForm()"><button>Forgot your password?</button></a>
+            </div>
+		</form>
+	</div>
 
+
+    <div id="resetPasswordForm" class="resetPasswordForm" >
+        <button class="closePanelButton" onclick="showCloseresetPasswordForm()">X</button>
+        <h2>Want to reset your password?</h2>
+        <form action="" method="post" enctype="">
+            <input id="resetEmail" name="Email" type="text" placeholder="Email" onfocus="this.placeholder=''" onblur="this.placeholder='Email'">
+            
+            <input type="submit" value="Reset">
+        </form>
+    </div>
+    <script th:src="@{/Script/Auth.js}"></script>
 </body>
 </html>

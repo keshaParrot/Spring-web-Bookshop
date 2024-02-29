@@ -1,15 +1,13 @@
 package com.DenysiukProg.spring6webapp.services;
 
 import com.DenysiukProg.spring6webapp.domain.Role;
-import com.DenysiukProg.spring6webapp.domain.User;
+import com.DenysiukProg.spring6webapp.domain.UserEntity;
 import com.DenysiukProg.spring6webapp.dto.RegistrationDto;
 import com.DenysiukProg.spring6webapp.repositories.RoleRepository;
 import com.DenysiukProg.spring6webapp.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.thymeleaf.expression.Sets;
+import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-
+@Service
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
@@ -22,13 +20,21 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void saveUser(RegistrationDto registrationDto) {
-        User user = new User();
-        user.setUsername(registrationDto.getUsername());
-        user.setEmail(registrationDto.getEmail());
-        user.setPassword(registrationDto.getPassword());
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(registrationDto.getUsername());
+        userEntity.setEmail(registrationDto.getEmail());
+        userEntity.setPassword(registrationDto.getPassword());
         Role role = roleRepository.findByName("USER");
-        user.setRoles(role);
-        userRepository.save(user);
+        userEntity.setRoles(role);
+        userRepository.save(userEntity);
+    }
+    @Override
+    public UserEntity findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
+    @Override
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
