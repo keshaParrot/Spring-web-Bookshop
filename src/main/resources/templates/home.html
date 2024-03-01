@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{css/Home.css}" rel="stylesheet" type="text/css">
+    <title>home</title>
+</head>
+<body>
+    <header>
+        <a th:href="@{/}"><button>home</button></a>
+        <input type="text" id="searchBookInputField" placeholder="type Title or isbn">
+            <button id="searchBookButton" onclick="searchBook()">search</button>
+        <a href="shoppingCart.html"><button class="shoppingCartButton">shopping cart</button></a>     
+    </header>
+    <section id="books">
+        <div id="booksGrid">
+            <div class="book" th:each="book : ${books}">
+                <h2 class="bookTitle" th:text="${book.title}">Java in action</h2>
+                <h4 class="bookPublisher" th:text="${book.publisher.publisherName}">wbox</h4>
+                
+                <div class="photoContainer">
+                    <img th:src="@{${book.photoURL}}" class="bookPhoto">
+                </div>
+                
+    
+                <div class="priceInfo">
+                    <span th:text="${book.price}">10</span>
+                    <span>usd</span>
+                </div>
+                <div style="text-align: center;">
+                    <button class="bookButton">add to cart</button>
+                    <button class="bookButton">view book</button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </section>
+    <footer>
+        <Table>
+            <tr>
+                <th>Contacts</th>
+                <th>We on social networks</th>
+                <th>newsletter</th>
+            </tr>
+            <tr>
+                <td>
+                    <p>+48 883 467 278</p>
+                    <p>ivan.denysiuk@gmail.com</p>
+                </td>
+                <td>
+                    <ol>
+                        <li>Instagram</li>
+                        <li>FaceBook</li>
+                        <li>Twitter</li>
+                        <li>YouTube</li>
+                        <li>Linkedin</li>
+                    </ol>
+                </td>
+                <td>
+                    <input type="email" placeholder="write here your email"><button>Subscribe</button>
+                </td>
+              </tr>
+        </Table>
+        <label>© 2024 Ivan Denysiuk. All rights reserved by the copyright holder.</label>
+    </footer>
+    <script th:src="@{/Script/Home.js}"></script>
+</body>
+</html>

@@ -21,6 +21,7 @@ public class Book {
     private String isbn;
     private String photoURL;
     private String description;
+    private String price;
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))

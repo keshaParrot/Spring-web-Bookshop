@@ -6,7 +6,6 @@ import com.DenysiukProg.spring6webapp.domain.Publisher;
 import com.DenysiukProg.spring6webapp.repositories.AuthorRepository;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
 import com.DenysiukProg.spring6webapp.repositories.PublisherRepository;
-import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +31,7 @@ public class BootstrapData implements CommandLineRunner {
         Book ddd = new Book();
         ddd.setTitle("Domain Driven Design");
         ddd.setIsbn("123456");
+        ddd.setPrice("15");
 
         Author ericSaved = authorRepository.save(eric);
         Book dddSaved = bookRepository.save(ddd);
@@ -43,6 +43,7 @@ public class BootstrapData implements CommandLineRunner {
         Book noEJB = new Book();
         noEJB.setTitle("J2EE Development without EJB");
         noEJB.setIsbn("54757585");
+        noEJB.setPrice("25");
 
         Author rodSaved = authorRepository.save(rod);
         Book noEJBSaved = bookRepository.save(noEJB);
