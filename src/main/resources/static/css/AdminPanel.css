@@ -23,14 +23,6 @@ canvas{
     background-color: #242729;
     border-radius: 10px;
 }
-.userBooks{
-    width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-
 .navBar{
     padding: 15px 20px;
     background-color: #242729;
@@ -53,6 +45,76 @@ canvas{
     transform: translate(-50%, -50%);
     
 }
+
+.userBooks{
+    width: 100%;
+    margin: 20px auto;
+
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+
+#booksGrid{
+    margin: 20px auto;
+
+    display: flex;
+    grid-template-rows: 1fr; 
+    grid-auto-flow: column; 
+}
+
+.book{
+    width: 180px;
+    height: 300px;
+    padding: 20px;
+    border-radius: 5px;
+
+    border: 2px solid #ecefff; 
+    padding: 20px; 
+    margin: 10px; 
+}
+
+
+.bookTitle{
+    font-size: 19px;
+}
+.bookPublisher{
+    font-size: 14px;
+}
+.photoContainer{
+    width: 150px;
+    height: 200px;
+    
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bookPhoto{
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+
+}
+.priceInfo{
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 7px;
+}
+.bookButton{
+    margin-right: 5px;
+    padding: 0px 3px;
+    font-size: 15px;
+}
+.book:hover{
+    -webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+}
+/*
+
+*/
 .closePanelButton{
     position: absolute; 
     top: 0; 
@@ -73,6 +135,7 @@ canvas{
     padding-right: 15px;
     
 }
+
 .blur-filter > *:not(#adminPanel) {
     filter: blur(2px);
 }

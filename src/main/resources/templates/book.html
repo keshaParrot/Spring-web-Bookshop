@@ -2,9 +2,64 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link th:href="@{/css/book.css}" rel="stylesheet" type="text/css">
+
+    <title>book</title>
 </head>
 <body>
+    <header>
+        <a th:href="@{/}"><button>home</button></a>
+        <input type="text" id="searchBookInputField" placeholder="type Title or isbn">
+            <button id="searchBookButton" onclick="searchBook()">search</button>
+        <a href="shoppingCart.html"><button class="shoppingCartButton">shopping cart</button></a>     
+    </header>
+    <div class="InformationSection">
+        <section class="InformationContainer">
+            <div class="bookSection">
 
+
+
+            </div>
+            <div class="buyMethodSection">
+
+
+            </div>
+        </section>
+    </div>
+    <div class="similarBookSection">
+
+
+
+    </div>
+    <footer>
+        <Table>
+            <tr>
+                <th>Contacts</th>
+                <th>We on social networks</th>
+                <th>newsletter</th>
+            </tr>
+            <tr>
+                <td>
+                    <p>+48 883 467 278</p>
+                    <p>ivan.denysiuk@gmail.com</p>
+                </td>
+                <td>
+                    <ol>
+                        <li>Instagram</li>
+                        <li>FaceBook</li>
+                        <li>Twitter</li>
+                        <li>YouTube</li>
+                        <li>Linkedin</li>
+                    </ol>
+                </td>
+                <td>
+                    <input type="email" placeholder="write here your email"><button>Subscribe</button>
+                </td>
+              </tr>
+        </Table>
+        <label>© 2024 Ivan Denysiuk. All rights reserved by the copyright holder.</label>
+    </footer>
+    
+    <!--<script th:src="@{/Script/Book.js}"></script>-->
 </body>
 </html>

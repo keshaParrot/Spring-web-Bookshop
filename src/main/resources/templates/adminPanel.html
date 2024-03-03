@@ -1,7 +1,8 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/AdminPanel.css">
     <title>Personal Account</title>
 </head>
 <body class="blur-filter" onload="start()">
@@ -35,8 +36,16 @@
 </section>
 <h2 style="padding-left: 20px;">Purchase history</h2>
 <section class="userBooks">
-
-
+    <div id="booksGrid">
+        <div class="book" th:each="book : ${books}">
+            <h2 class="bookTitle" th:text="${book.title}">Java in action</h2>
+            <h4 class="bookPublisher" th:text="${book.publisher.publisherName}">wbox</h4>
+            
+            <div class="photoContainer">
+                <img src="../static/SourceImg/71qoANDJu+L._AC_UF1000,1000_QL80_.jpg" class="bookPhoto">
+            </div>
+        </div>
+    </div>
 </section>
 <div id="adminPanel">
     <div class="navBar" style="position: relative;">
@@ -51,28 +60,46 @@
     </div>
     <div style="text-align: center;">
         <section id="manageBookAdminSection">
-            manageBook
+            <h1>Manage Book</h1>
+            <div class="propetrySection">
+
+            </div>
+            <div class="preViewSection">
+                
+            </div>
         </section>
         <section id="addBookAdminSection">
+            <h1>Add book</h1>
+            <div class="propetrySection">
 
+            </div>
+            <div class="preViewSection">
+                
+            </div>
         </section>
         <section id="manageAuthorAdminSection">
+            <h1>Manage author</h1>
 
         </section>
         <section id="addAuthorAdminSection">
+            <h1>Add author</h1>
 
         </section>
         <section id="managePublisherAdminSection">
+            <h1>Manage publisher</h1>
 
         </section>
         <section id="addPublisherAdminSection">
+            <h1>Add publisher</h1>
 
         </section>
         <section id="manageUserAdminSection">
+            <h1>Manage users</h1>
 
         </section>
     </div>
 </div>
 <script type="text/javascript" th:src="@{Script/AdminPanel.js}"></script>
+<script src="../static/Script/AdminPanel.js"></script>
 </body>
 </html>

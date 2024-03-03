@@ -31,6 +31,9 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> books = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Review> reviews = new HashSet<>();
     @ManyToMany
     @JoinTable(
             name = "users_roles", joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")},

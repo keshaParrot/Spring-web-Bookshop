@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,13 +20,21 @@ public class Book {
     private long id;
     private String title;
     private String isbn;
+    private Date publicationDate;
+
+    private String language;
     private String photoURL;
     private String description;
     private String price;
+    private String genre;
+
+    @OneToMany(mappedBy = "book")
+    private Set<Review> reviews = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
+
     @ManyToMany(mappedBy = "books")
     private Set<UserEntity> userEntities = new HashSet<>();
     @ManyToOne

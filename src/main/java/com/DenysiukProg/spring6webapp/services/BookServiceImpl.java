@@ -4,6 +4,8 @@ import com.DenysiukProg.spring6webapp.domain.Book;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -16,5 +18,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public Iterable<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public Optional<Book> finByID(Long id) {
+        return bookRepository.findById(id);
     }
 }
