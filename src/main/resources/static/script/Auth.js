@@ -1,3 +1,4 @@
+main();
 function main(){
     document.body.classList.remove('blur-filter');
 }

@@ -5,9 +5,65 @@ Body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 header{
-    color: white;
-    background-color: #242729; 
+    
+}
+nav {
+    position: relative;
+    background-color: #242729;
     padding: 15px 20px;
+    display: flex;
+    justify-content: flex-end;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    margin-right: 20px;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav li:hover {
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    min-width: 120px;
+    z-index: 1;
+    text-align: center;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 .AdminInfoSection{
 

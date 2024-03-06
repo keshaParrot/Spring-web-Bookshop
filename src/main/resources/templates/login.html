@@ -2,20 +2,40 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{css/Auth.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/Auth.css}" rel="stylesheet" type="text/css">
     <title>Login</title>
 </head>
 <body class="blur-filter" onload="main()">
-    <div id="container">
+<div th:if="${param.error}" class="alert alert-success">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}" class="alert alert-success">
+    You have been logged out.</div>
+<div id="container">
         <h2>Sign in to your account</h2>
-		<form action="" method="post" enctype="">
-			<input name="username" type="text" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='username'" >
+		<form method="post" th:action="@{/login}">
+			<input
+                    id="username"
+                    name="username"
+                    type="text"
+                    placeholder="login"
+                    onfocus="this.placeholder=''"
+                    onblur="this.placeholder='username'"
+            >
 			
-            <input name="haslo" type="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" >
-			
-			<button  th:href="@{/register}" id="registerButton">register</button>
+            <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="password"
+                    onfocus="this.placeholder=''"
+                    onblur="this.placeholder='password'"
+            >
+
+			<button type="submit" value="Log in" id="registerButton">Login</button>
+
             <div class="center" style="padding-top: 5px;">
-                <a href="register.html"><button>Want to create an account?</button></a>
+                <a th:href="@{/register}"><button>Want to create an account?</button></a>
                 <a onclick="showCloseresetPasswordForm()"><button>Forgot your password?</button></a>
             </div>
 		</form>
@@ -31,6 +51,6 @@
             <input type="submit" value="Reset">
         </form>
     </div>
-    <script th:src="@{/Script/Auth.js}"></script>
+    <script th:src="@{script/Auth.js}"></script>
 </body>
 </html>

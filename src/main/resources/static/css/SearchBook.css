@@ -87,33 +87,85 @@ ol {
     margin: 0;
     display: flex;
 }
-
 ol li {
     margin-right: 10px; 
 }
-.InformationSection{
+.searchResultText{
+    font-size: 23px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.searchResultNumber{
+    display: inline-block;
+    font-size: 16px;
+}
+
+#books{
+    width: 1380px;
+    margin: 20px auto;
+    
+
+    -webkit-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    -moz-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+}
+#booksGrid{
+    margin: 10px auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+    justify-items: center;
+    align-items: center;
+}
+#shoppingCartButton{
+
+}
+.book{
+    width: 250px;
+    height: 500px;
+    border-radius: 5px;
+
+    border: 2px solid #ecefff; 
+    padding: 10px;
+    margin: 20px;
+}
+.bookTitle{
+
+}
+.bookPublisher{
+
+}
+.bookPhoto{
     margin-left: auto;
     margin-right: auto;
-    padding: 10px;
+    width: 90%;
+    
 }
-.InformationContainer{
+.photoContainer{
+    width: 200px;
+    height: 300px;
+
+    /*margin-left: auto;
+    margin-right: auto;*/
+
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 800px;
 }
-.bookSection{
-    width: 900px;
-    height: 700px;
-    background-color: black;
+.priceInfo{
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 7px;
 }
-.buyMethodSection{
-    width: 400px;
-    height: 400px;
-    background-color: orange;
+.bookButton{
+    margin-right: 5px;
+    padding: 2px 5px;
+    font-size: 16px;
 }
-.similarBookSection{
-    width: 100%;
-    height: 100px;
-    background-color: green;
+.book:hover{
+    -webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+
+    border: 2px solid #ecefff;
 }

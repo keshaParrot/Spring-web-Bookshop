@@ -7,17 +7,38 @@
     <title>Register</title>
 </head>
 <body>
+    <div th:if="${param.fail}" class="alert alert-success">
+    Username or email already exists
+    </div>
     <div id="container">
         <h2>Register an account</h2>
-		<form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
-			<input name="Username" type="text" placeholder="Username" onfocus="this.placeholder=''" onblur="this.placeholder='Username'" th:field="*{username}">
+        <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+			<input
+                    name="Username"
+                    type="text"
+                    placeholder="Username"
+                    onfocus="this.placeholder=''"
+                    onblur="this.placeholder='Username'"
+                    th:field="*{username}">
             <p th:if="${#fields.hasErrors('username')}" class="text-danger"></p>
-            <input name="Email" type="text" placeholder="Email" onfocus="this.placeholder=''" onblur="this.placeholder='Email'" th:field="*{email}">
+            <input
+                    name="Email"
+                    type="text"
+                    placeholder="Email"
+                    onfocus="this.placeholder=''"
+                    onblur="this.placeholder='Email'"
+                    th:field="*{email}">
             <p th:if="${#fields.hasErrors('email')}" class="text-danger"></p>
-			<input name="Password" type="Password" placeholder="Password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" th:field="*{password}">
+			<input
+                    name="Password"
+                    type="Password"
+                    placeholder="Password"
+                    onfocus="this.placeholder=''"
+                    onblur="this.placeholder='Password'"
+                    th:field="*{password}">
             <p th:if="${#fields.hasErrors('password')}" class="text-danger"></p>
 
-            <button  th:href="@{/register}" id="registerButton">register</button>
+            <button th:href="@{/register}" id="registerButton">register</button>
             <div class="center">
                 <a th:href="@{/login}"><button>Already have account?</button></a>
             </div>

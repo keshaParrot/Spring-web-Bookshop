@@ -15,10 +15,12 @@ function initSectionList() {
     console.log(listOfSections);
 }
 function showSection(number) {
-    for(let i = 0;i<listOfSections.length;i++){
-        listOfSections[i].hidden = true
+    for (let i = 0; i < listOfSections.length; i++) {
+        listOfSections[i].hidden = true;
     }
-    listOfSections[number].hidden = false;
+    if (listOfSections[number]) {
+        listOfSections[number].hidden = false;
+    }
 }
 function showCloseAdminPanel() {
     if(document.getElementById("adminPanel").style.display != 'block'){

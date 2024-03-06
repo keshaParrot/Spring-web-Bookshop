@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/book.css}" rel="stylesheet" type="text/css">
-
-    <title>book</title>
+    <link th:href="@{/css/searchBook.css}" rel="stylesheet" type="text/css">
+    <link  rel="stylesheet" href="../static/css/SearchBook.css">
+    <title>result of search</title>
 </head>
 <body>
     <header>
@@ -30,22 +30,28 @@
             </li>
         </ul>
     </nav>
-    <div class="InformationSection">
-        <section class="InformationContainer">
-            <div class="bookSection">
-
-
-
+    <section id="books">
+        <div id="booksGrid">
+            <div class="book" th:each="book : ${books}">
+                <h2 class="bookTitle" th:text="${book.title}">Java in action</h2>
+                <h4 class="bookPublisher" th:text="${book.publisher.publisherName}">wbox</h4>
+                
+                <div class="photoContainer">
+                    <img th:src="@{${book.photoURL}}" class="bookPhoto">
+                </div>
+                
+    
+                <div class="priceInfo">
+                    <span th:text="${book.price}">10</span>
+                    <span>usd</span>
+                </div>
+                <div style="text-align: center;">
+                    <button class="bookButton">add to cart</button>
+                    <button class="bookButton">view book</button>
+                </div>
             </div>
-            <div class="buyMethodSection">
-
-
-            </div>
-        </section>
-    </div>
-    <div class="similarBookSection">
-
-
+        </div>
+    </section>
 
     </div>
     <footer>

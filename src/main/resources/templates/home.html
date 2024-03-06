@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{css/Home.css}" rel="stylesheet" type="text/css">
@@ -8,11 +10,27 @@
 </head>
 <body>
     <header>
-        <a th:href="@{/}"><button>home</button></a>
-        <input type="text" id="searchBookInputField" placeholder="type Title or isbn">
-            <button id="searchBookButton" onclick="searchBook()">search</button>
-        <a href="shoppingCart.html"><button class="shoppingCartButton">shopping cart</button></a>     
+    
     </header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <!--<button id="searchBookButton" onclick="searchBook()">search</button>-->
+            <li><a th:href="@{/searchBook}">Search Book</a></li>
+            <li><a th:href="@{/categories}">All Categories</a></li>
+            <li><a th:href="@{/shoppingCart}">shopping cart</a></li>
+            <li class="dropdown">
+                <a href="#">Account</a>
+                <ul class="dropdown-content">
+                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                    <li sec:authorize="isAuthenticated()" ><a th:href="@{/personalAccount}">Personal Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
     <section id="books">
         <div id="booksGrid">
             <div class="book" th:each="book : ${books}">
@@ -64,7 +82,7 @@
         <label>© 2024 Ivan Denysiuk. All rights reserved by the copyright holder.</label>
     </footer>
     
-    <script th:src="@{/Script/Home.js}"></script>
-    <script src="../static/Script/Home.js"></script>
+    <script th:src="@{script/Home.js}"></script>
+    <script src="../static/script/Home.js"></script>
 </body>
 </html>

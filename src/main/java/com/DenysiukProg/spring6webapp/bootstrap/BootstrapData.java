@@ -1,12 +1,10 @@
 package com.DenysiukProg.spring6webapp.bootstrap;
 
-import com.DenysiukProg.spring6webapp.domain.Author;
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.domain.Publisher;
-import com.DenysiukProg.spring6webapp.repositories.AuthorRepository;
-import com.DenysiukProg.spring6webapp.repositories.BookRepository;
-import com.DenysiukProg.spring6webapp.repositories.PublisherRepository;
+import com.DenysiukProg.spring6webapp.domain.Role;
+import com.DenysiukProg.spring6webapp.domain.UserEntity;
+import com.DenysiukProg.spring6webapp.repositories.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,12 +12,17 @@ public class BootstrapData implements CommandLineRunner {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
     private final PublisherRepository publisherRepository;
-    //private final UserRepository
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
+    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         this.publisherRepository = publisherRepository;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -70,11 +73,21 @@ public class BootstrapData implements CommandLineRunner {
         bookRepository.save(dddSaved);
         bookRepository.save(noEJBSaved);*/
 
+        userRepository.deleteAll();
+
+        UserEntity user = new UserEntity();
+        user.setUsername("1");
+        user.setPassword(passwordEncoder.encode("1"));
+        user.setEmail("1");
+        Role role = roleRepository.findByName("USER");
+        user.setRoles(role);
+
+        UserEntity userSaved = userRepository.save(user);
+
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book Count: " + bookRepository.count());
-
-
+        System.out.println("user Count: " + userRepository.count());
 
         System.out.println("Publisher Count: " + publisherRepository.count());
     }
