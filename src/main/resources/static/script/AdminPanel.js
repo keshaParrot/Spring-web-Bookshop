@@ -2,9 +2,10 @@ let listOfSections = new Array()
 
 function start() {
     document.body.classList.remove('blur-filter');
-    showSection(0)
     initSectionList()
     
+    showCloseAdminPanel()
+    showSection(1)
 }
 function initSectionList() {
     Array.from(document.getElementsByTagName('section')).forEach(section => {
@@ -25,6 +26,7 @@ function showSection(number) {
 function showCloseAdminPanel() {
     if(document.getElementById("adminPanel").style.display != 'block'){
         document.getElementById("adminPanel").style.display = 'block';
+        showSection(1)
         document.body.classList.add('blur-filter');
     }
     else{
@@ -32,3 +34,4 @@ function showCloseAdminPanel() {
         document.body.classList.remove('blur-filter');
     }
 }
+

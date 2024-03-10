@@ -2,10 +2,11 @@ package com.DenysiukProg.spring6webapp.services;
 
 import com.DenysiukProg.spring6webapp.domain.Review;
 import com.DenysiukProg.spring6webapp.repositories.ReviewRepository;
+import com.DenysiukProg.spring6webapp.services.Interfaces.ReviewService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReviewServiceImpl implements ReviewService{
+public class ReviewServiceImpl implements ReviewService {
 
     ReviewRepository reviewRepository;
 

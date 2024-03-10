@@ -4,17 +4,17 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{css/Layout.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../static/css/Layout.css}" rel="stylesheet" type="text/css">
     <link  rel="stylesheet" href="../static/css/Layout.css">
     <title>home</title>
 </head>
 <body>
-<header>
+<header th:fragment="headerFragment">
     
 </header>
-<nav>
+<nav th:fragment="navFragment">
     <ul>
-        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/home}">Home</a></li>
         <!--<button id="searchBookButton" onclick="searchBook()">search</button>-->
         <li><a th:href="@{/searchBook}">Search Book</a></li>
         <li><a th:href="@{/categories}">All Categories</a></li>
@@ -30,8 +30,12 @@
         </li>
     </ul>
 </nav>
+<!--        Admin Panel        -->
 
-<footer>
+
+
+<!--        Footer        -->
+<footer th:fragment="footerFragment">
     <Table>
         <tr>
             <th>Contacts</th>
@@ -60,7 +64,7 @@
     <label>© 2024 Ivan Denysiuk. All rights reserved by the copyright holder.</label>
 </footer>
 
-<script th:src="@{script/Home.js}"></script>
+<script th:src="@{../static/script/Home.js}"></script>
 <script src="../static/script/Home.js"></script>
 </body>
 </html>

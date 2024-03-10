@@ -20,8 +20,8 @@ public class Book {
     private long id;
     private String title;
     private String isbn;
-    private Date publicationDate;
 
+    private Date publicationDate;
     private String language;
     private String photoURL;
     private String description;

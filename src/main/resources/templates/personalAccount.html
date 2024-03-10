@@ -5,30 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/AdminPanel.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/Layout.css}" rel="stylesheet" type="text/css">
     <title>Personal Account</title>
 </head>
 
 <body class="blur-filter" onload="start()">
-    <header>
-    
-    </header>
-    <nav>
-        <ul>
-            <li><a th:href="@{/}">Home</a></li>
-            <!--<button id="searchBookButton" onclick="searchBook()">search</button>-->
-            <li><a th:href="@{/searchBook}">Search Book</a></li>
-            <li><a th:href="@{/categories}">All Categories</a></li>
-            <li><a th:href="@{/shoppingCart}">shopping cart</a></li>
-            <li class="dropdown">
-                <a href="#">Account</a>
-                <ul class="dropdown-content">
-                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
-                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+
+<div th:insert="~{layout :: headerFragment}"></div>
+<div th:insert="~{layout :: navFragment}"></div>
 
 <div th:if="${param.success}" class="alert alert-success">
     You are registered successfully!
@@ -36,41 +20,43 @@
 
 <section class="AdminInfoSection">
     <h1 style="padding-left: 20px;">Shop Statistics</h1>
-    <table>
-        <tr>
-            <td>
-                <canvas width="650" height="400">
 
-                </canvas>
-            </td>
-            <td>
-                <h3>Admin Menu</h3>
-                <button class="openAdminPanelButton" onClick="showCloseAdminPanel()">Open the admin panel</button>
-                <h3>я єбу, типу циферки</h3>
-                <label id="avaibleBook">avaible book : 651</label><br>
-                <label id="usersOnService">registered users : 20</label><br>
-                <label id="publisherOnService">number of publishers : 23</label>
-
-            </td>
-        </tr>
-    </table>
+    <div class="grid-container">
+        <div class="ShopStatistics">
+            <label id="avaibleBook">avaible book : 651</label>
+            <label id="usersOnService">registered users : 20</label>
+            <label id="publisherOnService">number of publishers : 23</label>
+        </div>
+        <div class="admin-buttons">
+            <h3>Admin Menu</h3>
+            <div>
+                <a th:href="@{/manageBook.html}"><button>manage Book</button></a>
+                <a th:href="@{/manageUser.html}"><button >manage User</button></a>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="UserInfoSection">
-    <h1 style="padding-left: 20px;">Shop Statistics</h1>
-    <table>
+    <h1 style="padding-left: 20px;">User Info</h1>
+    <table class="UserInfoTable">
         <tr>
-            <td>
-
-            </td>
-            <td>
-
-                <label>avaible book : 651</label><br>
-                <label>registered users : 20</label><br>
-                <label>number of publishers : 23</label>
-
-            </td>
+            <td>un</td>
+            <td>fn</td>
+            <td>ln</td>
+        </tr>
+        <tr>
+            <td>phone</td>
+            <td>mail</td>
+            <td>address</td>
+        </tr>
+        <tr>
+            <td>role</td>
+            <td></td>
+            <td></td>
         </tr>
     </table>
+
+
 </section>
 <h2 style="padding-left: 20px;">Purchase history</h2>
 <section class="userBooks">
@@ -85,58 +71,6 @@
         </div>
     </div>
 </section>
-<div id="adminPanel">
-    <div class="navBar" style="position: relative;">
-        <button style="margin-right: 5px;" onclick="showSection(0)">manageBook</button>
-        <button style="margin-right: 5px;" onclick="showSection(1)">addBook</button>
-        <button style="margin-right: 5px;" onclick="showSection(2)">manageAuthor</button>
-        <button style="margin-right: 5px;" onclick="showSection(3)">addAuthor</button>
-        <button style="margin-right: 5px;" onclick="showSection(4)">managePublisher</button>
-        <button style="margin-right: 5px;" onclick="showSection(5)">addPublisher</button>
-        <button style="margin-right: 5px;" onclick="showSection(6)">manageUser</button>
-        <button onclick="showCloseAdminPanel()" class="closePanelButton">X</button>
-    </div>
-    <div style="text-align: center;">
-        <section id="manageBookAdminSection">
-            <h1>Manage Book</h1>
-            <div class="propetrySection">
-
-            </div>
-            <div class="preViewSection">
-
-            </div>
-        </section>
-        <section id="addBookAdminSection">
-            <h1>Add book</h1>
-            <div class="propetrySection">
-
-            </div>
-            <div class="preViewSection">
-
-            </div>
-        </section>
-        <section id="manageAuthorAdminSection">
-            <h1>Manage author</h1>
-
-        </section>
-        <section id="addAuthorAdminSection">
-            <h1>Add author</h1>
-
-        </section>
-        <section id="managePublisherAdminSection">
-            <h1>Manage publisher</h1>
-
-        </section>
-        <section id="addPublisherAdminSection">
-            <h1>Add publisher</h1>
-
-        </section>
-        <section id="manageUserAdminSection">
-            <h1>Manage users</h1>
-
-        </section>
-    </div>
-</div>
 <script type="text/javascript" th:src="@{script/AdminPanel.js}"></script>
 </body>
 </html>

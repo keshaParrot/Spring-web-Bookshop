@@ -1,6 +1,6 @@
 package com.DenysiukProg.spring6webapp.controllers;
 
-import com.DenysiukProg.spring6webapp.services.AuthorService;
+import com.DenysiukProg.spring6webapp.services.Interfaces.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,0 +1,180 @@
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bottomSection {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.vertical-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.bookInfoSection {
+    width: 900px;
+    height: 1000px;
+    margin: 0 10px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    -webkit-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    -moz-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+}
+.booksImageBlock {
+    width: 450px;
+    height: 550px;
+    margin: 10px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #8F9499;
+}
+.booksImageBlock .booksImage {
+    flex-grow: 1;
+    width: 340px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.booksImageBlock .booksImage img {
+    max-width: 90%;
+    max-height: 90%;
+
+    object-fit: contain;
+}
+.bookInfoBlock{
+    width: 400px;
+    height: 550px;
+    margin: 10px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 3px solid #8F9499;
+}
+.localTable{
+
+}
+.localTable tr{
+
+}
+.localTable tr td{
+
+}
+.input, .select{
+    margin-bottom: 5px;
+    max-width: 170px;
+    background-color: #f5f5f5;
+    color: #242424;
+    padding: .15rem .5rem;
+    min-height: 30px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    line-height: 1.15;
+    box-shadow: 0px 10px 20px -18px;
+}
+.select{
+    width: 170px;
+    text-align: center;
+}
+input:focus {
+    border-bottom: 2px solid #5b5fc7;
+    border-radius: 4px 4px 2px 2px;
+}
+  
+input:hover, select:hover {
+    outline: 1px solid lightgrey;
+}
+.hr-style td {
+    border-top: 1px solid #000; 
+}
+.bookDescriptionBlock{
+    width: 870px;
+    height: 350px;
+    border-radius: 10px;
+
+    border: 3px solid #8F9499;
+}
+.buyMethodSection{
+    width: 400px;
+    height: 410px;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 10px;
+
+    -webkit-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    -moz-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+}
+.statusSpan{
+
+}
+.priceSpan{
+    font-size: large;
+}
+ul{
+
+}
+ul li{
+
+}
+ul li p {
+
+}
+.buyButton {
+    width: 240px;
+    height: 50px;
+    font-size: 17px;
+    padding: 0.5em 2em;
+    border: transparent;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    background: #52dd52;
+    color: white;
+    border-radius: 4px;
+}
+.buyButton:hover {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, #52dd52 0%, rgba(0,212,255,1) 100%);
+}
+.buyButton:active {
+    transform: translate(0em, 0.2em);
+}
+.userReviewBlock{
+    width: 1350px;
+    height: 350px;
+    margin: 0 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+
+
+    -webkit-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    -moz-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+}
+.semillarBookBlock{
+    width: 1350px;
+    height: 400px;
+    border-radius: 10px;
+
+
+    -webkit-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    -moz-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+}

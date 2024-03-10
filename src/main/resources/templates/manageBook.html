@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/manageBook.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/manageBook.css}" rel="stylesheet" type="text/css">
+    <link  rel="stylesheet" href="../static/css/manageBook.css">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="~{layout :: headerFragment}"></div>
+<div th:insert="~{layout :: navFragment}"></div>
+
+<div class="container">
+    <div class="vertical-container">
+        <div class="bookInfoSection">
+            <div style="margin: 5px;">
+                <button>back to Personal account</button>
+                <button>Add book to database</button>
+                <button>edit book</button>
+            </div>
+            <div class="vertical-container">
+                <div class="booksImageBlock">
+                    <div class="booksImage">
+                        <img src="71qoANDJu+L._AC_UF1000,1000_QL80_.jpg">
+                    </div>
+                    <div style="margin: 30px;">
+                        <label>Photo Url</label>
+                        <Input type="file">
+                    </div>
+                </div>
+                <div class="bookInfoBlock">
+                    <form action="" method="post">
+                        <table class="localTable">
+                            <tr>
+                                <td>Title: </td>
+                                <td><input class="input" name="text"type="search"></td>
+                            </tr>
+                            <tr>
+                                <td>ISNB: </td>
+                                <td><input class="input" name="text"type="search"></td>
+                            </tr>
+                            
+                            <tr><td><br></td></tr>
+                            
+                            <tr>
+                                <td>Age group: </td>
+                                <td><input class="input" name="text"type="search"></td>
+                            </tr>
+                            <tr>
+                                <td>Number of pages: </td>
+                                <td><input class="input" name="text" type="search"></td>
+                            </tr>
+                            <tr>
+                                <td>Publication Date:</td>
+                                <td><input class="input" name="text" type="search"></td>
+                            </tr>
+                            <tr>
+                                <td>Language</td>
+                                <td><input class="input" name="text" type="search"></td>
+                            </tr>
+                            <tr>
+                                <td>Genre</td>
+                                <td><input class="input" name="text" type="search"></td>
+                            </tr>
+
+                            <tr><td><br></td></tr>
+                            
+                            <tr>
+                                <td>Publisher</td>
+                                <td><select class="select">
+                                    <option value="1">Wbox</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>Authors</td>
+                                <td><Select multiple class="select">
+                                    <option value="1">Wbox</option>
+                                </Select></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                
+            </div>
+
+            <div class="bottomSection">
+                <div class="bookDescriptionBlock">
+                    <div style="padding: 15px;">
+                        <h3>Description</h3>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas fugit perspiciatis nam amet sapiente velit porro ipsum, reprehenderit enim animi! Maiores hic commodi totam, rem cumque facilis? Reiciendis, deserunt numquam.</p>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem assumenda, saepe nihil repudiandae deserunt magni ipsa et est nulla cum, sit amet consectetur adipisicing elit. Dolorem assumenda, saepe nihil repudiandae deserunt magni ipsa et est nulla cum,totam tempore voluptatem aspernatur voluptatibus dolorum. Adipisci cum omnis saepe.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi adipisci facere qui deserunt corporis, harum ea fugit accusantium ipsum consectetur praesentium a doloremque omnis mollitia error tempora perferendis natus fuga.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="buyMethodSection">
+            <div>
+                <span class="statusSpan">in store</span>
+            </div>
+            <div>
+                <span class="priceSpan">40 dollars</span>
+            </div>
+            <div style="text-align: center;margin-top: 15px;">
+                <button class="buyButton">Add to cart</button>
+            </div>
+            <div>
+                <h4>Delivery methods</h4>
+                <ul>
+                    <li>
+                        <p>Nova Post</p>
+                    </li>
+                    <li>
+                        <p>DHL</p>
+                    </li>
+                    <li>
+                        <p>justin</p>
+                    </li>
+                </ul>
+
+            </div>
+            <div>
+                <h4>Payment methods</h4>
+                <p>To a bank card</p>
+                <p>In cash upon receipt</p>
+                <p>Upon receipt by post</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottomSection">
+        <div class="userReviewBlock">
+            
+        </div>
+    </div>
+    
+    <div class="bottomSection">
+        <div class="semillarBookBlock">
+            буде базуватись на тематиці + жанрі
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+
+</body>
+</html>
