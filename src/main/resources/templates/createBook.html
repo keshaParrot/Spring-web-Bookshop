@@ -16,13 +16,12 @@
         <div class="bookInfoSection">
             <div style="margin: 5px;">
                 <button>back to Personal account</button>
-                <button>Add book to database</button>
-                <button>edit book</button>
+                <button>Edit book</button>
             </div>
             <div class="vertical-container">
                 <div class="booksImageBlock">
                     <div class="booksImage">
-                        <img src="71qoANDJu+L._AC_UF1000,1000_QL80_.jpg">
+                        <img src="../static/SourceImg/71qoANDJu+L._AC_UF1000,1000_QL80_.jpg">
                     </div>
                     <div style="margin: 30px;">
                         <label>Photo Url</label>
@@ -30,55 +29,57 @@
                     </div>
                 </div>
                 <div class="bookInfoBlock">
-                    <form action="" method="post">
+                    <form role="form" method="post" th:action="@{/personalAccount/createBook}" th:object="${book}">
                         <table class="localTable">
                             <tr>
                                 <td>Title: </td>
-                                <td><input class="input" name="text"type="search"></td>
+                                <td><input class="input" th:field="*{title}" name="text" type="search"></td>
                             </tr>
                             <tr>
                                 <td>ISNB: </td>
-                                <td><input class="input" name="text"type="search"></td>
+                                <td><input class="input" th:field="*{isbn}" name="text"type="search"></td>
                             </tr>
                             
                             <tr><td><br></td></tr>
                             
                             <tr>
                                 <td>Age group: </td>
-                                <td><input class="input" name="text"type="search"></td>
+                                <td><input class="input" th:field="*{ageGroup}" name="text"type="number"></td>
                             </tr>
                             <tr>
                                 <td>Number of pages: </td>
-                                <td><input class="input" name="text" type="search"></td>
+                                <td><input class="input" th:field="*{numberOfPages}" name="text" type="number"></td>
                             </tr>
                             <tr>
                                 <td>Publication Date:</td>
-                                <td><input class="input" name="text" type="search"></td>
+                                <td><input class="input" th:field="*{publicationDate}" name="text" type="date"></td>
                             </tr>
                             <tr>
                                 <td>Language</td>
-                                <td><input class="input" name="text" type="search"></td>
+                                <td><input class="input" th:field="*{language}" name="text" type="search"></td>
                             </tr>
                             <tr>
                                 <td>Genre</td>
-                                <td><input class="input" name="text" type="search"></td>
+                                <td><input class="input" th:field="*{genre}" name="text" type="search"></td>
                             </tr>
 
                             <tr><td><br></td></tr>
                             
                             <tr>
                                 <td>Publisher</td>
-                                <td><select class="select">
-                                    <option value="1">Wbox</option>
+                                <td><select th:field="*{publisher}" class="select">
+                                    <option th:each="option : ${publisher}" th:value="${option.id}" th:text="${option.publisherName}">Wbox</option>
                                 </select></td>
                             </tr>
                             <tr>
                                 <td>Authors</td>
-                                <td><Select multiple class="select">
-                                    <option value="1">Wbox</option>
-                                </Select></td>
+                                <td><Select th:field="*{authors}" multiple class="select">
+                                    <option th:each="option : ${authors}" th:value="${option.id}" th:text="${option.firstName} + ' ' + ${option.lastName}">Wbox</option>
+                                </Select>
+                                </td>
                             </tr>
                         </table>
+                        <button type="submit">Add book to database</button>
                     </form>
                 </div>
                 

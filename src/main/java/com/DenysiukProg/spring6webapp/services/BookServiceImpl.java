@@ -7,7 +7,6 @@ import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -27,10 +26,14 @@ public class BookServiceImpl implements BookService {
     public List<String> findAllGenre() {
         return bookRepository.findAllGenres();
     }
-
     @Override
-    public Optional<Book> finByID(Long id) {
-        return bookRepository.findById(id);
+    public List<Book> findBooksByGenreAndAgeGroup(String genre, String ageGroup) {
+        return bookRepository.findByGenreAndAgeGroup(genre, ageGroup);
+    }
+    @Override
+    public BookDto finByID(Long id) {
+        Book book = bookRepository.findById(id).get();
+        return mapToDto(book);
     }
 
     @Override
@@ -45,6 +48,9 @@ public class BookServiceImpl implements BookService {
         bookDto.setIsbn(book.getIsbn());
         bookDto.setPublicationDate(book.getPublicationDate());
 
+        bookDto.setAgeGroup(book.getAgeGroup());
+        bookDto.setNumberOfPages(book.getNumberOfPages());
+        bookDto.setPublicationDate(book.getPublicationDate());
         bookDto.setLanguage(book.getLanguage());
         bookDto.setPhotoURL(book.getPhotoURL());
         bookDto.setDescription(book.getDescription());

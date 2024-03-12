@@ -2,21 +2,21 @@ package com.DenysiukProg.spring6webapp.controllers;
 
 
 import com.DenysiukProg.spring6webapp.domain.Book;
+import com.DenysiukProg.spring6webapp.dto.BookDto;
 import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
-import org.springframework.security.core.parameters.P;
+import com.DenysiukProg.spring6webapp.services.Interfaces.ReviewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class BookController {
     private final BookService bookService;
+    private final ReviewService reviewService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, ReviewService reviewService) {
         this.bookService = bookService;
+        this.reviewService = reviewService;
     }
 
     @RequestMapping("/home")
@@ -30,8 +30,23 @@ public class BookController {
     }
     @RequestMapping("/book/{id}")
     public String getBook(Model model,@PathVariable Long id){
-        model.addAttribute("book", bookService.finByID(id));
+        BookDto book = bookService.finByID(id);
+
+        model.addAttribute("usersReview", reviewService.findAllForBook(book));
+        model.addAttribute("similarBooks", bookService.findBooksByGenreAndAgeGroup(book.getGenre(),book.getAgeGroup()));
+        model.addAttribute("book", book);
         return "book";
     }
+    @PutMapping("/book/{id}/update")
+    public String BookPropertyForm(Model model, @PathVariable("id") long id){
+        BookDto book = bookService.finByID(id);
+        model.addAttribute("book",book);
+        return "changePropertyBook";
+    }
+    /*@PutMapping("/book/{id}/update")
+    public String changeBookProperty(){
+
+
+    }*/
 
 }

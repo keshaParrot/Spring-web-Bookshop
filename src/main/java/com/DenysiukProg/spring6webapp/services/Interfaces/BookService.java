@@ -1,10 +1,10 @@
 package com.DenysiukProg.spring6webapp.services.Interfaces;
 
 import com.DenysiukProg.spring6webapp.domain.Book;
+import com.DenysiukProg.spring6webapp.dto.BookDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface BookService {
@@ -12,7 +12,9 @@ public interface BookService {
     Iterable<Book> findAll();
     List<String> findAllGenre();
 
-    Optional<Book> finByID(Long id);
+    List<Book> findBooksByGenreAndAgeGroup(String genre, String ageGroup);
+
+    BookDto finByID(Long id);
 
     void saveBook(Book bookDto);
 }

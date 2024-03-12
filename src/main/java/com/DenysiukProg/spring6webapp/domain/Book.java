@@ -21,6 +21,8 @@ public class Book {
     private String title;
     private String isbn;
 
+    private String ageGroup;
+    private String numberOfPages;
     private Date publicationDate;
     private String language;
     private String photoURL;
