@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{css/Home.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{css/Layout.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
     <link  rel="stylesheet" href="../static/css/Home.css">
     <title>home</title>
 </head>
@@ -29,7 +29,9 @@
                 </div>
                 <div style="text-align: center;">
                     <button class="bookButton">add to cart</button>
-                    <button class="bookButton">view book</button>
+                    <a th:href="@{/home/book/{id}(id=${book.id})}">
+                        <button class="bookButton">view book</button>
+                    </a>
                 </div>
             </div>
         </div>

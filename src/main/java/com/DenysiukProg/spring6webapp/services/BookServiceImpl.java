@@ -2,6 +2,7 @@ package com.DenysiukProg.spring6webapp.services;
 
 import com.DenysiukProg.spring6webapp.domain.Book;
 import com.DenysiukProg.spring6webapp.dto.BookDto;
+import com.DenysiukProg.spring6webapp.repositories.AuthorRepository;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
 
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -27,13 +30,13 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAllGenres();
     }
     @Override
-    public List<Book> findBooksByGenreAndAgeGroup(String genre, String ageGroup) {
-        return bookRepository.findByGenreAndAgeGroup(genre, ageGroup);
+    public List<Book> getBooksByGenreAndAgeGroupIgnoringId(String genre, String ageGroup, Long idToIgnore) {
+        return bookRepository.findByGenreAndAgeGroupAndIdNot(genre, ageGroup, idToIgnore);
     }
     @Override
-    public BookDto finByID(Long id) {
+    public BookDto findByID(Long id) {
         Book book = bookRepository.findById(id).get();
-        return mapToDto(book);
+        return entityToDto(book);
     }
 
     @Override
@@ -41,7 +44,13 @@ public class BookServiceImpl implements BookService {
         bookRepository.save(book);
         System.out.println("\nbook saved\n");
     }
-    private BookDto mapToDto(Book book) {
+
+    @Override
+    public void updateBook(BookDto bookDto) {
+        bookRepository.save(DtoToEntity(bookDto));
+    }
+
+    public static BookDto entityToDto(Book book) {
         BookDto bookDto = new BookDto();
         bookDto.setId(book.getId());
         bookDto.setTitle(book.getTitle());
@@ -61,5 +70,24 @@ public class BookServiceImpl implements BookService {
         bookDto.setPublisherId(book.getPublisher());
 
         return bookDto;
+    }
+    public static Book DtoToEntity(BookDto bookDto) {
+        Book book = new Book();
+        book.setId(bookDto.getId());
+        book.setTitle(bookDto.getTitle());
+        book.setIsbn(bookDto.getIsbn());
+
+        book.setAgeGroup(bookDto.getAgeGroup());
+        book.setNumberOfPages(bookDto.getNumberOfPages());
+        book.setPublicationDate(bookDto.getPublicationDate());
+        book.setLanguage(bookDto.getLanguage());
+        book.setPhotoURL(bookDto.getPhotoURL());
+        book.setDescription(bookDto.getDescription());
+        book.setPrice(bookDto.getPrice());
+        book.setGenre(bookDto.getGenre());
+
+        book.setAuthors(bookDto.getAuthorIds());
+        book.setPublisher(bookDto.getPublisherId());
+        return book;
     }
 }

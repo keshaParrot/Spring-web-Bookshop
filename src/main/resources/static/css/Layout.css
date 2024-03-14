@@ -21,11 +21,14 @@ nav ul {
     padding: 0;
     display: flex;
 }
-
 nav li {
     margin: 0 10px;
 }
-
+nav li a{
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+}
 nav li:hover {
     cursor: pointer;
 }

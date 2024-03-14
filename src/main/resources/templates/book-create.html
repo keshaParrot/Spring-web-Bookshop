@@ -2,10 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/Book.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/manageBook.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
-    <link  rel="stylesheet" href="../static/css/Book.css">
-    <link  rel="stylesheet" href="../static/css/Layout.css">
+    <link  rel="stylesheet" href="../static/css/manageBook.css">
     <title>Add Book</title>
 </head>
 <body>
@@ -15,76 +14,84 @@
 <div class="container">
     <div class="vertical-container">
         <div class="bookInfoSection">
-            <div style="margin: 5px; text-align: left">
-                <a th:href="@{/home/book/{bookId}/edit(bookId=${book.id})}"><button>Edit</button></a>
-                <!--<a th:href="@{}"><button>Delete</button></a>-->
+            <div style="margin: 5px;">
+                <button>back to Personal account</button>
+                <button>Edit book</button>
             </div>
             <div class="vertical-container">
                 <div class="booksImageBlock">
                     <div class="booksImage">
                         <img src="../static/SourceImg/71qoANDJu+L._AC_UF1000,1000_QL80_.jpg">
                     </div>
-
+                    <div style="margin: 30px;">
+                        <label>Photo Url</label>
+                        <Input type="file">
+                    </div>
                 </div>
                 <div class="bookInfoBlock">
-                    <form>
+                    <form role="form" method="post" th:action="@{/personalAccount/createBook}" th:object="${book}">
                         <table class="localTable">
                             <tr>
                                 <td>Title: </td>
-                                <td><p th:text="${book.title}">title</p></td>
+                                <td><input class="input" th:field="*{title}" name="text" type="search"></td>
                             </tr>
                             <tr>
                                 <td>ISNB: </td>
-                                <td><p th:text="${book.isbn}">isnb</p></td>
+                                <td><input class="input" th:field="*{isbn}" name="text"type="search"></td>
                             </tr>
-
+                            
                             <tr><td><br></td></tr>
-
+                            
                             <tr>
                                 <td>Age group: </td>
-                                <td><p th:text="${book.ageGroup}">age group</p></td>
+                                <td><input class="input" th:field="*{ageGroup}" name="text"type="number"></td>
                             </tr>
                             <tr>
                                 <td>Number of pages: </td>
-                                <td><p th:text="${book.numberOfPages}">number of page</p></td>
+                                <td><input class="input" th:field="*{numberOfPages}" name="text" type="number"></td>
                             </tr>
                             <tr>
                                 <td>Publication Date:</td>
-                                <td><p th:text="${book.getStringPublicationDate()}"></p></td>
+                                <td><input class="input" th:field="*{publicationDate}" name="text" type="date"></td>
                             </tr>
                             <tr>
                                 <td>Language</td>
-                                <td><p th:text="${book.language}"></p></td>
+                                <td><input class="input" th:field="*{language}" name="text" type="search"></td>
                             </tr>
                             <tr>
                                 <td>Genre</td>
-                                <td><p th:text="${book.genre}"></p></td>
+                                <td><input class="input" th:field="*{genre}" name="text" type="search"></td>
                             </tr>
 
                             <tr><td><br></td></tr>
-
-                            <tr class="underline">
+                            
+                            <tr>
                                 <td>Publisher</td>
-                                <td><p th:text="${book.publisherId.getPublisherName()}"></p></td>
+                                <td><select th:field="*{publisher}" class="select">
+                                    <option th:each="option : ${publisher}" th:value="${option.id}" th:text="${option.publisherName}">Wbox</option>
+                                </select></td>
                             </tr>
                             <tr>
                                 <td>Authors</td>
-                                <td>
-                                    <p th:each="authors : ${book.authorIds}" th:text="${authors.firstName} + ' ' + ${authors.lastName}"></p>
+                                <td><Select th:field="*{authors}" multiple class="select">
+                                    <option th:each="option : ${authors}" th:value="${option.id}" th:text="${option.firstName} + ' ' + ${option.lastName}">Wbox</option>
+                                </Select>
                                 </td>
                             </tr>
                         </table>
+                        <button type="submit">Add book to database</button>
                     </form>
-
                 </div>
-
+                
             </div>
 
             <div class="bottomSection">
                 <div class="bookDescriptionBlock">
                     <div style="padding: 15px;">
                         <h3>Description</h3>
-
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas fugit perspiciatis nam amet sapiente velit porro ipsum, reprehenderit enim animi! Maiores hic commodi totam, rem cumque facilis? Reiciendis, deserunt numquam.</p>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem assumenda, saepe nihil repudiandae deserunt magni ipsa et est nulla cum, sit amet consectetur adipisicing elit. Dolorem assumenda, saepe nihil repudiandae deserunt magni ipsa et est nulla cum,totam tempore voluptatem aspernatur voluptatibus dolorum. Adipisci cum omnis saepe.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi adipisci facere qui deserunt corporis, harum ea fugit accusantium ipsum consectetur praesentium a doloremque omnis mollitia error tempora perferendis natus fuga.</p>
                     </div>
                 </div>
             </div>
@@ -94,7 +101,7 @@
                 <span class="statusSpan">in store</span>
             </div>
             <div>
-                <span th:text="${book.price}" class="priceSpan">40 dollars</span><span class="priceSpan"> dollars</span>
+                <span class="priceSpan">40 dollars</span>
             </div>
             <div style="text-align: center;margin-top: 15px;">
                 <button class="buyButton">Add to cart</button>
@@ -122,43 +129,24 @@
             </div>
         </div>
     </div>
-
+    
     <div class="bottomSection">
         <div class="userReviewBlock">
-
+            
         </div>
     </div>
-
+    
     <div class="bottomSection">
-        <div class="semilunarBookBlock">
-            <div class="slider">
-                <div class="book" th:each="similarBooks : ${similarBooks}">
-                    <p class="bookTitle" th:text="${similarBooks.title}">J2EE Development without EJB</p>
-                    <p class="bookPublisher" th:text="${similarBooks.publisher.publisherName}">wbox</p>
-
-                    <div class="photoContainer">
-                        <img th:src="@{${similarBooks.photoURL}}" class="bookPhoto">
-                    </div>
-
-
-                    <div class="priceInfo">
-                        <span th:text="${similarBooks.price}">10</span>
-                        <span>usd</span>
-                    </div>
-                    <div style="text-align: center;">
-                        <button class="bookButton">add to cart</button>
-                        <a th:href="@{/home/book/{id}(id=${book.id})}">
-                            <button class="bookButton">view book</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <button id="prevBtn">Previous</button>
-            <button id="nextBtn">Next</button>
+        <div class="semillarBookBlock">
+            буде базуватись на тематиці + жанрі
         </div>
     </div>
 </div>
-<div th:insert="~{layout :: footerFragment}"></div>
-<script th:src="@{script/Book.js}"></script>
+
+
+
+
+    
+
 </body>
 </html>

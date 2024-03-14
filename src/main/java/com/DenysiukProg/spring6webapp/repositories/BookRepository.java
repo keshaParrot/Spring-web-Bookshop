@@ -10,5 +10,5 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book,Long> {
     @Query("SELECT DISTINCT b.genre FROM Book b")
     List<String> findAllGenres();
-    List<Book> findByGenreAndAgeGroup(String genre, String ageGroup);
+    List<Book> findByGenreAndAgeGroupAndIdNot(String genre, String ageGroup, Long idToIgnore);
 }

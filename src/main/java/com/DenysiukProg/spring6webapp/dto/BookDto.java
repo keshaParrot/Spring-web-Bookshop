@@ -10,9 +10,12 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 @Data
@@ -26,6 +29,7 @@ public class BookDto {
 
     private String ageGroup;
     private String numberOfPages;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date publicationDate;
     private String language;
     private String photoURL;
@@ -37,4 +41,9 @@ public class BookDto {
     private Set<Author> authorIds = new HashSet<>();
     private Set<UserEntity> userEntities = new HashSet<>();
     private Publisher publisherId;
+
+    public String getStringPublicationDate() {
+        if(publicationDate==null) return null;
+        return new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).format(publicationDate);
+    }
 }

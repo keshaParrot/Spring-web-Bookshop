@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/manageBook.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{/css/manageBook.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
     <link  rel="stylesheet" href="../static/css/manageBook.css">
-    <title>Title</title>
+    <title>Edit book property</title>
 </head>
 <body>
 <div th:insert="~{layout :: headerFragment}"></div>
@@ -15,8 +15,7 @@
     <div class="vertical-container">
         <div class="bookInfoSection">
             <div style="margin: 5px;">
-                <button>back to Personal account</button>
-                <button>Edit book</button>
+                <button>back to book</button>
             </div>
             <div class="vertical-container">
                 <div class="booksImageBlock">
@@ -29,7 +28,7 @@
                     </div>
                 </div>
                 <div class="bookInfoBlock">
-                    <form role="form" method="post" th:action="@{/personalAccount/createBook}" th:object="${book}">
+                    <form role="form" method="post" th:action="@{/home/book/{bookId}/edit(bookId=${book.id})}" th:object="${book}">
                         <table class="localTable">
                             <tr>
                                 <td>Title: </td>
@@ -39,9 +38,9 @@
                                 <td>ISNB: </td>
                                 <td><input class="input" th:field="*{isbn}" name="text"type="search"></td>
                             </tr>
-                            
+
                             <tr><td><br></td></tr>
-                            
+
                             <tr>
                                 <td>Age group: </td>
                                 <td><input class="input" th:field="*{ageGroup}" name="text"type="number"></td>
@@ -64,25 +63,25 @@
                             </tr>
 
                             <tr><td><br></td></tr>
-                            
+
                             <tr>
                                 <td>Publisher</td>
-                                <td><select th:field="*{publisher}" class="select">
+                                <td><select th:field="*{publisherId}" class="select">
                                     <option th:each="option : ${publisher}" th:value="${option.id}" th:text="${option.publisherName}">Wbox</option>
                                 </select></td>
                             </tr>
                             <tr>
                                 <td>Authors</td>
-                                <td><Select th:field="*{authors}" multiple class="select">
+                                <td><Select th:field="*{authorIds}" multiple class="select">
                                     <option th:each="option : ${authors}" th:value="${option.id}" th:text="${option.firstName} + ' ' + ${option.lastName}">Wbox</option>
                                 </Select>
                                 </td>
                             </tr>
                         </table>
-                        <button type="submit">Add book to database</button>
+                        <button type="submit">save changes</button>
                     </form>
                 </div>
-                
+
             </div>
 
             <div class="bottomSection">
@@ -129,24 +128,18 @@
             </div>
         </div>
     </div>
-    
-    <div class="bottomSection">
+
+    <!--<div class="bottomSection">
         <div class="userReviewBlock">
-            
+
         </div>
     </div>
-    
+
     <div class="bottomSection">
         <div class="semillarBookBlock">
             буде базуватись на тематиці + жанрі
         </div>
-    </div>
+    </div>-->
 </div>
-
-
-
-
-    
-
 </body>
 </html>

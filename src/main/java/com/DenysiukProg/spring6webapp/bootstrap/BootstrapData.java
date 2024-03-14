@@ -1,11 +1,14 @@
 package com.DenysiukProg.spring6webapp.bootstrap;
 
-import com.DenysiukProg.spring6webapp.domain.Role;
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.*;
 import com.DenysiukProg.spring6webapp.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Component
 public class BootstrapData implements CommandLineRunner {
@@ -27,7 +30,11 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /*Author eric = new Author();
+        /*bookRepository.deleteAll();
+        //authorRepository.deleteAll();
+        //publisherRepository.deleteAll();
+
+        Author eric = new Author();
         eric.setFirstName("Eric");
         eric.setLastName("Evans");
 
@@ -46,6 +53,11 @@ public class BootstrapData implements CommandLineRunner {
         Book noEJB = new Book();
         noEJB.setTitle("J2EE Development without EJB");
         noEJB.setIsbn("54757585");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2023, Calendar.JANUARY, 1, 0, 0, 0);
+        calendar.set(Calendar.MILLISECOND, 0); // Clear milliseconds for consistency
+        noEJB.setPublicationDate(calendar.getTime());
         noEJB.setPrice("25");
 
         Author rodSaved = authorRepository.save(rod);
@@ -90,6 +102,9 @@ public class BootstrapData implements CommandLineRunner {
         System.out.println("user Count: " + userRepository.count());
         System.out.println("role Count: " + roleRepository.count());
 
+        for (Book b : bookRepository.findAll()) {
+            System.out.println(b.getStringPublicationDate());
+        }
 
         System.out.println("Publisher Count: " + publisherRepository.count());
     }

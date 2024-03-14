@@ -22,18 +22,10 @@ public class UserController {
         this.authorService = authorService;
         this.publisherService = publisherService;
     }
-
     @GetMapping("/personalAccount")
     public String getAccountInformation(Model model){
         return "personalAccount";
     }
-
-    /*@GetMapping("/personalAccount/createBook")
-    public String CreateBookForm(Model model){
-        Book book = new Book();
-        model.addAttribute("book", book);
-        return "manageBook";
-    }*/
     @GetMapping("/personalAccount/createBook")
     public String CreateBookForm(Model model){
         Book book = new Book();
@@ -43,11 +35,12 @@ public class UserController {
         model.addAttribute("book", book);
         model.addAttribute("authors", authors);
         model.addAttribute("publisher", publishers);
-        return "createBook";
+        return "book-create";
     }
     @PostMapping("/personalAccount/createBook")
     public String CreateBook(@ModelAttribute("book") Book book){
+
         bookService.saveBook(book);
-        return "createBook";
+        return "redirect:/personalAccount";
     }
 }
