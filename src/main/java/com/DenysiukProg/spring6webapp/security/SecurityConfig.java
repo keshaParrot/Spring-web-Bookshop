@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         /*.requestMatchers("/login","/register","/register/**","/home/**","/categories","/searchBook","/shoppingCart","/css/**","/script/**")
                         .permitAll().anyRequest().authenticated())*/
-                        .requestMatchers("/personalAccount").authenticated()
+                        .requestMatchers("/personalAccount/**","/home/book/{id}/edit").authenticated()
                         .anyRequest().permitAll())
                 .formLogin(form -> form
                         .loginPage("/login")

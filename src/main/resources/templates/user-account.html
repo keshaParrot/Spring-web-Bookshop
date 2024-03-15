@@ -9,7 +9,7 @@
     <title>Personal Account</title>
 </head>
 
-<body class="blur-filter" onload="start()">
+<body>
 
 <div th:insert="~{layout :: headerFragment}"></div>
 <div th:insert="~{layout :: navFragment}"></div>
@@ -31,7 +31,7 @@
             <h3>Admin Menu</h3>
             <div>
                 <a th:href="@{/personalAccount/createBook}"><button>manage Book</button></a>
-                <a th:href="@{/manageUser.html}"><button >manage User</button></a>
+                <a th:href="@{/templates/user-manage.html}"><button >manage User</button></a>
             </div>
         </div>
     </div>
@@ -71,6 +71,5 @@
         </div>
     </div>
 </section>
-<script type="text/javascript" th:src="@{script/AdminPanel.js}"></script>
 </body>
 </html>

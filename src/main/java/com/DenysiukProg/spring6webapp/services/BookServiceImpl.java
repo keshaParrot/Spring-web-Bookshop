@@ -13,11 +13,9 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
 
-    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
+    public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -29,8 +27,15 @@ public class BookServiceImpl implements BookService {
     public List<String> findAllGenre() {
         return bookRepository.findAllGenres();
     }
+
+    @Override
+    public List<Book> findByGenre(String genre) {
+        return bookRepository.findByGenre(genre);
+    }
+
     @Override
     public List<Book> getBooksByGenreAndAgeGroupIgnoringId(String genre, String ageGroup, Long idToIgnore) {
+
         return bookRepository.findByGenreAndAgeGroupAndIdNot(genre, ageGroup, idToIgnore);
     }
     @Override
@@ -40,14 +45,20 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void saveBook(Book book){
-        bookRepository.save(book);
+    public Book saveBook(BookDto bookDto){
+        Book book = DtoToEntity(bookDto);
         System.out.println("\nbook saved\n");
+        return bookRepository.save(book);
     }
 
     @Override
     public void updateBook(BookDto bookDto) {
         bookRepository.save(DtoToEntity(bookDto));
+    }
+
+    @Override
+    public void delete(Long id) {
+        bookRepository.deleteById(id);
     }
 
     public static BookDto entityToDto(Book book) {
@@ -62,12 +73,14 @@ public class BookServiceImpl implements BookService {
         bookDto.setPublicationDate(book.getPublicationDate());
         bookDto.setLanguage(book.getLanguage());
         bookDto.setPhotoURL(book.getPhotoURL());
-        bookDto.setDescription(book.getDescription());
+        bookDto.setDescriptionParagraph1(book.getDescriptionParagraph1());
+        bookDto.setDescriptionParagraph2(book.getDescriptionParagraph2());
+        bookDto.setDescriptionParagraph3(book.getDescriptionParagraph3());
         bookDto.setPrice(book.getPrice());
         bookDto.setGenre(book.getGenre());
 
-        bookDto.setAuthorIds(book.getAuthors());
-        bookDto.setPublisherId(book.getPublisher());
+        bookDto.setAuthors(book.getAuthors());
+        bookDto.setPublisher(book.getPublisher());
 
         return bookDto;
     }
@@ -82,12 +95,14 @@ public class BookServiceImpl implements BookService {
         book.setPublicationDate(bookDto.getPublicationDate());
         book.setLanguage(bookDto.getLanguage());
         book.setPhotoURL(bookDto.getPhotoURL());
-        book.setDescription(bookDto.getDescription());
+        book.setDescriptionParagraph1(bookDto.getDescriptionParagraph1());
+        book.setDescriptionParagraph2(bookDto.getDescriptionParagraph2());
+        book.setDescriptionParagraph3(bookDto.getDescriptionParagraph3());
         book.setPrice(bookDto.getPrice());
         book.setGenre(bookDto.getGenre());
 
-        book.setAuthors(bookDto.getAuthorIds());
-        book.setPublisher(bookDto.getPublisherId());
+        book.setAuthors(bookDto.getAuthors());
+        book.setPublisher(bookDto.getPublisher());
         return book;
     }
 }

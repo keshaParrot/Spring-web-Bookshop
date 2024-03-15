@@ -7,6 +7,8 @@ import com.DenysiukProg.spring6webapp.domain.UserEntity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,23 +26,38 @@ import java.util.Set;
 public class BookDto {
 
     private long id;
+    @NotEmpty(message = "Book title should not be empty")
     private String title;
+    @NotEmpty(message = "Book ISBN should not be empty")
     private String isbn;
 
+    @NotEmpty(message = "Book age group should not be empty")
     private String ageGroup;
+    @NotEmpty(message = "Book number of pages should not be empty")
     private String numberOfPages;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date publicationDate;
+    @NotEmpty(message = "Book language should not be empty")
     private String language;
+    @NotEmpty(message = "Book photo should not be empty")
     private String photoURL;
-    private String description;
+    @NotEmpty(message = "Book price should not be empty")
     private String price;
+    @NotEmpty(message = "Book genre should not be empty")
     private String genre;
 
+    @NotEmpty(message = "First description paragraph should not be empty")
+    private String descriptionParagraph1;
+    @NotEmpty(message = "Second description paragraph should not be empty")
+    private String descriptionParagraph2;
+    private String descriptionParagraph3;
+
     private Set<Review> reviews = new HashSet<>();
-    private Set<Author> authorIds = new HashSet<>();
+    @NotEmpty(message = "Book need to have author")
+    private Set<Author> authors = new HashSet<>();
     private Set<UserEntity> userEntities = new HashSet<>();
-    private Publisher publisherId;
+    @NotNull(message = "Book need to have publisher")
+    private Publisher publisher;
 
     public String getStringPublicationDate() {
         if(publicationDate==null) return null;

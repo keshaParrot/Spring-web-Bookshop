@@ -7,10 +7,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Setter
@@ -29,9 +26,12 @@ public class Book {
     private Date publicationDate;
     private String language;
     private String photoURL;
-    private String description;
     private String price;
     private String genre;
+
+    private String descriptionParagraph1;
+    private String descriptionParagraph2;
+    private String descriptionParagraph3;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
@@ -75,12 +75,15 @@ public class Book {
                 ", publicationDate=" + publicationDate +
                 ", language='" + language + '\'' +
                 ", photoURL='" + photoURL + '\'' +
-                ", description='" + description + '\'' +
                 ", price='" + price + '\'' +
                 ", genre='" + genre + '\'' +
+                ", descriptionParagraph1='" + descriptionParagraph1 + '\'' +
+                ", descriptionParagraph2='" + descriptionParagraph2 + '\'' +
+                ", descriptionParagraph3='" + descriptionParagraph3 + '\'' +
+                ", reviews=" + reviews +
                 ", authors=" + authors +
                 ", userEntities=" + userEntities +
-                ", publisher=" + publisher.getPublisherName() +
+                ", publisher=" + publisher +
                 '}';
     }
 }

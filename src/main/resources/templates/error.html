@@ -2,29 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
+    <title>error</title>
 </head>
 <body>
-    <header>
-    
-    </header>
-    <nav>
-            <ul>
-                <li>Home</li>
-                <!--<button id="searchBookButton" onclick="searchBook()">search</button>-->
-                <li>Find Book</li>
-                <li>All Categories</li>
-                <li>shopping cart</li>
-                <li class="dropdown">
-                  Account
-                  <ul class="dropdown-content">
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
-                    <li><a href="#">Personal Account</a></li>
-                    <li><a href="#">Logout</a></li>
-                  </ul>
-                </li>
-            </ul>
-    </nav>
+<div th:insert="~{layout :: headerFragment}"></div>
+<div th:insert="~{layout :: navFragment}"></div>
 </body>
 </html>

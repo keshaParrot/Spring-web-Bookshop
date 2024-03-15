@@ -4,20 +4,48 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link th:href="@{/css/BookCategories.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
+    <link  rel="stylesheet" href="../static/css/BookCategories.css">
+    <title>Book categories</title>
 </head>
 <body>
 
 <div th:insert="~{layout :: headerFragment}"></div>
 <div th:insert="~{layout :: navFragment}"></div>
 
+<div class="categoriesDiv">
+    <div>
+        <h1 style="margin-left: 50px; padding: 5px;"> sci-fi</h1>
+        <hr style="width: 1100px;">
+    </div>
+    <div class="slider">
+        
+        <div class="book" th:each="similarBooks : ${similarBooks}">
+            <p class="bookTitle" th:text="${similarBooks.title}">J2EE Development without EJB</p>
+            <p class="bookPublisher" th:text="${similarBooks.publisher.publisherName}">wbox</p>
+
+            <div class="photoContainer">
+                <img src="../static/SourceImg/71qoANDJu+L._AC_UF1000,1000_QL80_.jpg" class="bookPhoto">
+            </div>
+
+            <div class="priceInfo">
+                <span th:text="${similarBooks.price}">10</span>
+                <span>usd</span>
+            </div>
+            <div style="text-align: center;">
+                <button class="bookButton">add to cart</button>
+                <a th:href="@{/home/book/{id}(id=${book.id})}">
+                    <button class="bookButton">view book</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-
-
-
-
-
+<div th:insert="~{layout :: footerFragment}"></div>
+<script th:src="@{/script/Book.js}"></script>
 </body>
 </html>

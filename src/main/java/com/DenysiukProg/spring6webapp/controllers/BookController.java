@@ -2,15 +2,20 @@ package com.DenysiukProg.spring6webapp.controllers;
 
 
 import com.DenysiukProg.spring6webapp.domain.Author;
+import com.DenysiukProg.spring6webapp.domain.Book;
 import com.DenysiukProg.spring6webapp.domain.Publisher;
 import com.DenysiukProg.spring6webapp.dto.BookDto;
 import com.DenysiukProg.spring6webapp.services.Interfaces.AuthorService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.PublisherService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.ReviewService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class BookController {
@@ -31,8 +36,11 @@ public class BookController {
         model.addAttribute("books", bookService.findAll());
         return "home";
     }
-    @RequestMapping("/bookCategories")
+    @RequestMapping("/home/bookCategories")
     public String getBookCategories(Model model){
+
+
+        model.addAttribute("categories", bookService.findAllGenre());
         return "book-categories";
     }
     @RequestMapping("/home/book/{id}")
@@ -44,42 +52,40 @@ public class BookController {
         model.addAttribute("book", book);
         return "book";
     }
+    @GetMapping("/home/book/{id}/delete")
+    public String deleteClub(@PathVariable Long id){
+        bookService.delete(id);
+        return "redirect:/home";
+    }
     @GetMapping("/home/book/{id}/edit")
     public String BookPropertyForm(Model model, @PathVariable("id") long id){
         BookDto book = bookService.findByID(id);
         Iterable<Author> authors = authorService.findAll();
         Iterable<Publisher> publishers = publisherService.findAll();
 
-        model.addAttribute("authors", authors);
-        model.addAttribute("publisher", publishers);
+        model.addAttribute("authorsList", authors);
+        model.addAttribute("publisherList", publishers);
         model.addAttribute("book",book);
         return "book-edit";
     }
     @PostMapping("/home/book/{id}/edit")
-    public String changeBookProperty(@PathVariable("id") long id, @ModelAttribute("book") BookDto bookDto){
+    public String changeBookProperty(@PathVariable("id") long id,
+                                     @Valid @ModelAttribute("book") BookDto bookDto,
+                                     BindingResult bindingResult,
+                                     Model model){
+
+        if (bindingResult.hasErrors()){
+            Iterable<Author> authors = authorService.findAll();
+            Iterable<Publisher> publishers = publisherService.findAll();
+            model.addAttribute("authorsList", authors);
+            model.addAttribute("publisherList", publishers);
+
+            return "book-edit";
+        }
+
         bookDto.setId(id);
         System.out.println(bookDto);
         bookService.updateBook(bookDto);
         return "redirect:/home/book/"+id;
     }
-
-    /*@PutMapping("/home/book/{id}/edit")
-    public String editBook(@PathVariable("id") long id, Model model, @ModelAttribute("book") BookDto bookDto) {
-        bookDto.setId(id);
-        BookDto existingBook = bookService.findByID(id);
-        Iterable<Author> authors = authorService.findAll();
-        Iterable<Publisher> publishers = publisherService.findAll();
-
-        model.addAttribute("authors", authors);
-        model.addAttribute("publishers", publishers);
-        model.addAttribute("book", existingBook); // Pass existing book data to the form
-        return "book-edit";
-    }
-
-    @PostMapping("/home/book/{id}/edit")
-    public String saveBookChanges(@PathVariable("id") long id, @ModelAttribute("book") BookDto bookDto) {
-        bookDto.setId(id);
-        bookService.updateBook(bookDto);
-        return "redirect:/home/book/" + id;
-    }*/
 }

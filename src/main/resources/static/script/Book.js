@@ -1,21 +1,60 @@
-let position = 0;
-const slides = document.querySelectorAll('.slide');
+document.addEventListener('DOMContentLoaded', function() {
+    var sliders = document.querySelectorAll('.semilunarBookBlock');
 
-function slideNext() {
-    position = (position + 1) % slides.length;
-    updateSlidePosition();
-}
+    sliders.forEach(function(sliderContainer) {
+        var slider = sliderContainer.querySelector('.slider');
+        var slides = slider.querySelectorAll('.book');
 
-function slidePrev() {
-    position = (position - 1 + slides.length) % slides.length;
-    updateSlidePosition();
-}
+        // Sprawdzenie, czy istnieją jakiekolwiek slajdy
+        if (slides.length > 0) {
+            var slideWidth = slides[0].offsetWidth;
+            var isDragging = false;
+            var startX;
+            var scrollLeft;
 
-function updateSlidePosition() {
-    const slideWidth = slides[position].offsetWidth;
-    const newPosition = -slideWidth * position;
-    document.querySelector('.slides').style.transform = `translateX(${newPosition}px)`;
-}
+            // Obserwator zdarzeń myszy/dotyku do przesuwania slajdów
+            slider.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
 
-document.getElementById('nextBtn').addEventListener('click', slideNext);
-document.getElementById('prevBtn').addEventListener('click', slidePrev);
+            slider.addEventListener('mouseleave', function() {
+                isDragging = false;
+            });
+
+            slider.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
+
+            slider.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2;
+                slider.scrollLeft = scrollLeft - walk;
+            });
+
+
+            slider.addEventListener('touchstart', function(e) {
+                isDragging = true;
+                startX = e.touches[0].pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+
+            slider.addEventListener('touchend', function() {
+                isDragging = false;
+            });
+
+            slider.addEventListener('touchmove', function(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.touches[0].pageX - slider.offsetLeft;
+                const walk = (x - startX) * 3;
+                slider.scrollLeft = scrollLeft - walk;
+            });
+        } else {
+            console.error('Nie znaleziono żadnych slajdów wewnątrz elementu .slider');
+        }
+    });
+});

@@ -23,14 +23,14 @@ public class AuthentificationController {
     }
     @GetMapping("/login")
     public String loginPage(){
-        return "login";
+        return "user-login";
     }
 
     @GetMapping("/register")
     public String getRegisterForm(Model model){
         RegistrationDto user = new RegistrationDto();
         model.addAttribute("user", user);
-        return "register";
+        return "user-register";
     }
     @PostMapping("/register/save")
     public String register(@Valid @ModelAttribute("user")RegistrationDto user,
@@ -45,7 +45,7 @@ public class AuthentificationController {
         }
         if(result.hasErrors()) {
             model.addAttribute("user", user);
-            return "register";
+            return "user-register";
         }
         userService.saveUser(user);
         System.out.println("user Count: " + userRepository.count());

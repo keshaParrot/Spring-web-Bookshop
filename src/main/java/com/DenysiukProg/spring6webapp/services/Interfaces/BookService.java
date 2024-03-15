@@ -11,13 +11,15 @@ public interface BookService {
 
     Iterable<Book> findAll();
     List<String> findAllGenre();
-
+    List<Book> findByGenre(String genre);
 
     List<Book> getBooksByGenreAndAgeGroupIgnoringId(String genre, String ageGroup, Long idToIgnore);
 
     BookDto findByID(Long id);
 
-    void saveBook(Book bookDto);
+    Book saveBook(BookDto bookDto);
 
     void updateBook(BookDto bookDto);
+
+    void delete(Long id);
 }

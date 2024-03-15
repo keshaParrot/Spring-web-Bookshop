@@ -65,14 +65,17 @@
 
     border: 3px solid #8F9499;
 }
-.localTable{
-
+.localTable {
+    border-collapse: collapse;
 }
-.localTable tr{
 
+.localTable tr:not(:last-child) {
+    margin-bottom: 10px; /* Задайте потрібний вам відступ */
 }
-.localTable tr td{
 
+.localTable td {
+
+    padding: 8px;
 }
 .input, .select{
     margin-bottom: 5px;
@@ -170,6 +173,7 @@ ul li p {
     height: 560px;
     border-radius: 10px;
 
+    overflow: hidden;
 
     -webkit-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
     -moz-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
@@ -180,11 +184,11 @@ ul li p {
 */
 .slider {
     width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
+    display: flex;
+    transition: transform 0.5s ease;
 }
 .book {
-    display: inline-block;
+    flex: 0 0 auto;
 
     width: 250px;
     height: 500px;

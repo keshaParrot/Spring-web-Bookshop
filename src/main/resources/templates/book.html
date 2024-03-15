@@ -16,7 +16,7 @@
     <div class="vertical-container">
         <div class="bookInfoSection">
             <div style="margin: 5px; text-align: left">
-                <a th:href="@{/home/book/{bookId}/edit(bookId=${book.id})}"><button>Edit</button></a>
+                <a th:href="@{/home/book/{bookId}/edit(bookId=${book.id})}"><button class="button-default">Edit</button></a>
                 <!--<a th:href="@{}"><button>Delete</button></a>-->
             </div>
             <div class="vertical-container">
@@ -31,46 +31,46 @@
                         <table class="localTable">
                             <tr>
                                 <td>Title: </td>
-                                <td><p th:text="${book.title}">title</p></td>
+                                <td><label th:text="${book.title}">title</label></td>
                             </tr>
                             <tr>
                                 <td>ISNB: </td>
-                                <td><p th:text="${book.isbn}">isnb</p></td>
+                                <td><label th:text="${book.isbn}">isnb</label></td>
                             </tr>
 
                             <tr><td><br></td></tr>
 
                             <tr>
                                 <td>Age group: </td>
-                                <td><p th:text="${book.ageGroup}">age group</p></td>
+                                <td><label th:text="${book.ageGroup}">age group</label></td>
                             </tr>
                             <tr>
                                 <td>Number of pages: </td>
-                                <td><p th:text="${book.numberOfPages}">number of page</p></td>
+                                <td><label th:text="${book.numberOfPages}">number of page</label></td>
                             </tr>
                             <tr>
                                 <td>Publication Date:</td>
-                                <td><p th:text="${book.getStringPublicationDate()}"></p></td>
+                                <td><label th:text="${book.getStringPublicationDate()}"></label></td>
                             </tr>
                             <tr>
                                 <td>Language</td>
-                                <td><p th:text="${book.language}"></p></td>
+                                <td><label th:text="${book.language}"></label></td>
                             </tr>
                             <tr>
                                 <td>Genre</td>
-                                <td><p th:text="${book.genre}"></p></td>
+                                <td><label th:text="${book.genre}"></label></td>
                             </tr>
 
                             <tr><td><br></td></tr>
 
                             <tr class="underline">
                                 <td>Publisher</td>
-                                <td><p th:text="${book.publisherId.getPublisherName()}"></p></td>
+                                <td><label th:text="${book.publisher.getPublisherName()}"></label></td>
                             </tr>
                             <tr>
                                 <td>Authors</td>
                                 <td>
-                                    <p th:each="authors : ${book.authorIds}" th:text="${authors.firstName} + ' ' + ${authors.lastName}"></p>
+                                    <label th:each="authors : ${book.authors}" th:text="${authors.firstName} + ' ' + ${authors.lastName}"></label>
                                 </td>
                             </tr>
                         </table>
@@ -84,7 +84,9 @@
                 <div class="bookDescriptionBlock">
                     <div style="padding: 15px;">
                         <h3>Description</h3>
-
+                        <p th:text="${book.descriptionParagraph1}"></p>
+                        <p th:text="${book.descriptionParagraph2}"></p>
+                        <p th:text="${book.descriptionParagraph3}"></p>
                     </div>
                 </div>
             </div>
@@ -153,12 +155,13 @@
                     </div>
                 </div>
             </div>
-            <button id="prevBtn">Previous</button>
-            <button id="nextBtn">Next</button>
         </div>
+        <!--<button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>-->
     </div>
 </div>
 <div th:insert="~{layout :: footerFragment}"></div>
-<script th:src="@{script/Book.js}"></script>
+<script th:src="@{/script/Book.js}"></script>
+
 </body>
 </html>

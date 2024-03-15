@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@ToString
 public class Review {
 
     @Id
@@ -29,5 +28,13 @@ public class Review {
     private int rating;
     private Date reviewDate;
 
-
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", rating=" + rating +
+                ", reviewDate=" + reviewDate +
+                '}';
+    }
 }
