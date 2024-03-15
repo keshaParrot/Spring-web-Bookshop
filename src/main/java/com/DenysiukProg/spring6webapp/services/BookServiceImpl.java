@@ -2,12 +2,12 @@ package com.DenysiukProg.spring6webapp.services;
 
 import com.DenysiukProg.spring6webapp.domain.Book;
 import com.DenysiukProg.spring6webapp.dto.BookDto;
-import com.DenysiukProg.spring6webapp.repositories.AuthorRepository;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -22,17 +22,14 @@ public class BookServiceImpl implements BookService {
     public Iterable<Book> findAll() {
         return bookRepository.findAll();
     }
-
     @Override
     public List<String> findAllGenre() {
         return bookRepository.findAllGenres();
     }
-
     @Override
     public List<Book> findByGenre(String genre) {
         return bookRepository.findByGenre(genre);
     }
-
     @Override
     public List<Book> getBooksByGenreAndAgeGroupIgnoringId(String genre, String ageGroup, Long idToIgnore) {
 
@@ -59,6 +56,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public void delete(Long id) {
         bookRepository.deleteById(id);
+    }
+    @Override
+    public Optional<Double> findMinPrice() {
+        return bookRepository.findMinPrice();
+    }
+    @Override
+    public Optional<Double> findMaxPrice() {
+        return bookRepository.findMaxPrice();
     }
 
     public static BookDto entityToDto(Book book) {

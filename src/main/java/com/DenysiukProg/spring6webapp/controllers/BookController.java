@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -38,9 +40,11 @@ public class BookController {
     }
     @RequestMapping("/home/bookCategories")
     public String getBookCategories(Model model){
+        HashSet<String> hashOfGenre = new HashSet<>(bookService.findAllGenre());
 
-
-        model.addAttribute("categories", bookService.findAllGenre());
+        model.addAttribute("maxPrice",bookService.findMinPrice().get().intValue());
+        model.addAttribute("minPrice",bookService.findMaxPrice().get().intValue());
+        model.addAttribute("categories", hashOfGenre);
         return "book-categories";
     }
     @RequestMapping("/home/book/{id}")

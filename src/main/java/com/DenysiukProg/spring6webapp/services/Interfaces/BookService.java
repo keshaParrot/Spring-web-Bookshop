@@ -5,6 +5,7 @@ import com.DenysiukProg.spring6webapp.dto.BookDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface BookService {
@@ -22,4 +23,8 @@ public interface BookService {
     void updateBook(BookDto bookDto);
 
     void delete(Long id);
+
+    Optional<Double> findMinPrice();
+
+    Optional<Double> findMaxPrice();
 }
