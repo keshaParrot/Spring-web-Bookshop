@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link th:href="@{/css/AdminPanel.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/static/css/AdminPanel.css" >
     <title>Personal Account</title>
 </head>
 
@@ -30,8 +31,8 @@
         <div class="admin-buttons">
             <h3>Admin Menu</h3>
             <div>
-                <a th:href="@{/personalAccount/createBook}"><button>manage Book</button></a>
-                <a th:href="@{/templates/user-manage.html}"><button >manage User</button></a>
+                <a th:href="@{/personalAccount/createBook}"><button class="button-default">manage Book</button></a>
+                <a th:href="@{/templates/user-manage.html}"><button class="button-default">manage User</button></a>
             </div>
         </div>
     </div>
@@ -71,5 +72,23 @@
         </div>
     </div>
 </section>
+<h2 style="padding-left: 20px;">last Review</h2>
+<!--<section class="userBooks">
+    <div id="booksGrid">
+        
+        <div class="Review" th:each="book : ${books}">
+            <div class="headerContainer">
+                <span class="nameH2">name</h2>
+                <span class="ReviewRating"> * * * * *</span>
+            </div><hr>
+            <div class="textContainer">
+                <span class="ReviewText">good</span>
+                <span class="linkToBook">J2EE</span>
+            </div>
+
+        </div>
+        
+    </div>
+</section>-->
 </body>
 </html>

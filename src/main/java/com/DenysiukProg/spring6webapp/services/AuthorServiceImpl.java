@@ -12,6 +12,10 @@ public class AuthorServiceImpl implements AuthorService {
         this.authorRepository = authorRepository;
     }
     @Override
+    public String count(){
+        return String.valueOf(authorRepository.count());
+    }
+    @Override
     public Iterable<Author> findAll() {
         return authorRepository.findAll();
     }

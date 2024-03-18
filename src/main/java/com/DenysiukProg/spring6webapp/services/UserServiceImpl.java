@@ -1,5 +1,6 @@
 package com.DenysiukProg.spring6webapp.services;
 
+import com.DenysiukProg.spring6webapp.domain.Book;
 import com.DenysiukProg.spring6webapp.domain.Role;
 import com.DenysiukProg.spring6webapp.domain.UserEntity;
 import com.DenysiukProg.spring6webapp.dto.RegistrationDto;
@@ -8,6 +9,8 @@ import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,5 +45,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+    @Override
+    public String count(){
+        return String.valueOf(userRepository.count());
+    }
+    @Override
+    public List<Book> findUserBook(Long userId) {
+        return userRepository.getReferenceById(userId).getBooks();
     }
 }

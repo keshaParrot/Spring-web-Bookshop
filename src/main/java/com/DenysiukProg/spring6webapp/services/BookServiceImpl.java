@@ -58,12 +58,20 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
     @Override
-    public Optional<Double> findMinPrice() {
+    public Optional<Integer> findMinPrice() {
         return bookRepository.findMinPrice();
     }
     @Override
-    public Optional<Double> findMaxPrice() {
+    public Optional<Integer> findMaxPrice() {
         return bookRepository.findMaxPrice();
+    }
+    @Override
+    public String count(){
+        return String.valueOf(bookRepository.count());
+    }
+    @Override
+    public List<Book> findFilteredBooks(String searchTerm, Double minPrice, Double maxPrice, List<String> genres) {
+        return bookRepository.findWithFilters(searchTerm, minPrice, maxPrice, genres);
     }
 
     public static BookDto entityToDto(Book book) {

@@ -3,7 +3,6 @@ package com.DenysiukProg.spring6webapp.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +25,7 @@ public class Book {
     private Date publicationDate;
     private String language;
     private String photoURL;
-    private String price;
+    private int price;
     private String genre;
 
     private String descriptionParagraph1;

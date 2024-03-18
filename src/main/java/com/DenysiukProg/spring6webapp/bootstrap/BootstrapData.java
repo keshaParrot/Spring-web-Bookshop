@@ -6,9 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 @Component
 public class BootstrapData implements CommandLineRunner {
@@ -96,16 +93,11 @@ public class BootstrapData implements CommandLineRunner {
 
         UserEntity userSaved = userRepository.save(user);
 
-        System.out.println("In Bootstrap");
+        System.out.println("debug Info");
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book Count: " + bookRepository.count());
         System.out.println("user Count: " + userRepository.count());
         System.out.println("role Count: " + roleRepository.count());
-
-        for (Book b : bookRepository.findAll()) {
-            System.out.println(b.getStringPublicationDate());
-        }
-
         System.out.println("Publisher Count: " + publisherRepository.count());
     }
 }

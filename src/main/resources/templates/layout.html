@@ -15,10 +15,8 @@
 <nav th:fragment="navFragment">
     <ul>
         <li><a th:href="@{/home}">Home</a></li>
-        <!--<button id="searchBookButton" onclick="searchBook()">search</button>-->
-        <li><a th:href="@{/searchBook}">Search Book</a></li>
         <li><a th:href="@{/home/bookCategories}">All Categories</a></li>
-        <li><a th:href="@{/shoppingCart}">shopping cart</a></li>
+        <li><a th:href="@{/home/shoppingCart}">shopping cart</a></li>
         <li class="dropdown">
             <a href="#">Account</a>
           <ul class="dropdown-content">
@@ -32,7 +30,27 @@
 </nav>
 <!--        Admin Panel        -->
 
+<!-- Book -->
+<div th:fragment="bookFragment" class="book" th:each="book : ${books}">
+    <h2 class="bookTitle" th:text="${book.title}">Java in action</h2>
+    <h4 class="bookPublisher" th:text="${book.publisher.publisherName}">wbox</h4>
 
+    <div class="photoContainer">
+        <img th:src="@{${book.photoURL}}" class="bookPhoto">
+    </div>
+
+
+    <div class="priceInfo">
+        <span th:text="${book.price}">10</span>
+        <span>usd</span>
+    </div>
+    <div style="text-align: center;">
+        <button>add to cart</button>
+        <a th:href="@{/home/book/{id}(id=${book.id})}">
+            <button>view book</button>
+        </a>
+    </div>
+</div>
 
 <!--        Footer        -->
 <footer th:fragment="footerFragment">

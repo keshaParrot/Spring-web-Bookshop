@@ -4,9 +4,6 @@ import com.DenysiukProg.spring6webapp.domain.Author;
 import com.DenysiukProg.spring6webapp.domain.Publisher;
 import com.DenysiukProg.spring6webapp.domain.Review;
 import com.DenysiukProg.spring6webapp.domain.UserEntity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -42,7 +39,7 @@ public class BookDto {
     @NotEmpty(message = "Book photo should not be empty")
     private String photoURL;
     @NotEmpty(message = "Book price should not be empty")
-    private String price;
+    private int price;
     @NotEmpty(message = "Book genre should not be empty")
     private String genre;
 

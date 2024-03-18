@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -38,15 +37,6 @@ public class BookController {
         model.addAttribute("books", bookService.findAll());
         return "home";
     }
-    @RequestMapping("/home/bookCategories")
-    public String getBookCategories(Model model){
-        HashSet<String> hashOfGenre = new HashSet<>(bookService.findAllGenre());
-
-        model.addAttribute("maxPrice",bookService.findMinPrice().get().intValue());
-        model.addAttribute("minPrice",bookService.findMaxPrice().get().intValue());
-        model.addAttribute("categories", hashOfGenre);
-        return "book-categories";
-    }
     @RequestMapping("/home/book/{id}")
     public String getBook(Model model,@PathVariable Long id){
         BookDto book = bookService.findByID(id);
@@ -61,6 +51,36 @@ public class BookController {
         bookService.delete(id);
         return "redirect:/home";
     }
+    @RequestMapping("/home/bookCategories")
+    public String getBookCategories(Model model) {
+        HashSet<String> hashOfGenre = new HashSet<>(bookService.findAllGenre());
+
+        model.addAttribute("minPrice", bookService.findMinPrice().get());
+        model.addAttribute("maxPrice", bookService.findMaxPrice().get());
+        model.addAttribute("categories", hashOfGenre);
+        model.addAttribute("books", bookService.findAll());
+        return "book-categories";
+    }
+
+    @GetMapping("/filteredBooks")
+    public String filterBooks(
+            @RequestParam(required = false) String searchTerm,
+            @RequestParam(required = false) Double inputMinPrice,
+            @RequestParam(required = false) Double inputMaxPrice,
+            @RequestParam(required = false) List<String> genres,
+            Model model) {
+
+        List<Book> filteredBooks = bookService.findFilteredBooks(searchTerm, inputMinPrice, inputMaxPrice, genres);
+        HashSet<String> hashOfGenre = new HashSet<>(bookService.findAllGenre());
+
+        model.addAttribute("minPrice", bookService.findMinPrice().get());
+        model.addAttribute("maxPrice", bookService.findMaxPrice().get());
+        model.addAttribute("categories", hashOfGenre);
+        model.addAttribute("books", filteredBooks);
+
+        return "book-categories";
+    }
+    //Edit Tab
     @GetMapping("/home/book/{id}/edit")
     public String BookPropertyForm(Model model, @PathVariable("id") long id){
         BookDto book = bookService.findByID(id);

@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <link th:href="@{/css/BookCategories.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
-    <link  rel="stylesheet" href="../static/css/BookCategories.css">
     <title>Book categories</title>
 </head>
 <body>
@@ -14,44 +13,65 @@
 <div th:insert="~{layout :: headerFragment}"></div>
 <div th:insert="~{layout :: navFragment}"></div>
 
-<div class="container">
+<div class="mainContainer">
     <div class="vertical-container">
         <div class="book-filter-container">
-            <div class="filterSection">
+            <form th:action="@{/filteredBooks}" method="get" class="filterSection">
                 <h2>filter</h2>
 
                 <div class="search">
-                    <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                    <button type="submit" class="searchButton">
-                        <i>></i>
-                    </button>
+                    <input type="text" class="searchTerm" name="searchTerm" placeholder="What are you looking for?">
                 </div><br>
 
                 <h3>price</h3>
-                <div class="min-max-slider" data-legendnum="2" style="margin-left: auto;margin-right: auto">
-                    <label for="min">Minimum price</label>
-                    <input id="min" class="min" name="min" type="range" step="1" th:min="${maxPrice}" th:max="${minPrice}"  />
-                    <label for="max">Maximum price</label>
-                    <input id="max" class="max" name="max" type="range" step="1" th:min="${maxPrice}" th:max="${minPrice}" />
-                </div>
+                <section class="range-slider rangeContainer">
+                    <span class="output outputOne"></span>
+                    <span class="output outputTwo"></span>
+                    <span class="full-range"></span>
+                    <span class="incl-range"></span>
+                    <input name="inputMinPrice" th:min="${minPrice}" th:max="${maxPrice}" th:value="${minPrice}" min="0" max="100" step="1" type="range">
+                    <input name="inputMaxPrice" th:min="${minPrice}" th:max="${maxPrice}" th:value="${maxPrice}" min="0" max="100" step="1" type="range">
+                </section>
 
                 <h3>genre</h3>
-                <div th:each="categories : ${categories}">
-                    <input type="checkbox" th:id="${categories}" name="myCheckbox" th:value="${categories}">
-                    <label for="${categories}" th:text="${categories}"></label>
+                <div class="checkboxSlider">
+                    <div class="checkboxContainer">
+                        <div class="checkbox" th:each="categories : ${categories}">
+                            <input type="checkbox" th:id="${categories}" name="genres" th:value="${categories}">
+                            <label for="${categories}" th:text="${categories}"></label>
+                        </div>
+                    </div>
                 </div>
 
-                <div style="text-align: center;padding: 20px">
-                    <button>show result</button>
+                <div style="text-align: center;padding: 10px">
+                    <button type="submit" class="button-default" onclick="validateForm()">show result</button>
+                    <button type="reset" class="button-default">clear filter</button>
                 </div>
-            </div>
+            </form>
             <div class="bookContainer">
+                <div class="booksGrid">
+                    <div class="book" th:each="book : ${books}">
+                        <h2 class="bookTitle" th:text="${book.title}">Java in action</h2>
+                        <h4 class="bookPublisher" th:text="${book.publisher.publisherName}">wbox</h4>
+
+                        <div class="photoContainer">
+                            <img th:src="@{${book.photoURL}}" class="bookPhoto">
+                        </div>
 
 
-
-
+                        <div class="priceInfo">
+                            <span th:text="${book.price}">10</span>
+                            <span>usd</span>
+                        </div>
+                        <div style="text-align: center;">
+                            <button>add to cart</button>
+                            <a th:href="@{/home/book/{id}(id=${book.id})}">
+                                <button>view book</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -12,7 +12,10 @@ public class PublisherServiceImpl implements PublisherService {
     public PublisherServiceImpl(PublisherRepository publisherRepository) {
         this.publisherRepository = publisherRepository;
     }
-
+    @Override
+    public String count(){
+        return String.valueOf(publisherRepository.count());
+    }
     @Override
     public Iterable<Publisher> findAll() {
         return publisherRepository.findAll();

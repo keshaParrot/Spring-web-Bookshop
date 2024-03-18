@@ -24,7 +24,11 @@ public interface BookService {
 
     void delete(Long id);
 
-    Optional<Double> findMinPrice();
+    Optional<Integer> findMinPrice();
 
-    Optional<Double> findMaxPrice();
+    Optional<Integer> findMaxPrice();
+
+    String count();
+
+    List<Book> findFilteredBooks(String searchTerm, Double minPrice, Double maxPrice, List<String> genres);
 }
