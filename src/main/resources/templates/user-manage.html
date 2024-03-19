@@ -2,14 +2,108 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link th:href="@{/css/manageBook.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
+    <link  rel="stylesheet" href="../static/css/UserEdit.css">
+    <link  rel="stylesheet" href="../static/css/Layout.css">
+    <title>Edit user</title>
 </head>
-<body>
+<body style="width: 1200px; margin-left: auto; margin-right: auto; font-size: 23px;">
+
+    <div th:insert="~{layout :: headerFragment}"></div>
+    <div th:insert="~{layout :: navFragment}"></div>
+
     <section class="findUser">
-
+        <form action="/personalAccount/user/searchUser" method="get">
+            <h2>provide username</h2>
+            <input type="text" th:name="username"><button type="submit">find</button>
+        </form>
     </section>
-    <section>
-
+    <section class="changeUserProperty" hidden>
+        <div>
+            <p>user with name <span>ivan</span> findet successfully</p>
+        </div>
+        <div class="container">
+            <div style="padding: 10px;">
+                <button class="button-default">back to account</button>
+            </div><hr>
+            <form action="/personalAccount/user/update" method="post">
+                <table class="UserInfoTable">
+                    <tr>
+                        <td>
+                            <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                            
+                            <label>Username</label></td>
+                        <td><input readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                            <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                                <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                            </div>
+                            <label>Firstname</label></td>
+                        <td><input readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                            <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                                <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                            </div>
+                            <label>Lastname</label></td>
+                        <td><input readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                            <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                                <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                            </div>
+                            <label>Phone number</label></td>
+                        <td><input readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                            <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                                <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                            </div>
+                            <label>Email</label></td>
+                        <td><input readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                            <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                                <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                            </div>
+                            <label>Delivery Address</label></td>
+                        <td><input readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                            <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                                <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                            </div>
+                            <label>User role</label></td>
+                        <td>
+                            <select>
+                                <option th:id="" th:text="">admin</option>
+                            </select><button>add</button><br>
+                            <select multiple>
+                                <option>user</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <button style="text-align: center;" id="saveButton">Save</button>
+            </form>
+        </div>
     </section>
+
+    <div th:insert="~{layout :: footerFragment}"></div>
+
 </body>
 </html>

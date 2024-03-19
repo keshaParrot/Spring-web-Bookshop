@@ -17,7 +17,6 @@
         <div class="bookInfoSection">
             <div style="margin: 5px; text-align: left">
                 <a th:href="@{/home/book/{bookId}/edit(bookId=${book.id})}"><button class="button-default">Edit</button></a>
-                <!--<a th:href="@{}"><button>Delete</button></a>-->
             </div>
             <div class="vertical-container">
                 <div class="booksImageBlock">
@@ -133,8 +132,104 @@
 
     <div class="bottomSection">
         <div class="semilunarBookBlock">
-            <div class="slider">
-                <div class="book" th:each="similarBooks : ${similarBooks}">
+            <div class="semilunarBookSlider">
+                <div class="semilunarbook" th:each="similarBooks : ${similarBooks}">
+                    <p class="bookTitle" th:text="${similarBooks.title}">J2EE Development without EJB</p>
+                    <p class="bookPublisher" th:text="${similarBooks.publisher.publisherName}">wbox</p>
+
+                    <div class="photoContainer">
+                        <img th:src="@{${similarBooks.photoURL}}" class="bookPhoto">
+                    </div>
+
+
+                    <div class="priceInfo">
+                        <span th:text="${similarBooks.price}">10</span>
+                        <span>usd</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="bookButton">add to cart</button>
+                        <a th:href="@{/home/book/{id}(id=${book.id})}">
+                            <button class="bookButton">view book</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="semilunarbook" th:each="similarBooks : ${similarBooks}">
+                    <p class="bookTitle" th:text="${similarBooks.title}">J2EE Development without EJB</p>
+                    <p class="bookPublisher" th:text="${similarBooks.publisher.publisherName}">wbox</p>
+
+                    <div class="photoContainer">
+                        <img th:src="@{${similarBooks.photoURL}}" class="bookPhoto">
+                    </div>
+
+
+                    <div class="priceInfo">
+                        <span th:text="${similarBooks.price}">10</span>
+                        <span>usd</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="bookButton">add to cart</button>
+                        <a th:href="@{/home/book/{id}(id=${book.id})}">
+                            <button class="bookButton">view book</button>
+                        </a>
+                    </div>
+                </div><div class="semilunarbook" th:each="similarBooks : ${similarBooks}">
+                    <p class="bookTitle" th:text="${similarBooks.title}">J2EE Development without EJB</p>
+                    <p class="bookPublisher" th:text="${similarBooks.publisher.publisherName}">wbox</p>
+
+                    <div class="photoContainer">
+                        <img th:src="@{${similarBooks.photoURL}}" class="bookPhoto">
+                    </div>
+
+
+                    <div class="priceInfo">
+                        <span th:text="${similarBooks.price}">10</span>
+                        <span>usd</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="bookButton">add to cart</button>
+                        <a th:href="@{/home/book/{id}(id=${book.id})}">
+                            <button class="bookButton">view book</button>
+                        </a>
+                    </div>
+                </div><div class="semilunarbook" th:each="similarBooks : ${similarBooks}">
+                    <p class="bookTitle" th:text="${similarBooks.title}">J2EE Development without EJB</p>
+                    <p class="bookPublisher" th:text="${similarBooks.publisher.publisherName}">wbox</p>
+
+                    <div class="photoContainer">
+                        <img th:src="@{${similarBooks.photoURL}}" class="bookPhoto">
+                    </div>
+
+
+                    <div class="priceInfo">
+                        <span th:text="${similarBooks.price}">10</span>
+                        <span>usd</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="bookButton">add to cart</button>
+                        <a th:href="@{/home/book/{id}(id=${book.id})}">
+                            <button class="bookButton">view book</button>
+                        </a>
+                    </div>
+                </div><div class="semilunarbook" th:each="similarBooks : ${similarBooks}">
+                    <p class="bookTitle" th:text="${similarBooks.title}">J2EE Development without EJB</p>
+                    <p class="bookPublisher" th:text="${similarBooks.publisher.publisherName}">wbox</p>
+
+                    <div class="photoContainer">
+                        <img th:src="@{${similarBooks.photoURL}}" class="bookPhoto">
+                    </div>
+
+
+                    <div class="priceInfo">
+                        <span th:text="${similarBooks.price}">10</span>
+                        <span>usd</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="bookButton">add to cart</button>
+                        <a th:href="@{/home/book/{id}(id=${book.id})}">
+                            <button class="bookButton">view book</button>
+                        </a>
+                    </div>
+                </div><div class="semilunarbook" th:each="similarBooks : ${similarBooks}">
                     <p class="bookTitle" th:text="${similarBooks.title}">J2EE Development without EJB</p>
                     <p class="bookPublisher" th:text="${similarBooks.publisher.publisherName}">wbox</p>
 
@@ -156,12 +251,12 @@
                 </div>
             </div>
         </div>
-        <!--<button id="prevBtn">Previous</button>
-        <button id="nextBtn">Next</button>-->
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
     </div>
 </div>
 <div th:insert="~{layout :: footerFragment}"></div>
 <script th:src="@{/script/Book.js}"></script>
-
+<script src="/static/script/Book.js"></script>
 </body>
 </html>

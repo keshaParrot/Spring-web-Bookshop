@@ -7,10 +7,11 @@
     <link th:href="@{/css/AdminPanel.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/static/css/AdminPanel.css" >
+    <link rel="stylesheet" href="/static/css/Layout.css" >
     <title>Personal Account</title>
 </head>
 
-<body>
+<body >
 
 <div th:insert="~{layout :: headerFragment}"></div>
 <div th:insert="~{layout :: navFragment}"></div>
@@ -19,76 +20,139 @@
     You are registered successfully!
 </div>
 
+
+<section class="UserInfoSection">
+
+
+    <h1 style="padding-left: 20px;">Welcome back, <span>Ivan</span></h1>
+    <form>
+        <table class="UserInfoTable">
+            <tr>
+                <td>
+                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                    
+                    <label>Username</label></td>
+                <td><input readonly></td>
+            </tr>
+            <tr>
+                <td>
+                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                    </div>
+                    <label>Firstname</label></td>
+                <td><input readonly></td>
+            </tr>
+            <tr>
+                <td>
+                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                    </div>
+                    <label>Lastname</label></td>
+                <td><input readonly></td>
+            </tr>
+            <tr>
+                <td>
+                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                    </div>
+                    <label>Phone number</label></td>
+                <td><input readonly></td>
+            </tr>
+            <tr>
+                <td>
+                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                    </div>
+                    <label>Email</label></td>
+                <td><input readonly></td>
+            </tr>
+            <tr>
+                <td>
+                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                    </div>
+                    <label>Delivery Address</label></td>
+                <td><input readonly></td>
+            </tr>
+            <tr>
+                <td>
+                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
+                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                    </div>
+                    <label>User role</label></td>
+                <td><label></label></td>
+            </tr>
+        </table>
+        <button style="text-align: center;" hidden id="saveButton" onclick="changeEditMode()">Save</button>
+    </form>
+    <button id="editButton" onclick="changeEditMode()">Edit</button>
+</section>
 <section class="AdminInfoSection">
     <h1 style="padding-left: 20px;">Shop Statistics</h1>
 
     <div class="grid-container">
         <div class="ShopStatistics">
-            <label id="avaibleBook">avaible book : 651</label>
-            <label id="usersOnService">registered users : 20</label>
-            <label id="publisherOnService">number of publishers : 23</label>
+            <label>avaible book: <span th:text="${shopData.get('availableBooks')}"></span></label>
+            <label>registered users: <span th:text="${shopData.get('registeredUsers')}"></span></label>
+            <label>number of publishers: <span th:text="${shopData.get('numberOfPublisher')}"></span></label>
+            <label>number of authors: <span th:text="${shopData.get('numberOfAuthors')}"></span></label>
         </div>
         <div class="admin-buttons">
-            <h3>Admin Menu</h3>
-            <div>
-                <a th:href="@{/personalAccount/createBook}"><button class="button-default">manage Book</button></a>
-                <a th:href="@{/templates/user-manage.html}"><button class="button-default">manage User</button></a>
+            <h3 style="text-align: center;">Admin Menu</h3>
+            <div style="text-align: center;">
+                <a th:href="@{/personalAccount/createBook}"><button class="button-default">Add Book</button></a>
+                <a th:href="@{/templates/user-manage.html}"><button class="button-default">Edit User</button></a>
             </div>
         </div>
     </div>
 </section>
-<section class="UserInfoSection">
-    <h1 style="padding-left: 20px;">User Info</h1>
-    <table class="UserInfoTable">
-        <tr>
-            <td>un</td>
-            <td>fn</td>
-            <td>ln</td>
-        </tr>
-        <tr>
-            <td>phone</td>
-            <td>mail</td>
-            <td>address</td>
-        </tr>
-        <tr>
-            <td>role</td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-
-
-</section>
-<h2 style="padding-left: 20px;">Purchase history</h2>
-<section class="userBooks">
-    <div id="booksGrid">
-        <div class="book" th:each="book : ${books}">
-            <h2 class="bookTitle" th:text="${book.title}">Java in action</h2>
-            <h4 class="bookPublisher" th:text="${book.publisher.publisherName}">wbox</h4>
-
-            <div class="photoContainer">
-                <img src="../static/SourceImg/71qoANDJu+L._AC_UF1000,1000_QL80_.jpg" class="bookPhoto">
+<section class="home" >
+    
+    <h2 style="padding-left: 20px;">Purchase history</h2>
+    <div class="userBooks">
+        <div class="booksGrid" id="slider">
+            <div class="book" id="slide" th:each="book : ${books}">
+                <h2 class="bookTitle" th:text="${book.title}">Java in action</h2>
+                <h4 class="bookPublisher" th:text="${book.publisher.publisherName}">wbox</h4>
+    
+                <div class="photoContainer">
+                    <img src="../static/SourceImg/71qoANDJu+L._AC_UF1000,1000_QL80_.jpg" class="bookPhoto">
+                </div>
             </div>
         </div>
+        <button id="prevButtonB">Previous</button>
+        <button id="nextButtonB">Next</button>
+    </div>
+    <h2 style="padding-left: 20px;">last Review</h2>
+    <div class="userReview">
+        <div class="ReviewGrid">
+            
+            <div class="Review"  th:each="book : ${books}">
+                <div class="headerContainer">
+                    <span class="userName">name</h2>
+                    <span class="ReviewRating"> * * * * *</span>
+                </div><hr style="width: 95%;">
+                <div class="textContainer">
+                    <span class="ReviewText">good</span>
+                    <a><span class="linkToBook">J2EE</span></a>
+                </div>
+            </div>
+        </div>
+        <button id="prevButtonR">Previous</button>
+        <button id="nextButtonR">Next</button>
     </div>
 </section>
-<h2 style="padding-left: 20px;">last Review</h2>
-<!--<section class="userBooks">
-    <div id="booksGrid">
-        
-        <div class="Review" th:each="book : ${books}">
-            <div class="headerContainer">
-                <span class="nameH2">name</h2>
-                <span class="ReviewRating"> * * * * *</span>
-            </div><hr>
-            <div class="textContainer">
-                <span class="ReviewText">good</span>
-                <span class="linkToBook">J2EE</span>
-            </div>
+<script>
+    
+</script>
 
-        </div>
-        
-    </div>
-</section>-->
+<script src="/static/script/AdminPanel.js"></script>
+<script src="/static/script/Book.js"></script>
 </body>
 </html>

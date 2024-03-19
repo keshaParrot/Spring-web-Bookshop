@@ -46,6 +46,37 @@ public class BookController {
         model.addAttribute("book", book);
         return "book";
     }
+    @GetMapping("/home/book/{id}/edit")
+    public String BookPropertyForm(Model model, @PathVariable("id") long id){
+        BookDto book = bookService.findByID(id);
+        Iterable<Author> authors = authorService.findAll();
+        Iterable<Publisher> publishers = publisherService.findAll();
+
+        model.addAttribute("authorsList", authors);
+        model.addAttribute("publisherList", publishers);
+        model.addAttribute("book",book);
+        return "book-edit";
+    }
+    @PostMapping("/home/book/{id}/edit")
+    public String changeBookProperty(@PathVariable("id") long id,
+                                     @Valid @ModelAttribute("book") BookDto bookDto,
+                                     BindingResult bindingResult,
+                                     Model model){
+
+        if (bindingResult.hasErrors()){
+            Iterable<Author> authors = authorService.findAll();
+            Iterable<Publisher> publishers = publisherService.findAll();
+            model.addAttribute("authorsList", authors);
+            model.addAttribute("publisherList", publishers);
+
+            return "book-edit";
+        }
+
+        bookDto.setId(id);
+        System.out.println(bookDto);
+        bookService.updateBook(bookDto);
+        return "redirect:/home/book/"+id;
+    }
     @GetMapping("/home/book/{id}/delete")
     public String deleteClub(@PathVariable Long id){
         bookService.delete(id);
@@ -79,37 +110,5 @@ public class BookController {
         model.addAttribute("books", filteredBooks);
 
         return "book-categories";
-    }
-    //Edit Tab
-    @GetMapping("/home/book/{id}/edit")
-    public String BookPropertyForm(Model model, @PathVariable("id") long id){
-        BookDto book = bookService.findByID(id);
-        Iterable<Author> authors = authorService.findAll();
-        Iterable<Publisher> publishers = publisherService.findAll();
-
-        model.addAttribute("authorsList", authors);
-        model.addAttribute("publisherList", publishers);
-        model.addAttribute("book",book);
-        return "book-edit";
-    }
-    @PostMapping("/home/book/{id}/edit")
-    public String changeBookProperty(@PathVariable("id") long id,
-                                     @Valid @ModelAttribute("book") BookDto bookDto,
-                                     BindingResult bindingResult,
-                                     Model model){
-
-        if (bindingResult.hasErrors()){
-            Iterable<Author> authors = authorService.findAll();
-            Iterable<Publisher> publishers = publisherService.findAll();
-            model.addAttribute("authorsList", authors);
-            model.addAttribute("publisherList", publishers);
-
-            return "book-edit";
-        }
-
-        bookDto.setId(id);
-        System.out.println(bookDto);
-        bookService.updateBook(bookDto);
-        return "redirect:/home/book/"+id;
     }
 }

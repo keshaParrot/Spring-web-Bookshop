@@ -4,13 +4,16 @@ import com.DenysiukProg.spring6webapp.domain.Book;
 import com.DenysiukProg.spring6webapp.domain.Role;
 import com.DenysiukProg.spring6webapp.domain.UserEntity;
 import com.DenysiukProg.spring6webapp.dto.RegistrationDto;
+import com.DenysiukProg.spring6webapp.dto.UserDto;
 import com.DenysiukProg.spring6webapp.repositories.RoleRepository;
 import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -53,5 +56,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Book> findUserBook(Long userId) {
         return userRepository.getReferenceById(userId).getBooks();
+    }
+
+    public static UserDto fromUserEntity(UserEntity userEntity) {
+        UserDto dto = new UserDto();
+        dto.setId(userEntity.getId());
+        dto.setUsername(userEntity.getUsername());
+        dto.setFirstName(userEntity.getFirstName());
+        dto.setLastName(userEntity.getLastName());
+        dto.setEmail(userEntity.getEmail());
+
+        dto.setRoles(userEntity.getRoles());
+        dto.setReviews(userEntity.getReviews());
+        dto.setBooks(userEntity.getBooks());
+
+        return dto;
     }
 }

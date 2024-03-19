@@ -182,12 +182,12 @@ ul li p {
 /*
 
 */
-.slider {
+.semilunarBookSlider {
     width: 100%;
     display: flex;
     transition: transform 0.5s ease;
 }
-.book {
+.semilunarbook {
     flex: 0 0 auto;
 
     width: 250px;
@@ -232,7 +232,7 @@ ul li p {
     padding: 2px 5px;
     font-size: 16px;
 }
-.book:hover{
+.semilunarbook:hover{
     -webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
     -moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
     box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);

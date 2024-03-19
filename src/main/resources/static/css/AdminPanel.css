@@ -18,46 +18,38 @@ Body{
     margin-left: 100px;
     grid-column: 1;
     display: flex;
-    width: 500px;
-    height: 200px;
+    width: 300px;
+    height: 120px;
     flex-direction: column;
     border: 2px solid #242729;
     border-radius: 10px;
+    font-size: large;
+    padding: 10px;
+    justify-content: center;
+    text-align: center;
 }
-.admin-buttons {
-    width: 500px;
-    height: 350px;
-    margin-left: 50px;
-    margin-right: auto;
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-}
-.admin-buttons button{
-    width: 130px;
-    height: 40px;
-    transition-duration: 0.4s;
-}
-.admin-buttons button:hover {
-    background-color: white;
-    color: #242729;
-}
-
 .userBooks{
     width: 100%;
     margin: 20px auto;
-
-    border-bottom: 2px solid black;
     border-top: 2px solid black;
+    
+    position: relative;
+    overflow: hidden;
 }
-#booksGrid{
+.booksGrid{
     margin: 20px auto;
-
+    
     display: flex;
-    grid-template-rows: 1fr; 
-    grid-auto-flow: column; 
+    transition: transform 0.5s ease;
+    flex-direction: row;
 }
+
+/*
+    book
+*/
 .book{
+    flex: 0 0 auto;
+
     width: 180px;
     height: 300px;
     padding: 20px;
@@ -100,6 +92,56 @@ Body{
 	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
 	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
 }
-.blur-filter > *:not(#adminPanel) {
-    filter: blur(2px);
+/*
+    review
+*/
+.userReview{
+    width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+    border-top: 2px solid black;
+}
+.ReviewGrid{
+    margin: 20px auto;
+
+    display: flex;
+    transition: transform 0.5s ease;
+    flex-direction: row;
+}
+            
+.Review{
+    flex: 0 0 auto;
+    width: 350px;
+    height: 200px;
+    padding: 15px; 
+    margin: 10px; 
+
+    border-radius: 5px;
+    border: 2px solid #ecefff; 
+}
+.Review:hover{
+    -webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+}
+.headerContainer{
+    justify-content: center;
+    font-size: large;
+}
+.userName{
+    text-align: left;
+    margin-left: 15px;
+}
+.ReviewRating{
+    float: right;
+    margin-right: 15px;
+}
+.textContainer{
+    padding: 10px;
+}
+.ReviewText{
+    
+}
+.linkToBook{
+
 }
