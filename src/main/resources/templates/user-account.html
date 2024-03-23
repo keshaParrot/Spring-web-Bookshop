@@ -11,103 +11,135 @@
     <title>Personal Account</title>
 </head>
 
-<body >
-
+<body>
 <div th:insert="~{layout :: headerFragment}"></div>
 <div th:insert="~{layout :: navFragment}"></div>
 
 <div th:if="${param.success}" class="alert alert-success">
     You are registered successfully!
 </div>
+<!--<div th:if="${param.changed}" class="alert alert-success">
+    data has been changed successfully!
+</div>-->
 
 
 <section class="UserInfoSection">
 
 
-    <h1 style="padding-left: 20px;">Welcome back, <span>Ivan</span></h1>
-    <form>
+    <h1 style="padding-left: 20px;">Welcome back, <span th:text="${userData.firstName == null ? userData.username : userData.firstName }">Ivan</span></h1>
+    <form role="form" th:method="post" th:action="@{/personalAccount}" th:object="${userData}">
         <table class="UserInfoTable">
             <tr>
-                <td>
-                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
-                    
+                <td><span th:if="${#fields.hasErrors('username')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('username')}">
+                        <p th:each="error : ${#fields.errors('username')}" th:text="${error}"></p>
+                    </div>
                     <label>Username</label></td>
-                <td><input readonly></td>
+                <td><input readonly th:field="*{username}"></td>
             </tr>
             <tr>
-                <td>
-                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
-                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
-                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                <td><span th:if="${#fields.hasErrors('firstName')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('firstName')}">
+                        <p th:each="error : ${#fields.errors('firstName')}" th:text="${error}"></p>
                     </div>
                     <label>Firstname</label></td>
-                <td><input readonly></td>
+                <td><input readonly th:field="*{firstName}"></td>
+            </tr>
+            <tr>
+                <td><label>Lastname</label></td>
+                <td><input readonly th:field="*{lastName}"></td>
             </tr>
             <tr>
                 <td>
-                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
-                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
-                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
-                    </div>
-                    <label>Lastname</label></td>
-                <td><input readonly></td>
-            </tr>
-            <tr>
-                <td>
-                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
-                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
-                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                    <span th:if="${#fields.hasErrors('phoneNumber')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('phoneNumber')}">
+                        <p th:each="error : ${#fields.errors('phoneNumber')}" th:text="${error}"></p>
                     </div>
                     <label>Phone number</label></td>
-                <td><input readonly></td>
+                <td><input readonly th:field="*{phoneNumber}"></td>
             </tr>
             <tr>
-                <td>
-                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
-                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
-                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
+                <td><span th:if="${#fields.hasErrors('email')}" class="errorField">? </span>
+                    <div class="tooltip-text" th:if="${#fields.hasErrors('email')}">
+                        <p th:each="error : ${#fields.errors('email')}" th:text="${error}"></p>
                     </div>
                     <label>Email</label></td>
-                <td><input readonly></td>
+                <td><input readonly th:field="*{email}"></td>
             </tr>
             <tr>
-                <td>
-                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
-                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
-                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
-                    </div>
-                    <label>Delivery Address</label></td>
-                <td><input readonly></td>
+                <td><label>Delivery Address</label></td>
+                <td><input readonly th:field="*{address}"></td>
             </tr>
             <tr>
-                <td>
-                    <span th:if="${#fields.hasErrors('isbn')}" class="errorField">? </span>
-                    <div class="tooltip-text" th:if="${#fields.hasErrors('isbn')}">
-                        <p th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></p>
-                    </div>
-                    <label>User role</label></td>
-                <td><label></label></td>
+                <td><label>User role</label></td>
+                <td><label th:each="Role : ${userData.getRoles()}" th:text="${Role.getName()}"></label></td>
             </tr>
         </table>
-        <button style="text-align: center;" hidden id="saveButton" onclick="changeEditMode()">Save</button>
+        <button style="text-align: center;" hidden id="saveButton" type="submit">Save 2</button>
     </form>
+
     <button id="editButton" onclick="changeEditMode()">Edit</button>
 </section>
-<section class="AdminInfoSection">
-    <h1 style="padding-left: 20px;">Shop Statistics</h1>
+<section class="AdminInfoSection" th:if="${userData.hasRole('ADMIN')}">
+    <h1 style="padding-left: 20px;">Admin Menu</h1>
 
     <div class="grid-container">
         <div class="ShopStatistics">
-            <label>avaible book: <span th:text="${shopData.get('availableBooks')}"></span></label>
-            <label>registered users: <span th:text="${shopData.get('registeredUsers')}"></span></label>
-            <label>number of publishers: <span th:text="${shopData.get('numberOfPublisher')}"></span></label>
+            <p>shop statistics</p>
+            <label>available book: <span th:text="${shopData.get('availableBooks')}"></span></label><br>
+            <label>registered users: <span th:text="${shopData.get('registeredUsers')}"></span></label><br>
+            <label>number of publishers: <span th:text="${shopData.get('numberOfPublisher')}"></span></label><br>
             <label>number of authors: <span th:text="${shopData.get('numberOfAuthors')}"></span></label>
         </div>
+        <div class="testBlock" style="text-align: center;">
+            <p>other function</p>
+            <a th:href="@{/personalAccount/createBook}"><button class="button-default">Add Book</button></a>
+        </div>
+        <div class="findUserBlock" style="text-align: center;">
+            <p>Find user</p>
+            <div class="search">
+                <input id="userInput" placeholder="provide username" type="text">
+                <button type="submit">Find</button>
+            </div>
+            <div id="userResults" class="searchResultContainer">
+                <div class="searchResult">
+                    <div class="userSlide">No users found</div>
+                </div>
+            </div>
+        </div>
+        <div class="findAuthorBlock" style="text-align: center;">
+            <p>Find publisher</p>
+            <div class="search">
+                <input id="authorInput" placeholder="provide fullname" type="text">
+                <button type="submit">Find</button>
+            </div>
+            <div id="authorResults" class="searchResultContainer">
+                <div class="searchResult">
+                    <div class="authorSlide">No authors found</div>
+                </div>
+            </div>
+        </div>
+        <div class="findPublisherBlock" style="text-align: center;">
+            <p>Find Author</p>
+            <div class="search">
+                <input id="publisherInput" placeholder="provide name" type="text">
+                <button type="submit">Find</button>
+            </div>
+            <div id="publisherResults" class="searchResultContainer">
+                <div class="searchResult">
+                    <div class="publisherSlide">No publishers found</div>
+                </div>
+            </div>
+        </div>
         <div class="admin-buttons">
-            <h3 style="text-align: center;">Admin Menu</h3>
+            
             <div style="text-align: center;">
-                <a th:href="@{/personalAccount/createBook}"><button class="button-default">Add Book</button></a>
-                <a th:href="@{/templates/user-manage.html}"><button class="button-default">Edit User</button></a>
+                
+                <a th:href="@{/personalAccount/}"><button class="button-default">manage author</button></a>
+            </div>
+            <div style="text-align: center;">
+                <a th:href="@{/personalAccount/}"><button class="button-default">Edit User</button></a>
+                <a th:href="@{/personalAccount/}"><button class="button-default">manage Publisher</button></a>
             </div>
         </div>
     </div>
@@ -117,7 +149,7 @@
     <h2 style="padding-left: 20px;">Purchase history</h2>
     <div class="userBooks">
         <div class="booksGrid" id="slider">
-            <div class="book" id="slide" th:each="book : ${books}">
+            <div class="book" id="slide" th:each="book : ${userBooks}">
                 <h2 class="bookTitle" th:text="${book.title}">Java in action</h2>
                 <h4 class="bookPublisher" th:text="${book.publisher.publisherName}">wbox</h4>
     
@@ -133,7 +165,7 @@
     <div class="userReview">
         <div class="ReviewGrid">
             
-            <div class="Review"  th:each="book : ${books}">
+            <!--<div class="Review"  th:each="review : ${userReview}">
                 <div class="headerContainer">
                     <span class="userName">name</h2>
                     <span class="ReviewRating"> * * * * *</span>
@@ -142,7 +174,7 @@
                     <span class="ReviewText">good</span>
                     <a><span class="linkToBook">J2EE</span></a>
                 </div>
-            </div>
+            </div>-->
         </div>
         <button id="prevButtonR">Previous</button>
         <button id="nextButtonR">Next</button>
@@ -152,7 +184,7 @@
     
 </script>
 
-<script src="/static/script/AdminPanel.js"></script>
-<script src="/static/script/Book.js"></script>
+<script th:src="@{/script/AdminPanel.js}"></script>
+<script th:src="@{/script/Book.js}"></script>
 </body>
 </html>

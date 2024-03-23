@@ -4,6 +4,7 @@ import com.DenysiukProg.spring6webapp.domain.Author;
 import com.DenysiukProg.spring6webapp.domain.Publisher;
 import com.DenysiukProg.spring6webapp.domain.Review;
 import com.DenysiukProg.spring6webapp.domain.UserEntity;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class BookDto {
     private String language;
     @NotEmpty(message = "Book photo should not be empty")
     private String photoURL;
-    @NotEmpty(message = "Book price should not be empty")
+    @Min(value = 1, message = "Book price should be greater than zero")
     private int price;
     @NotEmpty(message = "Book genre should not be empty")
     private String genre;

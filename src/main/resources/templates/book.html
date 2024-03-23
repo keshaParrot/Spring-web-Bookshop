@@ -15,8 +15,8 @@
 <div class="container">
     <div class="vertical-container">
         <div class="bookInfoSection">
-            <div style="margin: 5px; text-align: left">
-                <a th:href="@{/home/book/{bookId}/edit(bookId=${book.id})}"><button class="button-default">Edit</button></a>
+            <div style="margin: 5px; text-align: left" >
+                <a th:if="${userData.hasRole('ADMIN')}" th:href="@{/home/book/{bookId}/edit(bookId=${book.id})}"><button class="button-default">Edit</button></a>
             </div>
             <div class="vertical-container">
                 <div class="booksImageBlock">

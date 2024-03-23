@@ -21,7 +21,7 @@ public class Author {
     private String lastName;
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
-
+    // private UserEntity userAccount;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

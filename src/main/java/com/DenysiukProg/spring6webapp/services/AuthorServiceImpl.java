@@ -5,6 +5,8 @@ import com.DenysiukProg.spring6webapp.repositories.AuthorRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.AuthorService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
@@ -18,5 +20,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Iterable<Author> findAll() {
         return authorRepository.findAll();
+    }
+
+    @Override
+    public List<Author> findAuthorsByNameContaining(String authorName) {
+        return authorRepository.findAuthorsByNameContaining(authorName);
     }
 }

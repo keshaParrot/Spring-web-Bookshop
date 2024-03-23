@@ -4,11 +4,16 @@ package com.DenysiukProg.spring6webapp.controllers;
 import com.DenysiukProg.spring6webapp.domain.Author;
 import com.DenysiukProg.spring6webapp.domain.Book;
 import com.DenysiukProg.spring6webapp.domain.Publisher;
+import com.DenysiukProg.spring6webapp.domain.UserEntity;
 import com.DenysiukProg.spring6webapp.dto.BookDto;
+import com.DenysiukProg.spring6webapp.dto.UserDto;
+import com.DenysiukProg.spring6webapp.repositories.UserRepository;
+import com.DenysiukProg.spring6webapp.security.SecurityUtil;
 import com.DenysiukProg.spring6webapp.services.Interfaces.AuthorService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.PublisherService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.ReviewService;
+import com.DenysiukProg.spring6webapp.services.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +29,14 @@ public class BookController {
     private final ReviewService reviewService;
     private final AuthorService authorService;
     private final PublisherService publisherService;
+    private final UserRepository userRepository;
 
-    public BookController(BookService bookService, ReviewService reviewService, AuthorService authorService, PublisherService publisherService) {
+    public BookController(BookService bookService, ReviewService reviewService, AuthorService authorService, PublisherService publisherService, UserRepository userRepository) {
         this.bookService = bookService;
         this.reviewService = reviewService;
         this.authorService = authorService;
         this.publisherService = publisherService;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping("/home")
@@ -40,7 +47,9 @@ public class BookController {
     @RequestMapping("/home/book/{id}")
     public String getBook(Model model,@PathVariable Long id){
         BookDto book = bookService.findByID(id);
+        UserEntity user = userRepository.findByUsername(SecurityUtil.getSessionUser());
 
+        model.addAttribute("userData",user ==null? new UserDto(): UserServiceImpl.entityToDto(user));
         model.addAttribute("usersReview", reviewService.findAllForBook(book));
         model.addAttribute("similarBooks", bookService.getBooksByGenreAndAgeGroupIgnoringId(book.getGenre(),book.getAgeGroup(),book.getId()));
         model.addAttribute("book", book);

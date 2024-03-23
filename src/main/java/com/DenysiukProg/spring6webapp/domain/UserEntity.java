@@ -3,7 +3,6 @@ package com.DenysiukProg.spring6webapp.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,6 +19,8 @@ public class UserEntity {
     private String username;
     private String firstName;
     private String lastName;
+    private String address;
+    private String phoneNumber;
     private String email;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -38,7 +39,7 @@ public class UserEntity {
     )
     private Set<Role> roles = new HashSet<>();
 
-    public void setRoles(Role role) {
+    public void addRole(Role role) {
         this.roles.add(role);
     }
 

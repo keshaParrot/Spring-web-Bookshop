@@ -10,8 +10,18 @@ import java.util.List;
 
 public interface UserService {
     void saveUser(RegistrationDto registrationDto);
+
+    void updateUserData(UserDto userDto);
+
+    List<String> getAllUsernames();
+
+    List<String> getAllEmails();
+
     UserEntity findByEmail(String email);
     UserEntity findByUsername(String username);
+
+    List<UserEntity> findUsersByUsernameContaining(String username);
+
     String count();
     List<Book> findUserBook(Long userId);
 }

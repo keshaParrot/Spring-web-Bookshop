@@ -18,5 +18,11 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Set<UserEntity> userEntities = new HashSet<>();
 
-
+    @Override
+    public String toString() {
+        return "Role{" +
+                "Id=" + Id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

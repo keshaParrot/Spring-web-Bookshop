@@ -88,10 +88,11 @@ public class BootstrapData implements CommandLineRunner {
         user.setUsername("1");
         user.setPassword(passwordEncoder.encode("1"));
         user.setEmail("1");
-        Role role = roleRepository.findByName("USER");
-        user.setRoles(role);
+        user.addRole(roleRepository.findByName("USER"));
+        user.addRole(roleRepository.findByName("ADMIN"));
 
-        UserEntity userSaved = userRepository.save(user);
+        System.out.println(user.getRoles());
+        userRepository.save(user);
 
         System.out.println("debug Info");
         System.out.println("Author Count: " + authorRepository.count());
@@ -99,5 +100,6 @@ public class BootstrapData implements CommandLineRunner {
         System.out.println("user Count: " + userRepository.count());
         System.out.println("role Count: " + roleRepository.count());
         System.out.println("Publisher Count: " + publisherRepository.count());
+        System.out.println("\n" + userRepository.getAllUsernames());
     }
 }
