@@ -6,6 +6,7 @@ import com.DenysiukProg.spring6webapp.domain.Publisher;
 import com.DenysiukProg.spring6webapp.domain.UserEntity;
 import com.DenysiukProg.spring6webapp.dto.BookDto;
 import com.DenysiukProg.spring6webapp.dto.UserDto;
+import com.DenysiukProg.spring6webapp.security.SecurityEncryptUserID;
 import com.DenysiukProg.spring6webapp.security.SecurityUtil;
 import com.DenysiukProg.spring6webapp.services.Interfaces.AuthorService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
@@ -13,16 +14,13 @@ import com.DenysiukProg.spring6webapp.services.Interfaces.PublisherService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.UserService;
 import com.DenysiukProg.spring6webapp.services.UserServiceImpl;
 import jakarta.validation.Valid;
-import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,13 +32,15 @@ public class UserController {
     private final AuthorService authorService;
     private final PublisherService publisherService;
     private final UserService userService;
-    private Map<String,String> shopData = new HashMap<>();
+    private final SecurityEncryptUserID securityEncryptUserID;
+    private final Map<String,String> shopData = new HashMap<>();
 
-    public UserController(BookService bookService, AuthorService authorService, PublisherService publisherService, UserService userService) {
+    public UserController(BookService bookService, AuthorService authorService, PublisherService publisherService, UserService userService, SecurityEncryptUserID securityEncryptUserID) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.publisherService = publisherService;
         this.userService = userService;
+        this.securityEncryptUserID = securityEncryptUserID;
 
         shopData.put("registeredUsers",userService.count());
         shopData.put("availableBooks",bookService.count());
@@ -135,26 +135,39 @@ public class UserController {
 
         return "redirect:/personalAccount";
     }
-    @GetMapping("/search")
-    public ResponseEntity<List<UserDto>> searchUsers(@RequestParam("user") String username) {
+    @GetMapping("/search/User")
+    public ResponseEntity<Map<String,String>> searchUsers(@RequestParam("user") String username) {
         List<UserEntity> userEntities = userService.findUsersByUsernameContaining(username);
-        List<UserDto> userDTOs = new ArrayList<>();
-        for(UserEntity userEntity: userEntities) {
-            UserDto userDTO = UserServiceImpl.entityToDto(userEntity);
-            userDTOs.add(userDTO);
+        Map<String,String> response = new HashMap<>();
+
+        for (UserEntity ue: userEntities) {
+            response.put(securityEncryptUserID.getEncryptedUserId(ue.getUsername()),ue.getUsername());
         }
-        return ResponseEntity.ok(userDTOs);
+
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/searchAuthor")
-    public ResponseEntity<List<Author>> searchAuthors(@RequestParam("author") String authorName) {
+    @GetMapping("search/Author")
+    public ResponseEntity<Map<String,String>> searchAuthors(@RequestParam("author") String authorName) {
         List<Author> authors = authorService.findAuthorsByNameContaining(authorName);
-        return ResponseEntity.ok(authors);
+        Map<String,String> response = new HashMap<>();
+
+        for (Author a: authors) {
+            response.put(securityEncryptUserID.getEncryptedAuthorId(a.getFirstName()+" "+a.getLastName()),a.getFirstName()+" "+a.getLastName());
+        }
+
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/searchPublisher")
-    public ResponseEntity<List<Publisher>> searchPublishers(@RequestParam("publisher") String publisherName) {
+    @GetMapping("search/Publisher")
+    public ResponseEntity<Map<String,String>> searchPublishers(@RequestParam("publisher") String publisherName) {
         List<Publisher> publishers = publisherService.findPublishersByNameContaining(publisherName);
-        return ResponseEntity.ok(publishers);
+        Map<String,String> response = new HashMap<>();
+
+        for (Publisher p: publishers) {
+            response.put(securityEncryptUserID.getEncryptedPublisherId(p.getPublisherName()),p.getPublisherName());
+        }
+
+        return ResponseEntity.ok(response);
     }
 }

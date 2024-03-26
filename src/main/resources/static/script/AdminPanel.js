@@ -1,42 +1,81 @@
 document.addEventListener('DOMContentLoaded', function() {
+    let listOfOutputs = Array.from(document.querySelectorAll("[id$='Results']"));
+    listOfOutputs.forEach(item => item.hidden = true); // Приховуємо всі результати на початку
+
     function performSearch(inputId, resultsId, slideClass, searchEndpoint) {
-        var userInput = document.getElementById(inputId);
-        var results = document.getElementById(resultsId);
+        const userInput = document.getElementById(inputId);
+        const results = document.getElementById(resultsId);
+        const button = document.getElementById(inputId + "Btn");
+        console.log(button); // Логування кнопки для перевірки
 
         userInput.addEventListener('input', function() {
-            var query = userInput.value;
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', searchEndpoint + query);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var items = JSON.parse(xhr.responseText);
-                    results.innerHTML = '';
-                    if (items.length > 0) {
-                        items.forEach(function(item) {
-                            var div = document.createElement('div');
-                            div.textContent = item.name; 
-                            div.classList.add(slideClass);
-                            results.appendChild(div);
-                        });
-                    } else {
-                        var noResultsDiv = document.createElement('div');
-                        noResultsDiv.textContent = 'No results found';
-                        results.appendChild(noResultsDiv);
-                    }
-                }
-            };
-            xhr.send();
+            const query = userInput.value.trim();
+            if (query !== '') {
+                fetch(searchEndpoint + encodeURIComponent(query))
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(items => {
+                        results.innerHTML = ''; // Очищаємо попередні результати
+                        const keys = Object.keys(items);
+                        if (keys.length > 0) {
+                            sout("true")
+                            keys.forEach(key => {
+                                const div = document.createElement('div');
+                                div.textContent = items[key];
+                                div.classList.add(slideClass);
+
+                                const a = document.createElement('a');
+                                a.href = `/personalAccount/user/${key}/edit`;
+
+                                a.appendChild(div);
+                                results.appendChild(a);
+                            });
+                            openOutput(listOfOutputs.find(item => item.id.replace("Results", '').includes(userInput.id.replace("Input", ''))));
+                        } else {
+                            sout("false")
+                            showNoResultsMessage();
+                        }
+                    })
+                    .catch(error => console.error('There has been a problem with your fetch operation:', error));
+            } else {
+                hideRelatedOutput();
+            }
         });
+
+        button.addEventListener("click", function() {
+            userInput.value = '';
+            hideRelatedOutput();
+        });
+
+        function openOutput(outputElement) {
+            if (outputElement) outputElement.hidden = false;
+        }
+
+        function hideRelatedOutput() {
+            const outputElement = listOfOutputs.find(item => item.id.replace("Results", '').includes(userInput.id.replace("Input", '')));
+            if (outputElement) outputElement.hidden = true;
+        }
+
+        function showNoResultsMessage() {
+            const noResultsDiv = document.createElement('div');
+            noResultsDiv.textContent = 'No results found';
+            results.appendChild(noResultsDiv);
+        }
     }
 
-    performSearch('userInput', 'userResults', 'userSlide', '/search?user=');
-    performSearch('authorInput', 'authorResults', 'authorSlide', '/search?author=');
-    performSearch('publisherInput', 'publisherResults', 'publisherSlide', '/search?publisher=');
+    // Ініціалізуємо пошук для різних введень
+    performSearch('userInput', 'userResults', 'userSlide', '/search/User?user=');
+    performSearch('authorInput', 'authorResults', 'authorSlide', '/search/Author?author=');
+    performSearch('publisherInput', 'publisherResults', 'publisherSlide', '/search/Publisher?publisher=');
 });
+
 
 let saveButton = document.getElementById("saveButton");
 let editButton = document.getElementById("editButton");
-let submitButton = document.getElementById("submitButton");
 let editable = true;
 let listOfInputs = document.getElementsByTagName("input");
 

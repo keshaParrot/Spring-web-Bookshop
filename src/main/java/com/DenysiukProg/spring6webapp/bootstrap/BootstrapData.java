@@ -26,7 +26,7 @@ public class BootstrapData implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         /*bookRepository.deleteAll();
         //authorRepository.deleteAll();
         //publisherRepository.deleteAll();
@@ -91,13 +91,33 @@ public class BootstrapData implements CommandLineRunner {
         user.addRole(roleRepository.findByName("USER"));
         user.addRole(roleRepository.findByName("ADMIN"));
 
-        System.out.println(user.getRoles());
         userRepository.save(user);
+        UserEntity user2 = new UserEntity();
+        user2.setUsername("21");
+        user2.setPassword(passwordEncoder.encode("21"));
+        user2.setEmail("21");
+        user2.addRole(roleRepository.findByName("USER"));
+
+        userRepository.save(user);
+        UserEntity user3 = new UserEntity();
+        user3.setUsername("24");
+        user3.setPassword(passwordEncoder.encode("24"));
+        user3.setEmail("24");
+        user3.addRole(roleRepository.findByName("USER"));
+
+        System.out.println(user.getRoles());
+
+        userRepository.save(user);
+        userRepository.save(user2);
+        userRepository.save(user3);
+
+        System.out.println(authorRepository.findAll());
+        System.out.println(publisherRepository.findAll());
 
         System.out.println("debug Info");
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book Count: " + bookRepository.count());
-        System.out.println("user Count: " + userRepository.count());
+        System.out.println("user2 Count: " + userRepository.count());
         System.out.println("role Count: " + roleRepository.count());
         System.out.println("Publisher Count: " + publisherRepository.count());
         System.out.println("\n" + userRepository.getAllUsernames());

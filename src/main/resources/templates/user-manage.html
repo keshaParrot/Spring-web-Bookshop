@@ -9,17 +9,7 @@
     <title>Edit user</title>
 </head>
 <body style="width: 1200px; margin-left: auto; margin-right: auto; font-size: 23px;">
-
-    <div th:insert="~{layout :: headerFragment}"></div>
-    <div th:insert="~{layout :: navFragment}"></div>
-
-    <section class="findUser">
-        <form action="/personalAccount/user/searchUser" method="get">
-            <h2>provide username</h2>
-            <input type="text" th:name="username"><button type="submit">find</button>
-        </form>
-    </section>
-    <section class="changeUserProperty" hidden>
+ <section class="changeUserProperty" hidden>
         <div>
             <p>user with name <span>ivan</span> findet successfully</p>
         </div>

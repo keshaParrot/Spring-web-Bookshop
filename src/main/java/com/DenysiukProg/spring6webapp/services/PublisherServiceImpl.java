@@ -22,9 +22,12 @@ public class PublisherServiceImpl implements PublisherService {
     public Iterable<Publisher> findAll() {
         return publisherRepository.findAll();
     }
-
     @Override
     public List<Publisher> findPublishersByNameContaining(String publisherName) {
         return publisherRepository.findAuthorsByNameContaining(publisherName);
+    }
+    @Override
+    public Publisher findPublisherByPublisherName(String publisherName){
+        return publisherRepository.findAuthorsByPublisherName(publisherName);
     }
 }

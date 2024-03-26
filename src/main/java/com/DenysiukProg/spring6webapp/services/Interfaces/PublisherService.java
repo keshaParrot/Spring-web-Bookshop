@@ -8,9 +8,8 @@ import java.util.List;
 @Service
 public interface PublisherService {
     String count();
-
     Iterable<Publisher> findAll();
-
-
     List<Publisher> findPublishersByNameContaining(String publisherName);
+
+    Publisher findPublisherByPublisherName(String publisherName);
 }

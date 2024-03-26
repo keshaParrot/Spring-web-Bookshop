@@ -12,4 +12,5 @@ public interface AuthorService {
     Iterable<Author> findAll();
 
     List<Author> findAuthorsByNameContaining(String authorName);
+    Author findAuthorsByFullName(String fullName);
 }

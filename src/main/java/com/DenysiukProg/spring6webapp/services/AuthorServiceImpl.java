@@ -21,7 +21,10 @@ public class AuthorServiceImpl implements AuthorService {
     public Iterable<Author> findAll() {
         return authorRepository.findAll();
     }
-
+    @Override
+    public Author findAuthorsByFullName(String fullName){
+        return authorRepository.findAuthorsByFullName(fullName);
+    }
     @Override
     public List<Author> findAuthorsByNameContaining(String authorName) {
         return authorRepository.findAuthorsByNameContaining(authorName);

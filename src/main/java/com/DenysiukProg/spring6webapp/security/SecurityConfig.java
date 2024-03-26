@@ -1,6 +1,5 @@
 package com.DenysiukProg.spring6webapp.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,9 +29,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        /*.requestMatchers("/login","/register","/register/**","/home/**","/categories","/searchBook","/shoppingCart","/css/**","/script/**")
-                        .permitAll().anyRequest().authenticated())*/
                         .requestMatchers("/personalAccount/**","/home/book/{id}/edit").authenticated()
+                        .requestMatchers("/search/**").hasAuthority("ADMIN")
                         .anyRequest().permitAll())
                 .formLogin(form -> form
                         .loginPage("/login")

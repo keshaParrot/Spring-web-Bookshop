@@ -45,6 +45,7 @@ public class UserEntity {
 
     @Override
     public String toString() {
+
         return "UserEntity{" +
                 "id=" + id +
                 ", username='" + username + '\'' +

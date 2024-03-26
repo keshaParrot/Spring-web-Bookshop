@@ -6,8 +6,6 @@
     <meta charset="UTF-8">
     <link th:href="@{/css/AdminPanel.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/static/css/AdminPanel.css" >
-    <link rel="stylesheet" href="/static/css/Layout.css" >
     <title>Personal Account</title>
 </head>
 
@@ -99,11 +97,11 @@
             <p>Find user</p>
             <div class="search">
                 <input id="userInput" placeholder="provide username" type="text">
-                <button type="submit">Find</button>
+                <button id="userInputBtn" type="submit">Clear</button>
             </div>
             <div id="userResults" class="searchResultContainer">
                 <div class="searchResult">
-                    <div class="userSlide">No users found</div>
+                    <div class="userSlide"></div>
                 </div>
             </div>
         </div>
@@ -111,11 +109,11 @@
             <p>Find publisher</p>
             <div class="search">
                 <input id="authorInput" placeholder="provide fullname" type="text">
-                <button type="submit">Find</button>
+                <button id="authorInputBtn" type="submit">Clear</button>
             </div>
             <div id="authorResults" class="searchResultContainer">
                 <div class="searchResult">
-                    <div class="authorSlide">No authors found</div>
+                    <div class="authorSlide"></div>
                 </div>
             </div>
         </div>
@@ -123,11 +121,11 @@
             <p>Find Author</p>
             <div class="search">
                 <input id="publisherInput" placeholder="provide name" type="text">
-                <button type="submit">Find</button>
+                <button id="publisherInputBtn" type="submit">Clear</button>
             </div>
             <div id="publisherResults" class="searchResultContainer">
                 <div class="searchResult">
-                    <div class="publisherSlide">No publishers found</div>
+                    <div class="publisherSlide"></div>
                 </div>
             </div>
         </div>
