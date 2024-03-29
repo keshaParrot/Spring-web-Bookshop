@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 
 @Component
 public class BootstrapData implements CommandLineRunner {
@@ -15,14 +17,16 @@ public class BootstrapData implements CommandLineRunner {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ReviewRepository reviewRepository;
 
-    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, ReviewRepository reviewRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         this.publisherRepository = publisherRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.reviewRepository = reviewRepository;
     }
 
     @Override
@@ -82,7 +86,9 @@ public class BootstrapData implements CommandLineRunner {
         bookRepository.save(dddSaved);
         bookRepository.save(noEJBSaved);*/
 
+        reviewRepository.deleteAll();
         userRepository.deleteAll();
+
 
         UserEntity user = new UserEntity();
         user.setUsername("1");
@@ -90,29 +96,41 @@ public class BootstrapData implements CommandLineRunner {
         user.setEmail("1");
         user.addRole(roleRepository.findByName("USER"));
         user.addRole(roleRepository.findByName("ADMIN"));
-
         userRepository.save(user);
+
+        Review review = new Review();
+        review.setUser(user);
+        review.setBook(bookRepository.getReferenceById(802L));
+        review.setContent("is good");
+        review.setRating(5);
+        review.setReviewDate(new Date());
+        reviewRepository.save(review);
+
+
         UserEntity user2 = new UserEntity();
         user2.setUsername("21");
         user2.setPassword(passwordEncoder.encode("21"));
         user2.setEmail("21");
         user2.addRole(roleRepository.findByName("USER"));
+        userRepository.save(user2);
 
-        userRepository.save(user);
         UserEntity user3 = new UserEntity();
         user3.setUsername("24");
         user3.setPassword(passwordEncoder.encode("24"));
         user3.setEmail("24");
         user3.addRole(roleRepository.findByName("USER"));
+        userRepository.save(user3);
 
         System.out.println(user.getRoles());
 
-        userRepository.save(user);
-        userRepository.save(user2);
-        userRepository.save(user3);
+
+
 
         System.out.println(authorRepository.findAll());
         System.out.println(publisherRepository.findAll());
+
+        System.out.println(user);
+        System.out.println(review);
 
         System.out.println("debug Info");
         System.out.println("Author Count: " + authorRepository.count());

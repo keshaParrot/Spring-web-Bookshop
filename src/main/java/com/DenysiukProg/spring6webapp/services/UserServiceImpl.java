@@ -1,6 +1,7 @@
 package com.DenysiukProg.spring6webapp.services;
 
 import com.DenysiukProg.spring6webapp.domain.*;
+import com.DenysiukProg.spring6webapp.dto.BookDto;
 import com.DenysiukProg.spring6webapp.dto.RegistrationDto;
 import com.DenysiukProg.spring6webapp.dto.UserDto;
 import com.DenysiukProg.spring6webapp.repositories.AuthorRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -104,8 +106,9 @@ public class UserServiceImpl implements UserService {
 
         dto.setRoles(userEntity.getRoles());
         dto.setReviews(userEntity.getReviews());
-        dto.setBooks(userEntity.getBooks());
 
+
+        
         return dto;
     }
     public static UserEntity dtoToEntity(UserDto userDto){
@@ -121,7 +124,8 @@ public class UserServiceImpl implements UserService {
 
             user.setRoles(userDto.getRoles());
             user.setReviews(userDto.getReviews());
-            user.setBooks(userDto.getBooks());
+
+
 
             return user;
 

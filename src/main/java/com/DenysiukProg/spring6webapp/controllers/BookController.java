@@ -9,10 +9,8 @@ import com.DenysiukProg.spring6webapp.dto.BookDto;
 import com.DenysiukProg.spring6webapp.dto.UserDto;
 import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import com.DenysiukProg.spring6webapp.security.SecurityUtil;
-import com.DenysiukProg.spring6webapp.services.Interfaces.AuthorService;
-import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
-import com.DenysiukProg.spring6webapp.services.Interfaces.PublisherService;
-import com.DenysiukProg.spring6webapp.services.Interfaces.ReviewService;
+import com.DenysiukProg.spring6webapp.services.BookServiceImpl;
+import com.DenysiukProg.spring6webapp.services.Interfaces.*;
 import com.DenysiukProg.spring6webapp.services.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -29,14 +27,14 @@ public class BookController {
     private final ReviewService reviewService;
     private final AuthorService authorService;
     private final PublisherService publisherService;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public BookController(BookService bookService, ReviewService reviewService, AuthorService authorService, PublisherService publisherService, UserRepository userRepository) {
+    public BookController(BookService bookService, ReviewService reviewService, AuthorService authorService, PublisherService publisherService, UserService userService) {
         this.bookService = bookService;
         this.reviewService = reviewService;
         this.authorService = authorService;
         this.publisherService = publisherService;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @RequestMapping("/home")
@@ -47,13 +45,25 @@ public class BookController {
     @RequestMapping("/home/book/{id}")
     public String getBook(Model model,@PathVariable Long id){
         BookDto book = bookService.findByID(id);
-        UserEntity user = userRepository.findByUsername(SecurityUtil.getSessionUser());
+        UserEntity user = userService.findByUsername(SecurityUtil.getSessionUser());
 
+        System.out.println("semilunar book"+reviewService.findAllForBook(book));
         model.addAttribute("userData",user ==null? new UserDto(): UserServiceImpl.entityToDto(user));
-        model.addAttribute("usersReview", reviewService.findAllForBook(book));
+        model.addAttribute("booksReview", reviewService.findAllForBook(book));
         model.addAttribute("similarBooks", bookService.getBooksByGenreAndAgeGroupIgnoringId(book.getGenre(),book.getAgeGroup(),book.getId()));
         model.addAttribute("book", book);
         return "book";
+    }
+    @PostMapping("/home/book/{id}/addToCart")
+    public String addBookToCart(Model model, @PathVariable Long id){
+        BookDto book = bookService.findByID(id);
+        UserEntity user = userService.findByUsername(SecurityUtil.getSessionUser());
+        if(user!=null){
+            user.addToShoppingCart(BookServiceImpl.DtoToEntity(book));
+            return "redirect:/home/book/" + id + "?successAdded";
+        }
+
+        return "redirect:/home/book/" + id + "?failed";
     }
     @GetMapping("/home/book/{id}/edit")
     public String BookPropertyForm(Model model, @PathVariable("id") long id){
@@ -93,15 +103,27 @@ public class BookController {
     }
     @RequestMapping("/home/bookCategories")
     public String getBookCategories(Model model) {
-        HashSet<String> hashOfGenre = new HashSet<>(bookService.findAllGenre());
 
         model.addAttribute("minPrice", bookService.findMinPrice().get());
         model.addAttribute("maxPrice", bookService.findMaxPrice().get());
-        model.addAttribute("categories", hashOfGenre);
+        model.addAttribute("categories", new HashSet<>(bookService.findAllGenre()));
         model.addAttribute("books", bookService.findAll());
         return "book-categories";
     }
+    @GetMapping("/home/shoppingCart")
+    public String getShoppingCart(Model model) {
 
+
+
+        return "user-shopcart";
+    }
+    @PostMapping("/home/shoppingCart/buy")
+    public String buyBooks(Model model) {
+
+
+
+        return "";
+    }
     @GetMapping("/filteredBooks")
     public String filterBooks(
             @RequestParam(required = false) String searchTerm,

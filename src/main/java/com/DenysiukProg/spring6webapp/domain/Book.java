@@ -39,8 +39,11 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
-    private Set<UserEntity> userEntities = new HashSet<>();
+    @ManyToMany(mappedBy = "orderedBooks")
+    private Set<Order> orders = new HashSet<>();
+
+
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Publisher publisher;
 
@@ -79,10 +82,6 @@ public class Book {
                 ", descriptionParagraph1='" + descriptionParagraph1 + '\'' +
                 ", descriptionParagraph2='" + descriptionParagraph2 + '\'' +
                 ", descriptionParagraph3='" + descriptionParagraph3 + '\'' +
-                ", reviews=" + reviews +
-                ", authors=" + authors +
-                ", userEntities=" + userEntities +
-                ", publisher=" + publisher +
                 '}';
     }
 }

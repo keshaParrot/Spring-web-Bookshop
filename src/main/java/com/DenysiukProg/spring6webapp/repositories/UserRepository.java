@@ -1,6 +1,7 @@
 package com.DenysiukProg.spring6webapp.repositories;
 
 import com.DenysiukProg.spring6webapp.domain.UserEntity;
+import com.DenysiukProg.spring6webapp.dto.BookDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,5 +18,4 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     List<String> getAllEmails();
     @Query("SELECT u FROM UserEntity u WHERE LOWER(u.username) LIKE %:username%")
     List<UserEntity> findUsersByUsernameContaining(String username);
-
 }

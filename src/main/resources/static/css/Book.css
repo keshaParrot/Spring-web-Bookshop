@@ -171,6 +171,7 @@ ul li p {
 .semilunarBookBlock{
     width: 1350px;
     height: 560px;
+    margin: 10px;
     border-radius: 10px;
 
     overflow: hidden;

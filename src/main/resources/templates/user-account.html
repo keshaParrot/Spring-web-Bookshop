@@ -4,7 +4,7 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/AdminPanel.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{PersonalAccount.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
     <title>Personal Account</title>
 </head>
@@ -163,16 +163,16 @@
     <div class="userReview">
         <div class="ReviewGrid">
             
-            <!--<div class="Review"  th:each="review : ${userReview}">
+            <div class="Review"  th:each="review : ${userReview}">
                 <div class="headerContainer">
-                    <span class="userName">name</h2>
+                    <span class="userName">name</span>
                     <span class="ReviewRating"> * * * * *</span>
                 </div><hr style="width: 95%;">
                 <div class="textContainer">
                     <span class="ReviewText">good</span>
                     <a><span class="linkToBook">J2EE</span></a>
                 </div>
-            </div>-->
+            </div>
         </div>
         <button id="prevButtonR">Previous</button>
         <button id="nextButtonR">Next</button>
