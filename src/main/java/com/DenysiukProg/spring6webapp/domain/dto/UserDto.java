@@ -1,9 +1,8 @@
-package com.DenysiukProg.spring6webapp.dto;
+package com.DenysiukProg.spring6webapp.domain.dto;
 
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.domain.Order;
-import com.DenysiukProg.spring6webapp.domain.Review;
-import com.DenysiukProg.spring6webapp.domain.Role;
+import com.DenysiukProg.spring6webapp.domain.entity.Book;
+import com.DenysiukProg.spring6webapp.domain.entity.Review;
+import com.DenysiukProg.spring6webapp.domain.entity.Role;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -31,10 +30,11 @@ public class UserDto {
     private String address;
     @Pattern(regexp="\\d{9}", message="Phone number should to contains 9 number")
     private String phoneNumber;
-    private List<Book> shoppingCart = new ArrayList<>();
+
+    private List<ShoppingCartItem> shoppingCart = new ArrayList<>();
     private Set<Role> roles = new HashSet<>();
     private Set<Review> reviews = new HashSet<>();
-    private Set<Order> userOrders = new HashSet<>();
+    private Set<Book> bookList = new HashSet<>();
 
     public boolean hasRole(String name){
         for (Role role : roles) {

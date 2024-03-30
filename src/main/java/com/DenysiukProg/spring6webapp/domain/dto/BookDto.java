@@ -1,6 +1,9 @@
-package com.DenysiukProg.spring6webapp.dto;
+package com.DenysiukProg.spring6webapp.domain.dto;
 
-import com.DenysiukProg.spring6webapp.domain.*;
+import com.DenysiukProg.spring6webapp.domain.entity.Author;
+import com.DenysiukProg.spring6webapp.domain.entity.Order;
+import com.DenysiukProg.spring6webapp.domain.entity.Publisher;
+import com.DenysiukProg.spring6webapp.domain.entity.Review;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

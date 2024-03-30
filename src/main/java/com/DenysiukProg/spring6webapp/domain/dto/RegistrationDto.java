@@ -1,4 +1,4 @@
-package com.DenysiukProg.spring6webapp.dto;
+package com.DenysiukProg.spring6webapp.domain.dto;
 
 
 import jakarta.validation.constraints.NotEmpty;

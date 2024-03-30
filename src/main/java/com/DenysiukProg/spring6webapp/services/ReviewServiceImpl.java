@@ -1,9 +1,9 @@
 package com.DenysiukProg.spring6webapp.services;
 
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.domain.Review;
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
-import com.DenysiukProg.spring6webapp.dto.BookDto;
+import com.DenysiukProg.spring6webapp.domain.entity.Book;
+import com.DenysiukProg.spring6webapp.domain.entity.Review;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.dto.BookDto;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
 import com.DenysiukProg.spring6webapp.repositories.ReviewRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.ReviewService;

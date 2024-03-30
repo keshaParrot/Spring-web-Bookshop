@@ -1,4 +1,4 @@
-package com.DenysiukProg.spring6webapp.domain;
+package com.DenysiukProg.spring6webapp.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,31 +18,31 @@ public class Book {
     private long id;
     private String title;
     private String isbn;
-
     private String ageGroup;
     private String numberOfPages;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date publicationDate;
     private String language;
     private String photoURL;
-    private int price;
     private String genre;
 
     private String descriptionParagraph1;
     private String descriptionParagraph2;
     private String descriptionParagraph3;
 
+    private int quantity;
+    private int price;
+
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToMany(mappedBy = "orderedBooks")
-    private Set<Order> orders = new HashSet<>();
-
-
+    @OneToMany(mappedBy = "book")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Publisher publisher;

@@ -1,8 +1,8 @@
 package com.DenysiukProg.spring6webapp.security;
 
-import com.DenysiukProg.spring6webapp.domain.Author;
-import com.DenysiukProg.spring6webapp.domain.Publisher;
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.entity.Author;
+import com.DenysiukProg.spring6webapp.domain.entity.Publisher;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import com.DenysiukProg.spring6webapp.services.Interfaces.AuthorService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.PublisherService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.UserService;

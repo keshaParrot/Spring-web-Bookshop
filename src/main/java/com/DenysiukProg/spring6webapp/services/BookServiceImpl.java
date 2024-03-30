@@ -1,7 +1,7 @@
 package com.DenysiukProg.spring6webapp.services;
 
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.dto.BookDto;
+import com.DenysiukProg.spring6webapp.domain.entity.Book;
+import com.DenysiukProg.spring6webapp.domain.dto.BookDto;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
 import org.springframework.stereotype.Service;

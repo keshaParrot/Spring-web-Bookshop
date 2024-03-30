@@ -1,6 +1,6 @@
 package com.DenysiukProg.spring6webapp.security;
 
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

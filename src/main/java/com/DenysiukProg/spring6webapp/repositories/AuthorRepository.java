@@ -1,6 +1,6 @@
 package com.DenysiukProg.spring6webapp.repositories;
 
-import com.DenysiukProg.spring6webapp.domain.Author;
+import com.DenysiukProg.spring6webapp.domain.entity.Author;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

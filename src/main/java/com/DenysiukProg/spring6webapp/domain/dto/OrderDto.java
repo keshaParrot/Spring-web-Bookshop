@@ -1,31 +1,25 @@
-package com.DenysiukProg.spring6webapp.domain;
+package com.DenysiukProg.spring6webapp.domain.dto;
 
+import com.DenysiukProg.spring6webapp.domain.entity.Book;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@Entity
-@Getter
+@Data
 @Setter
-public class Order {
+@Getter
+public class OrderDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToMany
-    @JoinTable(
-            name = "order_books",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> orderedBooks = new HashSet<>();
-    @ManyToOne
-    @JoinColumn(name = "userbuyer_id")
     private UserEntity UserBuyer;
     private LocalDateTime orderTime;
     private int OrderPrice;
-
 }

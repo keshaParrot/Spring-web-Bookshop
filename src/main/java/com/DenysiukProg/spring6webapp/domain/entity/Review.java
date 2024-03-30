@@ -1,9 +1,8 @@
-package com.DenysiukProg.spring6webapp.domain;
+package com.DenysiukProg.spring6webapp.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.Date;
 

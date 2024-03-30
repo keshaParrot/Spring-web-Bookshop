@@ -1,7 +1,7 @@
 package com.DenysiukProg.spring6webapp.controllers;
 
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
-import com.DenysiukProg.spring6webapp.dto.RegistrationDto;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.dto.RegistrationDto;
 import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.UserService;
 import jakarta.validation.Valid;

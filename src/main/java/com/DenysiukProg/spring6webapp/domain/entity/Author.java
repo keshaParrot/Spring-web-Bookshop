@@ -1,10 +1,9 @@
-package com.DenysiukProg.spring6webapp.domain;
+package com.DenysiukProg.spring6webapp.domain.entity;
 
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,9 +18,13 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
+
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
     // private UserEntity userAccount;
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

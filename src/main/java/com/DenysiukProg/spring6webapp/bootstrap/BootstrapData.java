@@ -1,6 +1,7 @@
 package com.DenysiukProg.spring6webapp.bootstrap;
 
-import com.DenysiukProg.spring6webapp.domain.*;
+import com.DenysiukProg.spring6webapp.domain.entity.Review;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import com.DenysiukProg.spring6webapp.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;

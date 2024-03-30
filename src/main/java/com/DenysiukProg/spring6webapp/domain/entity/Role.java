@@ -1,4 +1,4 @@
-package com.DenysiukProg.spring6webapp.domain;
+package com.DenysiukProg.spring6webapp.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

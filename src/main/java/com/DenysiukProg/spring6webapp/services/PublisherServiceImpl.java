@@ -1,6 +1,6 @@
 package com.DenysiukProg.spring6webapp.services;
 
-import com.DenysiukProg.spring6webapp.domain.Publisher;
+import com.DenysiukProg.spring6webapp.domain.entity.Publisher;
 import com.DenysiukProg.spring6webapp.repositories.PublisherRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.PublisherService;
 import org.springframework.stereotype.Service;

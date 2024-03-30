@@ -1,23 +1,25 @@
 package com.DenysiukProg.spring6webapp.controllers;
 
 
-import com.DenysiukProg.spring6webapp.domain.Author;
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.domain.Publisher;
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
-import com.DenysiukProg.spring6webapp.dto.BookDto;
-import com.DenysiukProg.spring6webapp.dto.UserDto;
-import com.DenysiukProg.spring6webapp.repositories.UserRepository;
+import com.DenysiukProg.spring6webapp.domain.dto.ShoppingCartItem;
+import com.DenysiukProg.spring6webapp.domain.entity.Author;
+import com.DenysiukProg.spring6webapp.domain.entity.Book;
+import com.DenysiukProg.spring6webapp.domain.entity.Publisher;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.dto.BookDto;
+import com.DenysiukProg.spring6webapp.domain.dto.UserDto;
 import com.DenysiukProg.spring6webapp.security.SecurityUtil;
 import com.DenysiukProg.spring6webapp.services.BookServiceImpl;
 import com.DenysiukProg.spring6webapp.services.Interfaces.*;
 import com.DenysiukProg.spring6webapp.services.UserServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -55,11 +57,11 @@ public class BookController {
         return "book";
     }
     @PostMapping("/home/book/{id}/addToCart")
-    public String addBookToCart(Model model, @PathVariable Long id){
+    public String addBookToCart(Model model, @PathVariable Long id, HttpSession session){
         BookDto book = bookService.findByID(id);
         UserEntity user = userService.findByUsername(SecurityUtil.getSessionUser());
         if(user!=null){
-            user.addToShoppingCart(BookServiceImpl.DtoToEntity(book));
+
             return "redirect:/home/book/" + id + "?successAdded";
         }
 
@@ -142,4 +144,5 @@ public class BookController {
 
         return "book-categories";
     }
+    
 }

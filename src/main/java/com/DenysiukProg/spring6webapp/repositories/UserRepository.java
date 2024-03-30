@@ -1,7 +1,6 @@
 package com.DenysiukProg.spring6webapp.repositories;
 
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
-import com.DenysiukProg.spring6webapp.dto.BookDto;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

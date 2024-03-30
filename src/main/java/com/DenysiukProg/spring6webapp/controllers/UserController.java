@@ -1,11 +1,11 @@
 package com.DenysiukProg.spring6webapp.controllers;
 
-import com.DenysiukProg.spring6webapp.domain.Author;
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.domain.Publisher;
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
-import com.DenysiukProg.spring6webapp.dto.BookDto;
-import com.DenysiukProg.spring6webapp.dto.UserDto;
+import com.DenysiukProg.spring6webapp.domain.entity.Author;
+import com.DenysiukProg.spring6webapp.domain.entity.Book;
+import com.DenysiukProg.spring6webapp.domain.entity.Publisher;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.dto.BookDto;
+import com.DenysiukProg.spring6webapp.domain.dto.UserDto;
 import com.DenysiukProg.spring6webapp.security.SecurityEncryptUserID;
 import com.DenysiukProg.spring6webapp.security.SecurityUtil;
 import com.DenysiukProg.spring6webapp.services.Interfaces.AuthorService;
@@ -53,7 +53,7 @@ public class UserController {
         UserDto user = UserServiceImpl.entityToDto(userService.findByUsername(SecurityUtil.getSessionUser()));
 
         model.addAttribute("userData", user);
-        model.addAttribute("userBooks", user.getBooks());
+        model.addAttribute("userBooks", user.getBookList());
         model.addAttribute("userReview", user.getReviews());
         model.addAttribute("shopData", shopData);
 
@@ -81,7 +81,7 @@ public class UserController {
             System.out.println("znaleziono bledy" + bindingResult.getFieldErrors());
 
             model.addAttribute("userData", userDto);
-            model.addAttribute("userBooks", user.getBooks());
+            model.addAttribute("userBooks", user.getBookList());
             model.addAttribute("userReview", user.getReviews());
             model.addAttribute("shopData", shopData);
 

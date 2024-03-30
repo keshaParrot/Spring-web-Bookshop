@@ -1,9 +1,8 @@
 package com.DenysiukProg.spring6webapp.repositories;
 
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.domain.Review;
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
-import com.DenysiukProg.spring6webapp.dto.BookDto;
+import com.DenysiukProg.spring6webapp.domain.entity.Book;
+import com.DenysiukProg.spring6webapp.domain.entity.Review;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ReviewRepository extends CrudRepository<Review,Long> {

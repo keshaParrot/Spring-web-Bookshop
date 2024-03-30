@@ -1,10 +1,9 @@
 package com.DenysiukProg.spring6webapp.services.Interfaces;
 
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
-import com.DenysiukProg.spring6webapp.dto.BookDto;
-import com.DenysiukProg.spring6webapp.dto.RegistrationDto;
-import com.DenysiukProg.spring6webapp.dto.UserDto;
+import com.DenysiukProg.spring6webapp.domain.entity.Book;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.dto.RegistrationDto;
+import com.DenysiukProg.spring6webapp.domain.dto.UserDto;
 
 import java.util.List;
 

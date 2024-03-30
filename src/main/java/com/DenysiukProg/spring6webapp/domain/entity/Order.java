@@ -1,9 +1,6 @@
-package com.DenysiukProg.spring6webapp.dto;
+package com.DenysiukProg.spring6webapp.domain.entity;
 
-import com.DenysiukProg.spring6webapp.domain.Book;
-import com.DenysiukProg.spring6webapp.domain.UserEntity;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,15 +8,20 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@Setter
+@Entity
 @Getter
-public class OrderDto {
+@Setter
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Set<Book> orderedBooks = new HashSet<>();
-    private UserEntity UserBuyer;
+    @OneToMany(mappedBy = "order")
+    private Set<OrderItem> orderedItems = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "userbuyer_id")
+    private UserEntity userBuyer;
     private LocalDateTime orderTime;
     private int OrderPrice;
+
 }
