@@ -30,7 +30,7 @@ public class Book {
     private String descriptionParagraph2;
     private String descriptionParagraph3;
 
-    private int quantity;
+    private int quantity = 0;
     private int price;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)

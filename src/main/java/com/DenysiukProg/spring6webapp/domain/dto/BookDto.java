@@ -1,7 +1,7 @@
 package com.DenysiukProg.spring6webapp.domain.dto;
 
 import com.DenysiukProg.spring6webapp.domain.entity.Author;
-import com.DenysiukProg.spring6webapp.domain.entity.Order;
+import com.DenysiukProg.spring6webapp.domain.entity.UserOrder;
 import com.DenysiukProg.spring6webapp.domain.entity.Publisher;
 import com.DenysiukProg.spring6webapp.domain.entity.Review;
 import jakarta.validation.constraints.Min;
@@ -53,7 +53,7 @@ public class BookDto {
     private Set<Review> reviews = new HashSet<>();
     @NotEmpty(message = "Book need to have author")
     private Set<Author> authors = new HashSet<>();
-    private Set<Order> orders = new HashSet<>();
+    private Set<UserOrder> orders = new HashSet<>();
     @NotNull(message = "Book need to have publisher")
     private Publisher publisher;
 

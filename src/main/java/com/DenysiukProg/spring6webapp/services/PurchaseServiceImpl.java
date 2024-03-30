@@ -3,7 +3,7 @@ package com.DenysiukProg.spring6webapp.services;
 import com.DenysiukProg.spring6webapp.domain.dto.ShoppingCartItem;
 import com.DenysiukProg.spring6webapp.domain.dto.UserDto;
 import com.DenysiukProg.spring6webapp.domain.entity.Book;
-import com.DenysiukProg.spring6webapp.domain.entity.Order;
+import com.DenysiukProg.spring6webapp.domain.entity.UserOrder;
 import com.DenysiukProg.spring6webapp.domain.entity.OrderItem;
 import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
@@ -47,7 +47,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         UserEntity user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         List<ShoppingCartItem> shoppingCart = userDto.getShoppingCart();
 
-        Order order = new Order();
+        UserOrder order = new UserOrder();
         order.setUserBuyer(user);
         order.setOrderTime(LocalDateTime.now());
         int price = 0;

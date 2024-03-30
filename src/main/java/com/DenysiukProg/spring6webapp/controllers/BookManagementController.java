@@ -1,15 +1,11 @@
 package com.DenysiukProg.spring6webapp.controllers;
 
-
-import com.DenysiukProg.spring6webapp.domain.dto.ShoppingCartItem;
-import com.DenysiukProg.spring6webapp.domain.entity.Author;
-import com.DenysiukProg.spring6webapp.domain.entity.Book;
-import com.DenysiukProg.spring6webapp.domain.entity.Publisher;
-import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import com.DenysiukProg.spring6webapp.domain.dto.BookDto;
 import com.DenysiukProg.spring6webapp.domain.dto.UserDto;
+import com.DenysiukProg.spring6webapp.domain.entity.Author;
+import com.DenysiukProg.spring6webapp.domain.entity.Publisher;
+import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
 import com.DenysiukProg.spring6webapp.security.SecurityUtil;
-import com.DenysiukProg.spring6webapp.services.BookServiceImpl;
 import com.DenysiukProg.spring6webapp.services.Interfaces.*;
 import com.DenysiukProg.spring6webapp.services.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
@@ -18,34 +14,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
 @Controller
-public class BookController {
+public class BookManagementController {
     private final BookService bookService;
-    private final ReviewService reviewService;
     private final AuthorService authorService;
     private final PublisherService publisherService;
+    private final ReviewService reviewService;
     private final UserService userService;
 
-    public BookController(BookService bookService, ReviewService reviewService, AuthorService authorService, PublisherService publisherService, UserService userService) {
+    public BookManagementController(BookService bookService, AuthorService authorService, PublisherService publisherService, ReviewService reviewService, UserService userService) {
         this.bookService = bookService;
-        this.reviewService = reviewService;
         this.authorService = authorService;
         this.publisherService = publisherService;
+        this.reviewService = reviewService;
         this.userService = userService;
     }
 
-    @RequestMapping("/home")
-    public String getBooks(Model model){
-        model.addAttribute("books", bookService.findAll());
-        return "home";
-    }
     @RequestMapping("/home/book/{id}")
-    public String getBook(Model model,@PathVariable Long id){
+    public String getBook(Model model, @PathVariable Long id){
         BookDto book = bookService.findByID(id);
         UserEntity user = userService.findByUsername(SecurityUtil.getSessionUser());
 
@@ -103,46 +89,4 @@ public class BookController {
         bookService.delete(id);
         return "redirect:/home";
     }
-    @RequestMapping("/home/bookCategories")
-    public String getBookCategories(Model model) {
-
-        model.addAttribute("minPrice", bookService.findMinPrice().get());
-        model.addAttribute("maxPrice", bookService.findMaxPrice().get());
-        model.addAttribute("categories", new HashSet<>(bookService.findAllGenre()));
-        model.addAttribute("books", bookService.findAll());
-        return "book-categories";
-    }
-    @GetMapping("/home/shoppingCart")
-    public String getShoppingCart(Model model) {
-
-
-
-        return "user-shopcart";
-    }
-    @PostMapping("/home/shoppingCart/buy")
-    public String buyBooks(Model model) {
-
-
-
-        return "";
-    }
-    @GetMapping("/filteredBooks")
-    public String filterBooks(
-            @RequestParam(required = false) String searchTerm,
-            @RequestParam(required = false) Double inputMinPrice,
-            @RequestParam(required = false) Double inputMaxPrice,
-            @RequestParam(required = false) List<String> genres,
-            Model model) {
-
-        List<Book> filteredBooks = bookService.findFilteredBooks(searchTerm, inputMinPrice, inputMaxPrice, genres);
-        HashSet<String> hashOfGenre = new HashSet<>(bookService.findAllGenre());
-
-        model.addAttribute("minPrice", bookService.findMinPrice().get());
-        model.addAttribute("maxPrice", bookService.findMaxPrice().get());
-        model.addAttribute("categories", hashOfGenre);
-        model.addAttribute("books", filteredBooks);
-
-        return "book-categories";
-    }
-
 }

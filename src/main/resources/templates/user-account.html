@@ -4,7 +4,7 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{PersonalAccount.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/PersonalAccount.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
     <title>Personal Account</title>
 </head>
@@ -92,6 +92,7 @@
         <div class="testBlock" style="text-align: center;">
             <p>other function</p>
             <a th:href="@{/personalAccount/createBook}"><button class="button-default">Add Book</button></a>
+            <a th:href="@{/personalAccount/createBook}"><button class="button-default">Add Book Quantity</button></a>
         </div>
         <div class="findUserBlock" style="text-align: center;">
             <p>Find user</p>

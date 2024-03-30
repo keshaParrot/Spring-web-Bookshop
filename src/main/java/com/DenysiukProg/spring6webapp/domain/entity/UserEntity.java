@@ -36,7 +36,7 @@ public class UserEntity {
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "userBuyer")
-    private Set<Order> userOrders = new HashSet<>();
+    private Set<UserOrder> userOrders = new HashSet<>();
 
     public void addRole(Role role) {
         this.roles.add(role);
@@ -44,7 +44,7 @@ public class UserEntity {
 
     public List<Book> getBooks(){
         List<Book> usersBooks = new ArrayList<>();
-        for(Order order : userOrders){
+        for(UserOrder order : userOrders){
             while (order.getOrderedItems().iterator().hasNext()) {
                 usersBooks.add(order.getOrderedItems().iterator().next().getBook());
             }

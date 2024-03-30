@@ -1,12 +1,12 @@
 package com.DenysiukProg.spring6webapp.bootstrap;
 
-import com.DenysiukProg.spring6webapp.domain.entity.Review;
-import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
+import com.DenysiukProg.spring6webapp.domain.entity.*;
 import com.DenysiukProg.spring6webapp.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -32,9 +32,10 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        /*bookRepository.deleteAll();
-        //authorRepository.deleteAll();
-        //publisherRepository.deleteAll();
+        reviewRepository.deleteAll();
+        bookRepository.deleteAll();
+        authorRepository.deleteAll();
+        publisherRepository.deleteAll();
 
         Author eric = new Author();
         eric.setFirstName("Eric");
@@ -43,7 +44,8 @@ public class BootstrapData implements CommandLineRunner {
         Book ddd = new Book();
         ddd.setTitle("Domain Driven Design");
         ddd.setIsbn("123456");
-        ddd.setPrice("15");
+        ddd.setPrice(15);
+        ddd.setQuantity(1);
 
         Author ericSaved = authorRepository.save(eric);
         Book dddSaved = bookRepository.save(ddd);
@@ -55,12 +57,13 @@ public class BootstrapData implements CommandLineRunner {
         Book noEJB = new Book();
         noEJB.setTitle("J2EE Development without EJB");
         noEJB.setIsbn("54757585");
+        noEJB.setQuantity(10);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2023, Calendar.JANUARY, 1, 0, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0); // Clear milliseconds for consistency
         noEJB.setPublicationDate(calendar.getTime());
-        noEJB.setPrice("25");
+        noEJB.setPrice(25);
 
         Author rodSaved = authorRepository.save(rod);
         Book noEJBSaved = bookRepository.save(noEJB);
@@ -85,11 +88,21 @@ public class BootstrapData implements CommandLineRunner {
         authorRepository.save(ericSaved);
         authorRepository.save(rodSaved);
         bookRepository.save(dddSaved);
-        bookRepository.save(noEJBSaved);*/
+        bookRepository.save(noEJBSaved);
 
-        reviewRepository.deleteAll();
+
         userRepository.deleteAll();
+        roleRepository.deleteAll();
 
+        Role role = new Role();
+        role.setName("ADMIN");
+        roleRepository.save(role);
+        role = new Role();
+        role.setName("USER");
+        roleRepository.save(role);
+        role = new Role();
+        role.setName("AUTHOR");
+        roleRepository.save(role);
 
         UserEntity user = new UserEntity();
         user.setUsername("1");
@@ -99,13 +112,7 @@ public class BootstrapData implements CommandLineRunner {
         user.addRole(roleRepository.findByName("ADMIN"));
         userRepository.save(user);
 
-        Review review = new Review();
-        review.setUser(user);
-        review.setBook(bookRepository.getReferenceById(802L));
-        review.setContent("is good");
-        review.setRating(5);
-        review.setReviewDate(new Date());
-        reviewRepository.save(review);
+
 
 
         UserEntity user2 = new UserEntity();
@@ -131,7 +138,6 @@ public class BootstrapData implements CommandLineRunner {
         System.out.println(publisherRepository.findAll());
 
         System.out.println(user);
-        System.out.println(review);
 
         System.out.println("debug Info");
         System.out.println("Author Count: " + authorRepository.count());
@@ -140,5 +146,8 @@ public class BootstrapData implements CommandLineRunner {
         System.out.println("role Count: " + roleRepository.count());
         System.out.println("Publisher Count: " + publisherRepository.count());
         System.out.println("\n" + userRepository.getAllUsernames());
+
+
+
     }
 }

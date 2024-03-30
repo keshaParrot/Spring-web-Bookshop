@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class Order {
+public class UserOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
