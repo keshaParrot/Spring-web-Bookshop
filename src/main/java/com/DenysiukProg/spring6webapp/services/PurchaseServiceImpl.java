@@ -12,34 +12,21 @@ import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.PurchaseService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PurchaseServiceImpl implements PurchaseService {
 
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
     private final OrderRepository orderRepository;
-
-    public PurchaseServiceImpl(UserRepository userRepository, BookRepository bookRepository, OrderRepository orderRepository) {
-        this.userRepository = userRepository;
-        this.bookRepository = bookRepository;
-        this.orderRepository = orderRepository;
-    }
-
-    @Override
-    @Transactional
-    public void addBookToUserShoppingCart(Long userId, Long bookId) {
-        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
-
-
-        userRepository.save(user);
-    }
 
     @Override
     @Transactional
@@ -65,7 +52,9 @@ public class PurchaseServiceImpl implements PurchaseService {
         orderRepository.save(order);
     }
     @Override
-    public void putBookOnShoppingCart(Book book, int quantity, HttpSession session){
+    public int putBookOnShoppingCart(Long bookId, int quantity, HttpSession session){
+        Book book = bookRepository.getReferenceById(bookId);
+
         ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
         shoppingCartItem.setBookId(book.getId());
         shoppingCartItem.setQuantity(quantity);
@@ -75,9 +64,44 @@ public class PurchaseServiceImpl implements PurchaseService {
             shoppingCart = new ArrayList<ShoppingCartItem>();
             session.setAttribute("shoppingCart", shoppingCart);
         }
+        else{
+            shoppingCart = (ArrayList<ShoppingCartItem>) session.getAttribute("shoppingCart");
+        }
+        if(shoppingCart.size()>20){
+            System.out.println("cart full");
+            return 2;
+        }
 
-        shoppingCart = (ArrayList<ShoppingCartItem>) session.getAttribute("shoppingCart");
+        for (ShoppingCartItem item : shoppingCart) {
+            if (item.getBookId() == book.getId()) {
+                item.setQuantity(quantity);
+                System.out.println("book quantity has been changed successfully");
+                return 1;
+            }
+        }
         shoppingCart.add(shoppingCartItem);
+        session.setAttribute("shoppingCart",shoppingCart);
+        System.out.println("book was added to cart successfully");
+        System.out.println(session.getAttribute("shoppingCart"));
+        return 0;
+    }
+    @Override
+    public boolean deleteBookFromCart(Long bookId, HttpSession session){
+        ArrayList<ShoppingCartItem> shoppingCart = (ArrayList<ShoppingCartItem>) session.getAttribute("shoppingCart");
+        Book book = bookRepository.getReferenceById(bookId);
+
+        for (Iterator<ShoppingCartItem> iterator = shoppingCart.iterator(); iterator.hasNext();) {
+            ShoppingCartItem item = iterator.next();
+            if (item.getBookId().equals(book.getId())) {
+                iterator.remove();
+                System.out.println("Book removed from cart successfully");
+                session.setAttribute("shoppingCart", shoppingCart);
+                return true;
+            }
+        }
+
+        System.out.println("Book not found in cart");
+        return false;
     }
     @Override
     public List<ShoppingCartItem> getBooksFromShoppingCart(HttpSession session){

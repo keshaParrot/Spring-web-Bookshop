@@ -1,24 +1,84 @@
-booksOnCart{
+.booksOnCart{
     width: auto;
     height: auto;
     max-width: 1000px;
     min-height: 300px;
 
+    position: relative;
     padding: 20px;
     border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
 
     -webkit-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
     -moz-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
     box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
 }
-booksOnCartGrid{
+.booksOnCartGrid{
+    
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 10px;
+    gap: 10px;
 }
-BookOnCart{
+.BookOnCart{
+    height: 100px;
+    padding: 20px;
+
+    background-color: #f0f0f0;
     border: 1px solid #ccc;
-    padding: 10px;
+}
+.noBooksPhoto{
+
+}
+.bookPhotoBlock,
+.bookInfoBlock,
+.bookManagementBlock{
+    float: left; 
+    width: 100px; 
+    height: 100px;
+}
+.bookPhotoBlock{
+    width: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bookPhotoBlock :hover{
+    border: 1px solid #ccc;
+
+    -webkit-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    -moz-box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+    box-shadow: 0px 9px 20px -4px rgba(0,0,0,0.61);
+}
+.bookPhotoBlock img{
+    width: 70%;
+
+    border-radius: 5px;
+}
+.bookInfoBlock{
+    width: 300px;
+    font-size: large;
+}
+.bookManagementBlock{
+    width: 140px;
+    float: right;
+}
+.bookManagementBlock input, 
+.bookManagementBlock button{
+    width: 120px;
+    height: 35px;
+    
+    font-size: large;
+    margin: 5px;
+
+    box-sizing: border-box;
+    display: inline-block;
+}
+.buyButtonSection{
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
 }
 
 

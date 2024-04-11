@@ -43,6 +43,7 @@ public class BookDto {
     private int price;
     @NotEmpty(message = "Book genre should not be empty")
     private String genre;
+    private int quantity = 0;
 
     @NotEmpty(message = "First description paragraph should not be empty")
     private String descriptionParagraph1;

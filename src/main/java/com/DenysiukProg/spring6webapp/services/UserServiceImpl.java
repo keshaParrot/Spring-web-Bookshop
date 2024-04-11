@@ -10,6 +10,7 @@ import com.DenysiukProg.spring6webapp.repositories.AuthorRepository;
 import com.DenysiukProg.spring6webapp.repositories.RoleRepository;
 import com.DenysiukProg.spring6webapp.repositories.UserRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,20 +18,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
     private final AuthorRepository authorRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-
-
-    public UserServiceImpl(UserRepository userRepository, AuthorRepository authorRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.authorRepository = authorRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public void saveUser(RegistrationDto registrationDto) {

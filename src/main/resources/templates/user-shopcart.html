@@ -4,8 +4,10 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-
-
+    <link th:href="@{/css/ShoppingCart.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/static/css/ShoppingCart.css">
+    <link rel="stylesheet" href="/static/css/Layout.css">
     <title>Shopping cart</title>
 </head>
 <body>
@@ -13,21 +15,36 @@
     <div th:insert="~{layout :: headerFragment}"></div>
     <div th:insert="~{layout :: navFragment}"></div>
 
+    
     <div class="booksOnCart">
-        <div class="booksOnCartGrid">
+        <form th:action="@{/updateCart}" method="post">
+            <div class="booksOnCartGrid">
+                <div class="noBooksPhoto" th:if="${shoppingCartBooks == null || shoppingCartBooks.size()==0}">
+                    <img>
+                </div>
 
-            <a th:href="@{}"><div class="BookOnCart">
-                <div>photo</div>
+                <div class="BookOnCart" th:each="entry : ${shoppingCartBooks}">
+                    <a th:href="@{/home/book/{id}(id=${entry.getKey().getId()})}">
+                        <div class="bookPhotoBlock">
+                            <img th:src="${entry.getKey().getPhotoURL()}">
+                        </div>
+                    </a>
 
-                <span>title</span>
-                <span>author</span>
+                    <div class="bookInfoBlock">
+                        <p th:text="${entry.getKey().getTitle()}">title</p>
+                        <p th:each="authors : ${entry.getKey().getAuthors()}" th:text="${authors.firstName} + ' ' + ${authors.lastName}">author</p>
+                    </div>
+                    <div class="bookManagementBlock">
+                        <input th:name="'quantity_' + ${entry.key.id}" th:value="${entry.value}" min="1" type="number" readonly>
+                        <a th:href="@{/home/shoppingCart/deleteBook(bookId=${entry.key.id})}"><button>delete</button></a>
+                    </div>
+                </div>
 
-                <a th:href="@{}"><button>delete</button></a>
-            </div></a>
-
-        </div>
-        <a><button class="button-default">buy</button></a>
+            </div>
+            <div class="buyButtonSection">
+                <a><button class="button-default" type="submit">buy</button></a>
+            </div>
+        </form>
     </div>
-
 </body>
 </html>

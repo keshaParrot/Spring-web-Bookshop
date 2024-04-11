@@ -14,6 +14,7 @@ import com.DenysiukProg.spring6webapp.services.Interfaces.PublisherService;
 import com.DenysiukProg.spring6webapp.services.Interfaces.UserService;
 import com.DenysiukProg.spring6webapp.services.UserServiceImpl;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,16 +26,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller handling user-related operations such as viewing and updating personal account details,
+ * managing books and searching for users, authors, and publishers for also manage them.
+ */
+
 @Controller
-@RequestMapping()
 public class UserController {
     private final BookService bookService;
     private final AuthorService authorService;
     private final PublisherService publisherService;
     private final UserService userService;
     private final SecurityEncryptUserID securityEncryptUserID;
-    private final Map<String,String> shopData = new HashMap<>();
 
+
+    @Autowired
     public UserController(BookService bookService, AuthorService authorService, PublisherService publisherService, UserService userService, SecurityEncryptUserID securityEncryptUserID) {
         this.bookService = bookService;
         this.authorService = authorService;
@@ -42,12 +48,27 @@ public class UserController {
         this.userService = userService;
         this.securityEncryptUserID = securityEncryptUserID;
 
+    }
+
+    /**
+     * method for initialize shop statistics map
+     *
+     * @return HashMap containing the counts of
+     * registered users, available books, number of publishers, and number of authors
+     */
+    private Map<String,String> getShopData(){
+        Map<String,String> shopData = new HashMap<>();
         shopData.put("registeredUsers",userService.count());
         shopData.put("availableBooks",bookService.count());
         shopData.put("numberOfPublisher",publisherService.count());
         shopData.put("numberOfAuthors",authorService.count());
+        return shopData;
     }
-
+    /**
+     * Method for Display user account information including user details, book list, reviews, and shop data.
+     *
+     * @return the view name for the user account page
+     */
     @GetMapping("/personalAccount")
     public String getAccountInformation(Model model){
         UserDto user = UserServiceImpl.entityToDto(userService.findByUsername(SecurityUtil.getSessionUser()));
@@ -55,10 +76,17 @@ public class UserController {
         model.addAttribute("userData", user);
         model.addAttribute("userBooks", user.getBookList());
         model.addAttribute("userReview", user.getReviews());
-        model.addAttribute("shopData", shopData);
+        model.addAttribute("shopData", getShopData());
 
         return "user-account";
     }
+    /**
+     * Method for Handle changing user account information including validation and error handling.
+     *
+     * @param userDto the data transfer object containing updated user information
+     * @param bindingResult the result of the validation
+     * @return the redirection URL to the user account page or back to the edit form if there are validation errors
+     */
     @PostMapping("/personalAccount")
     public String changeAccountInformation(@Valid @ModelAttribute("userData") UserDto userDto,
                                            BindingResult bindingResult,
@@ -78,12 +106,11 @@ public class UserController {
         }
 
         if (bindingResult.hasErrors()){
-            System.out.println("znaleziono bledy" + bindingResult.getFieldErrors());
 
             model.addAttribute("userData", userDto);
             model.addAttribute("userBooks", user.getBookList());
             model.addAttribute("userReview", user.getReviews());
-            model.addAttribute("shopData", shopData);
+            model.addAttribute("shopData", getShopData());
 
             return "user-account";
         }
@@ -93,6 +120,12 @@ public class UserController {
             return "redirect:/personalAccount";
         }
     }
+
+    /**
+     * Method for display create book page
+     *
+     * @return the view name for the book create page
+     */
     @GetMapping("/personalAccount/createBook")
     public String CreateBookForm(Model model){
         Book book = new Book();
@@ -104,6 +137,13 @@ public class UserController {
         model.addAttribute("publisherList", publishers);
         return "book-create";
     }
+    /**
+     * Method for Validates provided book information.
+     *
+     * @param bindingResult the result of the validation
+     * @param bookDto the data transfer object containing new book data
+     * @return the view name for the book create page
+     */
     @PostMapping("/personalAccount/createBook")
     public String CreateBook(@Valid @ModelAttribute("book") BookDto bookDto,
                              BindingResult bindingResult,

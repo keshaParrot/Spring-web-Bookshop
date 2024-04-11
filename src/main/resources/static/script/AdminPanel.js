@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     let listOfOutputs = Array.from(document.querySelectorAll("[id$='Results']"));
-    listOfOutputs.forEach(item => item.hidden = true); // Приховуємо всі результати на початку
+    listOfOutputs.forEach(item => item.hidden = true);
 
     function performSearch(inputId, resultsId, slideClass, searchEndpoint) {
         const userInput = document.getElementById(inputId);
         const results = document.getElementById(resultsId);
         const button = document.getElementById(inputId + "Btn");
-        console.log(button); // Логування кнопки для перевірки
+        console.log(button);
 
         userInput.addEventListener('input', function() {
             const query = userInput.value.trim();
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return response.json();
                     })
                     .then(items => {
-                        results.innerHTML = ''; // Очищаємо попередні результати
+                        results.innerHTML = '';
                         const keys = Object.keys(items);
                         if (keys.length > 0) {
                             sout("true")
@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Ініціалізуємо пошук для різних введень
     performSearch('userInput', 'userResults', 'userSlide', '/search/User?user=');
     performSearch('authorInput', 'authorResults', 'authorSlide', '/search/Author?author=');
     performSearch('publisherInput', 'publisherResults', 'publisherSlide', '/search/Publisher?publisher=');
