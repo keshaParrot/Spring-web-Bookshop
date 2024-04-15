@@ -32,7 +32,7 @@ public class BookManagementController {
     private final PurchaseService purchaseService;
 
     /**
-     * Method for display the Book page.
+     * Display the Book page.
      *
      * @param id the ID of the book to display
      * @return the name of the view template
@@ -49,7 +49,7 @@ public class BookManagementController {
         return "book";
     }
     /**
-     * Method for adding a book to the shopping cart.
+     * Adding a book to the shopping cart.
      *
      * @param model the model to add attributes for rendering the view
      * @param id the ID of the book to add to the cart
@@ -69,7 +69,7 @@ public class BookManagementController {
         return "redirect:/home/book/" + id + "?failed";
     }
     /**
-     * Method for display book edit page with form.
+     * Display book edit page with form.
      *
      * @param id the ID of the book to edit
      * @return the name of the view template
@@ -86,7 +86,7 @@ public class BookManagementController {
         return "book-edit";
     }
     /**
-     * Method for save changing book properties.
+     * Save changing book properties.
      *
      * @param id the ID of the book to edit
      * @param bookDto the data transfer object containing updated book information
@@ -113,7 +113,7 @@ public class BookManagementController {
         return "redirect:/home/book/"+id;
     }
     /**
-     * Method for delete book.
+     * Delete book.
      *
      * @param id the ID of the book to edit
      * @return the redirection URL to the home page

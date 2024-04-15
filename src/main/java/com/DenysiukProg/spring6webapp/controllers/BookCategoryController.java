@@ -23,7 +23,7 @@ public class BookCategoryController {
     private final BookService bookService;
 
     /**
-     * Method for display the book category page.
+     * Display the book category page.
      *
      * @return the name of the login view template
      */
@@ -37,7 +37,7 @@ public class BookCategoryController {
         return "book-categories";
     }
     /**
-     * Method for process filtering books based on search term, price range, and genres,
+     * Process filtering books based on search term, price range, and genres,
      * then displaying a page with filtered books.
      *
      * @param searchTerm the search term to filter books

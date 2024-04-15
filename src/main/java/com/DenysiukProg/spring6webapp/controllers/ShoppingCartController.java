@@ -27,7 +27,7 @@ import java.util.Map;
 public class ShoppingCartController {
     private final BookService bookService;
     /**
-     * Method for displaying the shopping cart page.
+     * Displaying the shopping cart page.
      *
      * @param session the HTTP session to store shopping cart information
      * @return the name of the view template
@@ -45,7 +45,7 @@ public class ShoppingCartController {
         return "user-shopcart";
     }
     /**
-     * Method for deleting a book from the shopping cart.
+     * Deleting a book from the shopping cart.
      *
      * @param bookId the ID of the book to delete
      * @param session the HTTP session containing the shopping cart
@@ -69,7 +69,7 @@ public class ShoppingCartController {
         return "redirect:/home/shoppingCart";
     }
     /**
-     * Method for purchasing books in the shopping cart.
+     * Purchasing books in the shopping cart.
      *
      * @param shoppingCartBooks the map containing book details and quantities
      * @param session the HTTP session containing the shopping cart

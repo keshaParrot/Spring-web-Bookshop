@@ -4,19 +4,25 @@ import com.DenysiukProg.spring6webapp.domain.entity.Book;
 import com.DenysiukProg.spring6webapp.domain.dto.BookDto;
 import com.DenysiukProg.spring6webapp.repositories.BookRepository;
 import com.DenysiukProg.spring6webapp.services.Interfaces.BookService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+import static com.DenysiukProg.spring6webapp.domain.Mappers.BookMapper.DtoToEntity;
+import static com.DenysiukProg.spring6webapp.domain.Mappers.BookMapper.entityToDto;
+
+/**
+ * Service class for managing books in the repository.
+ * Implements business logic associated with book data.
+ */
 @Service
+@AllArgsConstructor
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    public BookServiceImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
 
     @Override
     public Iterable<Book> findAll() {
@@ -32,7 +38,6 @@ public class BookServiceImpl implements BookService {
     }
     @Override
     public List<Book> getBooksByGenreAndAgeGroupIgnoringId(String genre, String ageGroup, Long idToIgnore) {
-
         return bookRepository.findByGenreAndAgeGroupAndIdNot(genre, ageGroup, idToIgnore);
     }
     @Override
@@ -74,48 +79,5 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findWithFilters(searchTerm, minPrice, maxPrice, genres);
     }
 
-    public static BookDto entityToDto(Book book) {
-        BookDto bookDto = new BookDto();
-        bookDto.setId(book.getId());
-        bookDto.setTitle(book.getTitle());
-        bookDto.setIsbn(book.getIsbn());
-        bookDto.setPublicationDate(book.getPublicationDate());
 
-        bookDto.setAgeGroup(book.getAgeGroup());
-        bookDto.setNumberOfPages(book.getNumberOfPages());
-        bookDto.setPublicationDate(book.getPublicationDate());
-        bookDto.setLanguage(book.getLanguage());
-        bookDto.setPhotoURL(book.getPhotoURL());
-        bookDto.setDescriptionParagraph1(book.getDescriptionParagraph1());
-        bookDto.setDescriptionParagraph2(book.getDescriptionParagraph2());
-        bookDto.setDescriptionParagraph3(book.getDescriptionParagraph3());
-        bookDto.setPrice(book.getPrice());
-        bookDto.setGenre(book.getGenre());
-
-        bookDto.setAuthors(book.getAuthors());
-        bookDto.setPublisher(book.getPublisher());
-
-        return bookDto;
-    }
-    public static Book DtoToEntity(BookDto bookDto) {
-        Book book = new Book();
-        book.setId(bookDto.getId());
-        book.setTitle(bookDto.getTitle());
-        book.setIsbn(bookDto.getIsbn());
-
-        book.setAgeGroup(bookDto.getAgeGroup());
-        book.setNumberOfPages(bookDto.getNumberOfPages());
-        book.setPublicationDate(bookDto.getPublicationDate());
-        book.setLanguage(bookDto.getLanguage());
-        book.setPhotoURL(bookDto.getPhotoURL());
-        book.setDescriptionParagraph1(bookDto.getDescriptionParagraph1());
-        book.setDescriptionParagraph2(bookDto.getDescriptionParagraph2());
-        book.setDescriptionParagraph3(bookDto.getDescriptionParagraph3());
-        book.setPrice(bookDto.getPrice());
-        book.setGenre(bookDto.getGenre());
-
-        book.setAuthors(bookDto.getAuthors());
-        book.setPublisher(bookDto.getPublisher());
-        return book;
-    }
 }

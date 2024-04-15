@@ -1,5 +1,6 @@
 package com.DenysiukProg.spring6webapp.services;
 
+import com.DenysiukProg.spring6webapp.domain.Mappers.BookMapper;
 import com.DenysiukProg.spring6webapp.domain.entity.Book;
 import com.DenysiukProg.spring6webapp.domain.entity.Review;
 import com.DenysiukProg.spring6webapp.domain.entity.UserEntity;
@@ -26,7 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
     @Override
     public Iterable<Review> findAllForBook(BookDto bookDto){
-        Book book = BookServiceImpl.DtoToEntity(bookDto);
+        Book book = BookMapper.DtoToEntity(bookDto);
         Book persistedBook = bookRepository.findById(book.getId()).orElse(null);
 
         if (persistedBook != null) {

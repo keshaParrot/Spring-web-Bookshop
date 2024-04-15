@@ -1,5 +1,6 @@
 package com.DenysiukProg.spring6webapp.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,20 +12,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * Configuration class for security settings.
+ */
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
 
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
-        this.customUserDetailsService = customUserDetailsService;
-    }
 
+    /**
+     * Bean for configuring password encoder.
+     *
+     * @return Password encoder instance.
+     */
     @Bean
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
+    /**
+     * Configures security filter chain.
+     *
+     * @param http HttpSecurity instance to configure.
+     * @return SecurityFilterChain instance.
+     * @throws Exception Exception if configuration fails.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
@@ -47,7 +60,12 @@ public class SecurityConfig {
         return http.build();
 
     }
-
+    /**
+     * Configures authentication manager.
+     *
+     * @param builder AuthenticationManagerBuilder instance to configure.
+     * @throws Exception Exception if configuration fails.
+     */
     public void configure(AuthenticationManagerBuilder builder)throws Exception{
         builder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }

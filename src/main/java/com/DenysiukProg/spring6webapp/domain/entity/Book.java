@@ -1,6 +1,7 @@
 package com.DenysiukProg.spring6webapp.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,6 +12,7 @@ import java.util.*;
 @Entity
 @Setter
 @Getter
+@Builder
 public class Book {
 
     @Id
@@ -47,20 +49,9 @@ public class Book {
     @ManyToOne(fetch = FetchType.EAGER)
     private Publisher publisher;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public Book() {
 
-        Book book = (Book) o;
-
-        return id == book.id;
     }
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
-
     public String getStringPublicationDate() {
         if(publicationDate==null) return null;
         return new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).format(publicationDate);

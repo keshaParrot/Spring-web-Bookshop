@@ -51,7 +51,7 @@ public class UserController {
     }
 
     /**
-     * method for initialize shop statistics map
+     * Initialize shop statistics map
      *
      * @return HashMap containing the counts of
      * registered users, available books, number of publishers, and number of authors
@@ -65,7 +65,7 @@ public class UserController {
         return shopData;
     }
     /**
-     * Method for Display user account information including user details, book list, reviews, and shop data.
+     * Display user account information including user details, book list, reviews, and shop data.
      *
      * @return the view name for the user account page
      */
@@ -81,7 +81,7 @@ public class UserController {
         return "user-account";
     }
     /**
-     * Method for Handle changing user account information including validation and error handling.
+     * Handle changing user account information including validation and error handling.
      *
      * @param userDto the data transfer object containing updated user information
      * @param bindingResult the result of the validation
@@ -122,7 +122,7 @@ public class UserController {
     }
 
     /**
-     * Method for display create book page
+     * Display create book page
      *
      * @return the view name for the book create page
      */
@@ -138,7 +138,7 @@ public class UserController {
         return "book-create";
     }
     /**
-     * Method for Validates provided book information.
+     * Validates provided book information, and save book entity to database.
      *
      * @param bindingResult the result of the validation
      * @param bookDto the data transfer object containing new book data
@@ -163,18 +163,32 @@ public class UserController {
         bookService.saveBook(bookDto);
         return "redirect:/personalAccount";
     }
+    /**
+     * Display edit user page with id.
+     *
+     */
     @GetMapping("/personalAccount/user/{id}/edit")
     public String createUserForm(Model model,@PathVariable String id){
 
 
         return "user-manage";
     }
+    /**
+     *
+     *
+     */
     @PostMapping("/personalAccount/user/{id}/edit")
     public String editUser(Model model,@PathVariable String id){
 
 
         return "redirect:/personalAccount";
     }
+    /**
+     *Searches for users by username.
+     *
+     * @param username of the desired user
+     * @return ResponseEntity with Map of Usernames and encrypted IDs with http status 200
+     */
     @GetMapping("/search/User")
     public ResponseEntity<Map<String,String>> searchUsers(@RequestParam("user") String username) {
         List<UserEntity> userEntities = userService.findUsersByUsernameContaining(username);
@@ -186,7 +200,12 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
-
+    /**
+     * Searches for authors by first name and last name.
+     *
+     * @param authorName of the desired author
+     * @return ResponseEntity with Map of full names and encrypted IDs with http status 200
+     */
     @GetMapping("search/Author")
     public ResponseEntity<Map<String,String>> searchAuthors(@RequestParam("author") String authorName) {
         List<Author> authors = authorService.findAuthorsByNameContaining(authorName);
@@ -198,7 +217,12 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
-
+    /**
+     * Searches for publishers by publisher name.
+     *
+     * @param publisherName of the desired publisher
+     * @return ResponseEntity with Map of publisher name and encrypted IDs with http status 200
+     */
     @GetMapping("search/Publisher")
     public ResponseEntity<Map<String,String>> searchPublishers(@RequestParam("publisher") String publisherName) {
         List<Publisher> publishers = publisherService.findPublishersByNameContaining(publisherName);

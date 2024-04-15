@@ -16,7 +16,7 @@ public class HomeController {
     private final BookService bookService;
 
     /**
-     * Method for display home page with all books
+     * Display home page with all books
      *
      * @return the redirection URL to the book page
      */
